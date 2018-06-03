@@ -2,17 +2,123 @@
 #All Word related PowerShell functionality has been provided by Carl Webster
 #To contact, please use e-mail address info@barryschiffer.com
 
+#Version 4.0 31-Aug-2017
+#	The script is now fully compatible with NetScaler 12.0 released in july 2017
+#	Fixed NetScaler SSL connections
+#	Added SAML Authentication policies
+#	Updated GSLB Parameters to include late 11.1 build enhancements
+#	Added Support for NetScaler Clustering
+#	Added AppExpert
+	#	Pattern Sets
+	#	HTTP Callouts
+	#	Data Sets
+#	Numerous bug fixes
+
+#Version 3.61 13-Feb-2017
+#	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
+
+#Version 3.6 21-dec-2016
+
+The script is now fully compatible with NetScaler 11.1 released in July 2016.
+
+    * Added NetScaler Gateway reporting for Custom Themes
+    * Added HTTPS redirect for Load Balancing
+    * Added Policy Based Routing
+    * Added several items to advanced configuration for Load Balancer and Services
+    * Numerous bug fixes
+
+#Version 3.5 24-Oct-2016
+
+Most work on version 3.5 has been done by Andy McCullough!
+
+After the release of version 3.0 in May 2016, which was a major overhaul of the NetScaler documentation script we found a few issues which have been fixed in the update.
+
+The script is now fully compatible with NetScaler 11.1 released in July 2016.
+
+*	Added NetScaler functionality
+*	Added NetScaler 11.1 Features, LSN / RDP Proxy / REP
+*	Added Auditing Section
+*	Added GSLB Section, vServer / Services / Sites
+*	Added Locations Database section to support GSLB configuration using Static proximity.
+*	Added additional DNS Records to the NetScaler DNS Section
+*	Added RPC Nodes section
+*	Added NetScaler SSL Chapter, moved existing functionality and added detailed information
+*	Added AppFW Profiles and Policies
+*	Added AAA vServers
+
+Added NetScaler Gateway functionality
+*	Updated NSGW Global Settings Client Experience to include new parameters
+*	Updated NSGW Global Settings Published Applications to include new parameters
+*	Added Section NSGW "Global Settings AAA Parameters"
+*	Added SSL Parameters section for NSGW Virtual Servers
+*	Added Rewrite Policies section for each NSGW vServer
+*	Updated CAG vServer basic configuration section to include new parameters
+*	Updated NetScaler Gateway Session Action > Security to include new attributed
+*	Added Section NetScaler Gateway Session Action > Client Experience
+*	Added Section NetScaler Gateway Policies > NetScaler Gateway AlwaysON Policies
+*	Added NSGW Bookmarks
+*	Added NSGW Intranet IP's
+*	Added NSGW Intranet Applications
+*	Added NSGW SSL Ciphers
+
+Webster's Updates
+
+*	Updated help text to match other documentation scripts
+*	Removed all code related to TEXT and HTML output since Barry does not offer those
+*	Added support for specifying an output folder to match other documentation scripts
+*	Added support for the -Dev and -ScriptInfo parameters to match other documentation scripts
+*	Added support for emailing the output file to match other documentation scripts
+*	Removed unneeded functions
+*	Brought script code in line with the other documentation scripts
+*	Temporarily disabled the use of the UseNSSSL parameter
+
+#Version 3.0 24-may-2016
+
+•	Uses Nitro API to connect to NetScaler instead of ns.conf
+
+•	Microsoft Office 2016 support
+
+•	NetScaler 11.0 support
+
+•	Documents hardware revision
+
+•	Documents NetScaler Edition
+
+•	Documents SSL Certificates, including expiry date
+
+•	Shows all policies, including default
+
+•	Shows all routes, including default
+
+•	Shows all monitors, including default
+
+#Version 2.60
+#	Added -Dev and -ScriptInfo parameters
+#	Added Chinese language support
+#	Added four new Cover Page properties
+#		Company Address
+#		Company Email
+#		Company Fax
+#		Company Phone
+#	Added Function sendemail
+#	Added Log switch to create a transcript log
+#		Added function TranscriptLogging
+#	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
+#	Removed Hardware code as it is not needed for NetScaler
+#	Removed HTML and Text code as they are not used
+#	Removed code that made sure all Parameters were set to default values if for some reason they did exist or values were $Null
+#	Removed ComputerName code as it is not needed for NetScaler
+#	Reordered the parameters in the help text and parameter list so they match and are grouped better
+#	Replaced _SetDocumentProperty function with Jim Moyle's Set-DocumentProperty function
+#	Updated Function ProcessScriptEnd for the new Cover Page properties, and Dev, ScriptInfo, Log Parameters
+#	Updated Function ShowScriptOptions for the new Cover Page properties, and Dev, ScriptInfo, Log Parameters
+#	Updated Function UpdateDocumentProperties for the new Cover Page properties and Parameters
+#	Updated Help Text
+#	Updated script to support Word 2016 but doing so removes support for Word 2007
+
 #Version 2.51 16-December-2014
 •	Help text was broken after adding regions.
 •	Wrong variable name was used for saving as a PDF. Changed $wdSaveFormatPDF to $wdFormatPDF.
-
-#Version 2.5 22-November-2014
-New NetScaler functionality
-•	Citrix NetScaler Admin Partitions (almost 0 day support)
-•	Monitors: Added SitePath Thanks Roland!
-Bugfixes
-•	Removed Client-IP header name within services because of an error Thanks Carl!
-
 
 #Version 2.0 23-July-2014
 New Script Features
