@@ -330,7 +330,7 @@
 	NAME: NetScaler_Script_v2_6_unsigned.ps1
 	VERSION: 2.60
 	AUTHOR: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters, Barry Schiffer
-	LASTEDIT: June 1, 2018
+	LASTEDIT: August 28, 2018
 #>
 
 #endregion Support
@@ -454,10 +454,11 @@ Param(
 	Added Function sendemail
 	Added Log switch to create a transcript log
 		Added function TranscriptLogging
+	Fixed uninitialized variable for Admin Partitions
 	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
 	Removed Hardware code as it is not needed for NetScaler
 	Removed HTML and Text code as they are not used
-	Removed code that made sure all Parameters were set to default values if for some reason they did exist or values were $Null
+	Removed code that made sure all Parameters were set to default values if for some reason they did exist, or values were $Null
 	Removed ComputerName code as it is not needed for NetScaler
 	Reordered the parameters in the help text and parameter list so they match and are grouped better
 	Replaced _SetDocumentProperty function with Jim Moyle's Set-DocumentProperty function
@@ -2425,7 +2426,7 @@ $selection.InsertNewPage()
    Returns a case-insensitive property from a string, assuming the property is
    named before the actual property value and is separated by a space. For
    example, if the specified SearchString contained "-property1 <value1>
-   -property2 <value2>”, searching for "-Property1" would return "<value1>".
+   -property2 <value2>ï¿½, searching for "-Property1" would return "<value1>".
 .PARAMETER SearchString
    String to search for the specified property name.
 .PARAMETER PropertyName
@@ -2481,8 +2482,8 @@ function Get-StringProperty {
     )
 
     Process {
-        # First replace escaped quotes with '¬'
-        $SearchString = $SearchString.Replace('\"', "¬");
+        # First replace escaped quotes with 'ï¿½'
+        $SearchString = $SearchString.Replace('\"', "ï¿½");
         # Locate and replace quotes with '^^' and quoted spaces '^' to aid with parsing, until there are none left
         while ($SearchString.Contains('"')) {
             # Store the right-hand side temporarily, skipping the first quote
@@ -2505,8 +2506,8 @@ function Get-StringProperty {
                     # Remove quotes
                     if ($RemoveQuotes) { $propertyValue = $propertyValue.Trim('"'); }
                     # Replace escaped quotes
-                    if ($ReplaceEscapedQuotes) { return $propertyValue.Replace('¬','"'); }
-                    else { return $propertyValue.Replace('¬','\"'); }
+                    if ($ReplaceEscapedQuotes) { return $propertyValue.Replace('ï¿½','"'); }
+                    else { return $propertyValue.Replace('ï¿½','\"'); }
                 }
             }
         }
@@ -2578,8 +2579,8 @@ function Get-StringPropertySplit {
     )
 
     Process {
-        # First replace escaped quotes with '¬'
-        $SearchString = $SearchString.Replace('\"', '¬');
+        # First replace escaped quotes with 'ï¿½'
+        $SearchString = $SearchString.Replace('\"', 'ï¿½');
         
         while ($SearchString.Contains('"')) {
             # Store the right-hand side temporarily, skipping the first quote
@@ -2597,8 +2598,8 @@ function Get-StringPropertySplit {
             # Remove quotes
             if ($RemoveQuotes) { $stringArray[$i] = $stringArray[$i].Trim('"'); }
             # Replace escaped quotes
-            if ($ReplaceEscapedQuotes) { $stringArray[$i] = $stringArray[$i].Replace('¬','"'); }
-            else { $stringArray[$i] = $stringArray[$i].Replace('¬','\"'); }
+            if ($ReplaceEscapedQuotes) { $stringArray[$i] = $stringArray[$i].Replace('ï¿½','"'); }
+            else { $stringArray[$i] = $stringArray[$i].Replace('ï¿½','\"'); }
         }
 
         if ($Index -ne -1) { return $stringArray[$Index]; }
@@ -2640,14 +2641,14 @@ function Get-NetScalerExpression {
     Process {
         $searchStringLeftPosition = $SearchString.IndexOf('q/');
         if ($searchStringLeftPosition -eq -1) { return $null; }
-        $SearchString = $SearchString.Replace('q/', '¬¬');
+        $SearchString = $SearchString.Replace('q/', 'ï¿½ï¿½');
 
         $searchStringRightPosition = $SearchString.IndexOf('/');
         if ($searchStringRightPosition -eq -1) { return $null; }
-        $SearchString = $SearchString.Replace('/', '¬');
+        $SearchString = $SearchString.Replace('/', 'ï¿½');
 
         $NetScalerExpression = $SearchString.Substring($searchStringLeftPosition, (($searchStringRightPosition +1)- $searchStringLeftPosition));
-        return $NetScalerExpression.Replace('¬¬','q/').Replace('¬','/');
+        return $NetScalerExpression.Replace('ï¿½ï¿½','q/').Replace('ï¿½','/');
     }
 }
 
@@ -2657,7 +2658,7 @@ function Get-NetScalerExpression {
 .DESCRIPTION
    Tests for the presence of a property value in a string and returns a boolean
    value. For example, if the specified SearchString contained "-property1
-   -property2 <value2>”, searching for "-Property1" or "-Property2" would return
+   -property2 <value2>ï¿½, searching for "-Property1" or "-Property2" would return
    $true, but searching for "-Property3" would return $false
 .PARAMETER SearchString
    String to search for the specified property name.
@@ -2926,6 +2927,10 @@ $CAGSESSIONPOLS = Get-StringWithProperty -SearchString $ADD -Like "add vpn sessi
 $CAGSESSIONACTS = Get-StringWithProperty -SearchString $ADD -Like "add vpn sessionAction *";
 $BINDVPNVSERVER = Get-StringWithProperty -SearchString $BIND -Like "bind vpn vserver *";
 $CAGURLPOLS = Get-StringWithProperty -SearchString $ADD -Like "add vpn url *";
+
+#new stuff added by Webster
+$AdminPartitions = Get-StringWithProperty -SearchString $Add -Like 'add ns partition *';
+$SSLProfiles = Get-StringWithProperty -SearchString $Add -Like 'add ssl profile *';
 #endregion NetScaler Create Collections
 
 #region NetScaler chaptercounters
@@ -3354,6 +3359,7 @@ else
 
 		$APBindMatches = Get-StringWithProperty -SearchString $AdminPartitionsBind -Like "bind ns partition $AdminPartitionDisplayNameWithQoutes *";
 
+        $vlanap = ""
 		$APBindMatches | ForEach-Object {
 			$vlanap = Get-StringProperty $_ "-vlan";
 			}
@@ -3384,7 +3390,6 @@ else
 		WriteWordLine 0 0 " "
 	}
 }
-    
 #endregion NetScaler Admin Partitions
 
 #region NetScaler Features
@@ -6204,7 +6209,7 @@ if ($POLICY -eq $null -or $POLICY.Length -le 0) {
 
             ## IB - Iterate over all load balancer bindings (uses new function)
             foreach ($POL in $POLICY) {
-                $Y = Get-StringPropertySplit $POL –RemoveQuotes
+                $Y = Get-StringPropertySplit $POL ï¿½RemoveQuotes
                 $POLICIESH += @{ "Responder Policy" = $Y[3]; }
                 } # end foreach
 
@@ -6234,7 +6239,7 @@ if ($POLRW -eq $null -or $POLRW.Length -le 0) {
             [System.Collections.Hashtable[]] $POLRWH = @();
 
             foreach ($POL in $POLRW) {
-                $Y = Get-StringPropertySplit $POL –RemoveQuotes
+                $Y = Get-StringPropertySplit $POL ï¿½RemoveQuotes
                 $POLRWH += @{ "Rewrite Policy" = $Y[3]; }
                 } # end foreach
 
@@ -6309,7 +6314,7 @@ if ($ACTRES -eq $null -or $ACTRES.Length -le 0) {
 
             ## IB - Iterate over all load balancer bindings (uses new function)
             foreach ($POL in $ACTRES) {
-                $Y = Get-StringPropertySplit $POL –RemoveQuotes                
+                $Y = Get-StringPropertySplit $POL ï¿½RemoveQuotes                
                 $ACTRESH += @{ 
                     Responder = $Y[3]; 
                     Rule = $Y[4];
@@ -6343,7 +6348,7 @@ if ($ACTRW -eq $null -or $ACTRW.Length -le 0) {
 
             ## IB - Iterate over all load balancer bindings (uses new function)
             foreach ($POL in $ACTRW) {
-                $Y = Get-StringPropertySplit $POL –RemoveQuotes
+                $Y = Get-StringPropertySplit $POL ï¿½RemoveQuotes
                 $ACTRWH += @{ 
                     Rewrite = $Y[3]; 
                     Rule = $Y[4];

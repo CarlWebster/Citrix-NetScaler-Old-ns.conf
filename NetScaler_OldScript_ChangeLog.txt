@@ -13,10 +13,11 @@
 #	Added Function sendemail
 #	Added Log switch to create a transcript log
 #		Added function TranscriptLogging
+#	Fixed uninitialized variable for Admin Partitions
 #	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
 #	Removed Hardware code as it is not needed for NetScaler
 #	Removed HTML and Text code as they are not used
-#	Removed code that made sure all Parameters were set to default values if for some reason they did exist or values were $Null
+#	Removed code that made sure all Parameters were set to default values if for some reason they did exist, or values were $Null
 #	Removed ComputerName code as it is not needed for NetScaler
 #	Reordered the parameters in the help text and parameter list so they match and are grouped better
 #	Replaced _SetDocumentProperty function with Jim Moyle's Set-DocumentProperty function
