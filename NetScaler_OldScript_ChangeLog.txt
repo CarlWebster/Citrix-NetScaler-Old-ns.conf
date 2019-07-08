@@ -2,17 +2,34 @@
 #All Word related PowerShell functionality has been provided by Carl Webster
 #To contact, please use e-mail address info@barryschiffer.com
 
+#Version 2.60
+#	Added -Dev and -ScriptInfo parameters
+#	Added Chinese language support
+#	Added four new Cover Page properties
+#		Company Address
+#		Company Email
+#		Company Fax
+#		Company Phone
+#	Added Function sendemail
+#	Added Log switch to create a transcript log
+#		Added function TranscriptLogging
+#	Fixed uninitialized variable for Admin Partitions
+#	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
+#	Removed Hardware code as it is not needed for NetScaler
+#	Removed HTML and Text code as they are not used
+#	Removed code that made sure all Parameters were set to default values if for some reason they did exist, or values were $Null
+#	Removed ComputerName code as it is not needed for NetScaler
+#	Reordered the parameters in the help text and parameter list so they match and are grouped better
+#	Replaced _SetDocumentProperty function with Jim Moyle's Set-DocumentProperty function
+#	Updated Function ProcessScriptEnd for the new Cover Page properties, and Dev, ScriptInfo, Log Parameters
+#	Updated Function ShowScriptOptions for the new Cover Page properties, and Dev, ScriptInfo, Log Parameters
+#	Updated Function UpdateDocumentProperties for the new Cover Page properties and Parameters
+#	Updated Help Text
+#	Updated script to support Word 2016 but doing so removes support for Word 2007
+
 #Version 2.51 16-December-2014
 •	Help text was broken after adding regions.
 •	Wrong variable name was used for saving as a PDF. Changed $wdSaveFormatPDF to $wdFormatPDF.
-
-#Version 2.5 22-November-2014
-New NetScaler functionality
-•	Citrix NetScaler Admin Partitions (almost 0 day support)
-•	Monitors: Added SitePath Thanks Roland!
-Bugfixes
-•	Removed Client-IP header name within services because of an error Thanks Carl!
-
 
 #Version 2.0 23-July-2014
 New Script Features

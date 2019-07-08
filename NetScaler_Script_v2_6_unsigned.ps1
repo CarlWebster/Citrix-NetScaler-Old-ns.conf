@@ -1,4 +1,4 @@
-#Requires -Version 3.0
+﻿#Requires -Version 3.0
 #This File is in Unicode format.  Do not edit in an ASCII editor.
 
 #region Support
@@ -12,6 +12,7 @@
 	Document includes a Cover Page, Table of Contents and Footer.
 	Includes support for the following language versions of Microsoft Word:
 		Catalan
+		Chinese
 		Danish
 		Dutch
 		English
@@ -23,92 +24,159 @@
 		Spanish
 		Swedish
 		
+.PARAMETER CompanyAddress
+	Company Address to use for the Cover Page, if the Cover Page has the Address field.
+	
+	The following Cover Pages have an Address field:
+		Banded (Word 2013/2016)
+		Contrast (Word 2010)
+		Exposure (Word 2010)
+		Filigree (Word 2013/2016)
+		Ion (Dark) (Word 2013/2016)
+		Retrospect (Word 2013/2016)
+		Semaphore (Word 2013/2016)
+		Tiles (Word 2010)
+		ViewMaster (Word 2013/2016)
+		
+	This parameter is only valid with the MSWORD and PDF output parameters.
+	This parameter has an alias of CA.
+.PARAMETER CompanyEmail
+	Company Email to use for the Cover Page, if the Cover Page has the Email field.  
+	
+	The following Cover Pages have an Email field:
+		Facet (Word 2013/2016)
+	
+	This parameter is only valid with the MSWORD and PDF output parameters.
+	This parameter has an alias of CE.
+.PARAMETER CompanyFax
+	Company Fax to use for the Cover Page, if the Cover Page has the Fax field.  
+	
+	The following Cover Pages have a Fax field:
+		Contrast (Word 2010)
+		Exposure (Word 2010)
+	
+	This parameter is only valid with the MSWORD and PDF output parameters.
+	This parameter has an alias of CF.
 .PARAMETER CompanyName
 	Company Name to use for the Cover Page.  
-	Default value is contained in HKCU:\Software\Microsoft\Office\Common\UserInfo\CompanyName or
-	HKCU:\Software\Microsoft\Office\Common\UserInfo\Company, whichever is populated on the 
-	computer running the script.
+	The default value is contained in 
+	HKCU:\Software\Microsoft\Office\Common\UserInfo\CompanyName or
+	HKCU:\Software\Microsoft\Office\Common\UserInfo\Company, whichever is populated 
+	on the computer running the script.
+
+	This parameter is only valid with the MSWORD and PDF output parameters.
 	This parameter has an alias of CN.
-	If either registry key does not exist and this parameter is not specified, the report will
-	not contain a Company Name on the cover page.
+.PARAMETER CompanyPhone
+	Company Phone to use for the Cover Page if the Cover Page has the Phone field.  
+	
+	The following Cover Pages have a Phone field:
+		Contrast (Word 2010)
+		Exposure (Word 2010)
+	
+	This parameter is only valid with the MSWORD and PDF output parameters.
+	This parameter has an alias of CPh.
 .PARAMETER CoverPage
 	What Microsoft Word Cover Page to use.
+	Only Word 2010, 2013 and 2016 are supported.
 	(default cover pages in Word en-US)
+
 	Valid input is:
-		Alphabet (Word 2007/2010. Works)
-		Annual (Word 2007/2010. Doesn't work well for this report)
-		Austere (Word 2007/2010. Works)
-		Austin (Word 2007/2010/2013. Doesn't work in 2013, mostly works in 2007/2010 but Subtitle/Subject & Author fields need to me moved after title box is moved up)
-		Banded (Word 2013. Works)
-		Conservative (Word 2007/2010. Works)
-		Contrast (Word 2007/2010. Works)
-		Cubicles (Word 2007/2010. Works)
-		Exposure (Word 2007/2010. Works if you like looking sideways)
-		Facet (Word 2013. Works)
-		Filigree (Word 2013. Works)
-		Grid (Word 2010/2013.Works in 2010)
-		Integral (Word 2013. Works)
-		Ion (Dark) (Word 2013. Top date doesn't fit, box needs to be manually resized or font changed to 8 point)
-		Ion (Light) (Word 2013. Top date doesn't fit, box needs to be manually resized or font changed to 8 point)
-		Mod (Word 2007/2010. Works)
-		Motion (Word 2007/2010/2013. Works if top date is manually changed to 36 point)
+		Alphabet (Word 2010. Works)
+		Annual (Word 2010. Doesn't work well for this report)
+		Austere (Word 2010. Works)
+		Austin (Word 2010/2013/2016. Doesn't work in 2013 or 2016, mostly 
+		works in 2010 but Subtitle/Subject & Author fields need to be moved 
+		after title box is moved up)
+		Banded (Word 2013/2016. Works)
+		Conservative (Word 2010. Works)
+		Contrast (Word 2010. Works)
+		Cubicles (Word 2010. Works)
+		Exposure (Word 2010. Works if you like looking sideways)
+		Facet (Word 2013/2016. Works)
+		Filigree (Word 2013/2016. Works)
+		Grid (Word 2010/2013/2016. Works in 2010)
+		Integral (Word 2013/2016. Works)
+		Ion (Dark) (Word 2013/2016. Top date doesn't fit; box needs to be 
+		manually resized or font changed to 8 point)
+		Ion (Light) (Word 2013/2016. Top date doesn't fit; box needs to be 
+		manually resized or font changed to 8 point)
+		Mod (Word 2010. Works)
+		Motion (Word 2010/2013/2016. Works if top date is manually changed to 
+		36 point)
 		Newsprint (Word 2010. Works but date is not populated)
 		Perspective (Word 2010. Works)
-		Pinstripes (Word 2007/2010. Works)
-		Puzzle (Word 2007/2010. Top date doesn't fit, box needs to be manually resized or font changed to 14 point)
-		Retrospect (Word 2013. Works)
-		Semaphore (Word 2013. Works)
-		Sideline (Word 2007/2010/2013. Doesn't work in 2013, works in 2007/2010)
-		Slice (Dark) (Word 2013. Doesn't work)
-		Slice (Light) (Word 2013. Doesn't work)
-		Stacks (Word 2007/2010. Works)
-		Tiles (Word 2007/2010. Date doesn't fit unless changed to 26 point)
-		Transcend (Word 2007/2010. Works)
-		ViewMaster (Word 2013. Works)
-		Whisp (Word 2013. Works)
-	Default value is Sideline.
+		Pinstripes (Word 2010. Works)
+		Puzzle (Word 2010. Top date doesn't fit; box needs to be manually 
+		resized or font changed to 14 point)
+		Retrospect (Word 2013/2016. Works)
+		Semaphore (Word 2013/2016. Works)
+		Sideline (Word 2010/2013/2016. Doesn't work in 2013 or 2016, works in 
+		2010)
+		Slice (Dark) (Word 2013/2016. Doesn't work)
+		Slice (Light) (Word 2013/2016. Doesn't work)
+		Stacks (Word 2010. Works)
+		Tiles (Word 2010. Date doesn't fit unless changed to 26 point)
+		Transcend (Word 2010. Works)
+		ViewMaster (Word 2013/2016. Works)
+		Whisp (Word 2013/2016. Works)
+
+	The default value is Sideline.
 	This parameter has an alias of CP.
+	This parameter is only valid with the MSWORD and PDF output parameters.
 .PARAMETER UserName
-	User name to use for the Cover Page and Footer.
-	Default value is contained in $env:username
+	Username to use for the Cover Page and Footer.
+	The default value is contained in $env:username
 	This parameter has an alias of UN.
+	This parameter is only valid with the MSWORD and PDF output parameters.
 .PARAMETER PDF
 	SaveAs PDF file instead of DOCX file.
 	This parameter is disabled by default.
 	For Word 2007, the Microsoft add-in for saving as a PDF muct be installed.
 	For Word 2007, please see http://www.microsoft.com/en-us/download/details.aspx?id=9943
 	The PDF file is roughly 5X to 10X larger than the DOCX file.
-.PARAMETER Text
-	Creates a formatted text file with a .txt extension.
-	This parameter is disabled by default.
-	This parameter is reserved for a future update and no output is created at this time.
 .PARAMETER MSWord
 	SaveAs DOCX file
 	This parameter is set True if no other output format is selected.
-.PARAMETER HTML
-	Creates an HTML file with an .html extension.
-	This parameter is disabled by default.
-	This parameter is reserved for a future update and no output is created at this time.
 .PARAMETER AddDateTime
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2014 at 6PM is 2014-06-01_1800.
-	Output filename will be ReportName_2014-06-01_1800.docx (or .pdf).
+	June 1, 2018 at 6PM is 2018-06-01_1800.
+	Output filename will be ReportName_2018-06-01_1800.docx (or .pdf).
 	This parameter is disabled by default.
-.PARAMETER Hardware
-	Use WMI to gather hardware information on: Computer System, Disks, Processor and Network Interface Cards
-	This parameter may require the script be run from an elevated PowerShell session 
-	using an account with permission to retrieve hardware information (i.e. Domain Admin or Local Administrator).
-	Selecting this parameter will add to both the time it takes to run the script and size of the report.
+.PARAMETER Folder
+	Specifies the optional output folder to save the output report. 
+.PARAMETER SmtpServer
+	Specifies the optional email server to send the output report. 
+.PARAMETER SmtpPort
+	Specifies the SMTP port. 
+	The default is 25.
+.PARAMETER UseSSL
+	Specifies whether to use SSL for the SmtpServer.
+	The default is False.
+.PARAMETER From
+	Specifies the username for the From email address.
+	If SmtpServer is used, this is a required parameter.
+.PARAMETER To
+	Specifies the username for the To email address.
+	If SmtpServer is used, this is a required parameter.
+.PARAMETER Dev
+	Clears errors at the beginning of the script.
+	Outputs all errors to a text file at the end of the script.
+	
+	This is used when the script developer requests more troubleshooting data.
+	The text file is placed in the same folder from where the script is run.
+	
 	This parameter is disabled by default.
-.PARAMETER ComputerName
-	Specifies a computer to use to run the script against.
-	ComputerName can be entered as the NetBIOS name, FQDN, localhost or IP Address.
-	If entered as localhost, the actual computer name is determined and used.
-	If entered as an IP address, an attempt is made to determine and use the actual computer name.
-	Default is localhost.
+.PARAMETER ScriptInfo
+	Outputs information about the script to a text file.
+	The text file is placed in the same folder from where the script is run.
+	
+	This parameter is disabled by default.
+	This parameter has an alias of SI.
+.PARAMETER Log
+	Generates a log file for troubleshooting.
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1
 	
 	Will use all default values.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
@@ -119,7 +187,7 @@
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -PDF
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -PDF
 	
 	Will use all default values and save the document as a PDF file.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
@@ -130,43 +198,21 @@
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -TEXT
-	
-	Will use all default values and save the document as a formatted text file.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
-	$env:username = Administrator
-
-	Barry Schiffer for the Company Name.
-	Sideline for the Cover Page format.
-	Administrator for the User Name.
-.EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -HTML
-	
-	Will use all default values and save the document as an HTML file.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
-	$env:username = Administrator
-
-	Barry Schiffer for the Company Name.
-	Sideline for the Cover Page format.
-	Administrator for the User Name.
-.EXAMPLE
-	PS C:\PSScript .\NetScaler_Script_v2_5.ps1 -CompanyName "Barry Schiffer Consulting" -CoverPage "Mod" -UserName "Barry Schiffer"
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Barry Schiffer Consulting" -CoverPage "Mod" -UserName "Barry Schiffer"
 
 	Will use:
 		Barry Schiffer Consulting for the Company Name.
 		Mod for the Cover Page format.
 		Barry Schiffer for the User Name.
 .EXAMPLE
-	PS C:\PSScript .\NetScaler_Script_v2_5.ps1 -CN "Barry Schiffer Consulting" -CP "Mod" -UN "Barry Schiffer"
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CN "Barry Schiffer Consulting" -CP "Mod" -UN "Barry Schiffer"
 
 	Will use:
 		Barry Schiffer Consulting for the Company Name (alias CN).
 		Mod for the Cover Page format (alias CP).
 		Barry Schiffer for the User Name (alias UN).
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -AddDateTime
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -AddDateTime
 	
 	Will use all default values.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
@@ -179,10 +225,10 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2014 at 6PM is 2014-06-01_1800.
-	Output filename will be Script_Template_2014-06-01_1800.docx
+	June 1, 2018 at 6PM is 2018-06-01_1800.
+	Output filename will be Script_Template_2018-06-01_1800.docx
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -PDF -AddDateTime
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -PDF -AddDateTime
 	
 	Will use all default values and save the document as a PDF file.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
@@ -195,44 +241,96 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2014 at 6PM is 2014-06-01_1800.
-	Output filename will be Script_Template_2014-06-01_1800.PDF
+	June 1, 2018 at 6PM is 2018-06-01_1800.
+	Output filename will be Script_Template_2018-06-01_1800.PDF
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -Hardware
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes Consulting"
+	-CoverPage Exposure -UserName "Dr. Watson"
+	-CompanyAddress "221B Baker Street, London, England"
+	-CompanyFax "+44 1753 276600"
+	-CompanyPhone "+44 1753 276200"
+	
+	Will use:
+		Sherlock Holmes Consulting for the Company Name.
+		Exposure for the Cover Page format.
+		Dr. Watson for the User Name.
+		221B Baker Street, London, England for the Company Address.
+		+44 1753 276600 for the Company Fax.
+		+44 1753 276200 for the Company Phone.
+.EXAMPLE
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes Consulting"
+	-CoverPage Facet -UserName "Dr. Watson"
+	-CompanyEmail SuperSleuth@SherlockHolmes.com
+
+	Will use:
+		Sherlock Holmes Consulting for the Company Name.
+		Facet for the Cover Page format.
+		Dr. Watson for the User Name.
+		SuperSleuth@SherlockHolmes.com for the Company Email.
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -Folder \\FileServer\ShareName
 	
 	Will use all default values.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl 
+	Webster" or 
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Carl Webster"
 	$env:username = Administrator
 
-	Barry Schiffer for the Company Name.
+	Carl Webster for the Company Name.
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
-	localhost for running hardware inventory.
-	localhost will be replaced by the actual computer name.
-.EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_5.ps1 -Hardware -ComputerName 192.168.1.51
 	
-	Will use all default values.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
+	Output file will be saved in the path \\FileServer\ShareName
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer mail.domain.tld
+	-From XDAdmin@domain.tld -To ITGroup@domain.tld	
+	
+	Will use all Default values.
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl 
+	Webster" or 
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Carl Webster"
 	$env:username = Administrator
 
-	Barry Schiffer for the Company Name.
+	Carl Webster for the Company Name.
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
-	192.168.1.51 for running hardware inventory.
-	192.168.1.51 will be replaced by the actual computer name, if possible.
+	
+	The script will use the email server mail.domain.tld, sending from XDAdmin@domain.tld, 
+	sending to ITGroup@domain.tld.
+	
+	The script will use the default SMTP port 25 and will not use SSL.
+	
+	If the current user's credentials are not valid to send email, 
+	the user will be prompted to enter valid credentials.
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer smtp.office365.com -SmtpPort 587
+	-UseSSL -From Webster@CarlWebster.com -To ITGroup@CarlWebster.com	
+	
+	Will use all Default values.
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl 
+	Webster" or 
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Carl Webster"
+	$env:username = Administrator
+
+	Carl Webster for the Company Name.
+	Sideline for the Cover Page format.
+	Administrator for the User Name.
+	
+	The script will use the email server smtp.office365.com on port 587 using SSL, 
+	sending from webster@carlwebster.com, sending to ITGroup@carlwebster.com.
+	
+	If the current user's credentials are not valid to send email, 
+	the user will be prompted to enter valid credentials.
 .INPUTS
 	None.  You cannot pipe objects to this script.
 .OUTPUTS
 	No objects are output from this script.  
-	This script creates a Word, PDF, Formatted Text or HTML document.
+	This script creates a Word or PDF document.
 .NOTES
-	NAME: NetScaler_Script_v2_5_unsigned.ps1
-	VERSION: 16122014
+	NAME: NetScaler_Script_v2_6_unsigned.ps1
+	VERSION: 2.60
 	AUTHOR: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters, Barry Schiffer
-	LASTEDIT: December 16, 2014
+	LASTEDIT: August 28, 2018
 #>
 
 #endregion Support
@@ -242,72 +340,95 @@
 [CmdletBinding(SupportsShouldProcess = $False, ConfirmImpact = "None", DefaultParameterSetName = "WordOrPDF") ]
 
 Param(
-	[parameter(ParameterSetName="WordOrPDF",
-	Position = 0, 
-	Mandatory=$False )
-	] 
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[Alias("CA")]
+	[ValidateNotNullOrEmpty()]
+	[string]$CompanyAddress="",
+    
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[Alias("CE")]
+	[ValidateNotNullOrEmpty()]
+	[string]$CompanyEmail="",
+    
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[Alias("CF")]
+	[ValidateNotNullOrEmpty()]
+	[string]$CompanyFax="",
+    
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
 	[Alias("CN")]
 	[ValidateNotNullOrEmpty()]
 	[string]$CompanyName="",
     
-	[parameter(ParameterSetName="WordOrPDF",
-	Position = 1, 
-	Mandatory=$False )
-	] 
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[Alias("CPh")]
+	[ValidateNotNullOrEmpty()]
+	[string]$CompanyPhone="",
+    
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
 	[Alias("CP")]
 	[ValidateNotNullOrEmpty()]
 	[string]$CoverPage="Sideline", 
 
-	[parameter(ParameterSetName="WordOrPDF",
-	Position = 2, 
-	Mandatory=$False )
-	] 
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
 	[Alias("UN")]
 	[ValidateNotNullOrEmpty()]
 	[string]$UserName=$env:username,
 
-	[parameter(ParameterSetName="WordOrPDF",
-	Position = 3, 
-	Mandatory=$False )
-	] 
-	[Switch]$PDF=$False,
-
-	[parameter(ParameterSetName="Text",
-	Position = 4, 
-	Mandatory=$False )
-	] 
-	[Switch]$Text=$False,
-
-	[parameter(ParameterSetName="WordOrPDF",
-	Position = 4, 
-	Mandatory=$False )
-	] 
+	[parameter(ParameterSetName="Word",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
 	[Switch]$MSWord=$False,
 
-	[parameter(ParameterSetName="HTML",
-	Position = 4, 
-	Mandatory=$False )
-	] 
-	[Switch]$HTML=$False,
+	[parameter(ParameterSetName="PDF",Mandatory=$False)] 
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[Switch]$PDF=$False,
 
-	[parameter(
-	Position = 5, 
-	Mandatory=$False )
-	] 
+	[parameter(Mandatory=$False)] 
+	[Alias("ADT")]
 	[Switch]$AddDateTime=$False,
 	
-	[parameter(
-	Position = 6, 
-	Mandatory=$False )
-	] 
-	[Switch]$Hardware=$False,
-
-	[parameter(
-	Position = 7, 
-	Mandatory=$False )
-	] 
-	[string]$ComputerName="LocalHost"
+	[parameter(Mandatory=$False)] 
+	[string]$Folder="",
 	
+	[parameter(ParameterSetName="SMTP",Mandatory=$True)] 
+	[string]$SmtpServer="",
+
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[int]$SmtpPort=25,
+
+	[parameter(ParameterSetName="SMTP",Mandatory=$False)] 
+	[switch]$UseSSL=$False,
+
+	[parameter(ParameterSetName="SMTP",Mandatory=$True)] 
+	[string]$From="",
+
+	[parameter(ParameterSetName="SMTP",Mandatory=$True)] 
+	[string]$To="",
+
+	[parameter(Mandatory=$False)] 
+	[Switch]$Dev=$False,
+	
+	[parameter(Mandatory=$False)] 
+	[Alias("SI")]
+	[Switch]$ScriptInfo=$False,
+	
+	[parameter(Mandatory=$False)] 
+	[Switch]$Log=$False
+
 	)
 	
 #webster@carlwebster.com
@@ -317,13 +438,35 @@ Param(
 
 <#
 .NetScaler Documentation Script
-    NAME: NetScaler_Script_v2_5.ps1
-	VERSION NetScaler Script: 2.5
-	VERSION Script Template: 16122014
+    NAME: NetScaler_Script_v2_6.ps1
+	VERSION NetScaler Script: 2.6
 	AUTHOR NetScaler script: Barry Schiffer
     AUTHOR NetScaler script functions: Iain Brighton
     AUTHOR Script template: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters
-	LASTEDIT: December 16, 2014  
+.Release Notes V2.60
+	Added -Dev and -ScriptInfo parameters
+	Added Chinese language support
+	Added four new Cover Page properties
+		Company Address
+		Company Email
+		Company Fax
+		Company Phone
+	Added Function sendemail
+	Added Log switch to create a transcript log
+		Added function TranscriptLogging
+	Fixed uninitialized variable for Admin Partitions
+	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
+	Removed Hardware code as it is not needed for NetScaler
+	Removed HTML and Text code as they are not used
+	Removed code that made sure all Parameters were set to default values if for some reason they did exist, or values were $Null
+	Removed ComputerName code as it is not needed for NetScaler
+	Reordered the parameters in the help text and parameter list so they match and are grouped better
+	Replaced _SetDocumentProperty function with Jim Moyle's Set-DocumentProperty function
+	Updated Function ProcessScriptEnd for the new Cover Page properties, and Dev, ScriptInfo, Log Parameters
+	Updated Function ShowScriptOptions for the new Cover Page properties, and Dev, ScriptInfo, Log Parameters
+	Updated Function UpdateDocumentProperties for the new Cover Page properties and Parameters
+	Updated Help Text
+	Updated script to support Word 2016 but doing so removes support for Word 2007
 .Release Notes version 2
     Overall
         Test group has grown from 5 to 20 people. A lot more testing on a lot more configs has been done.
@@ -391,67 +534,35 @@ $PSDefaultParameterValues = @{"*:Verbose"=$True}
 $SaveEAPreference = $ErrorActionPreference
 $ErrorActionPreference = 'SilentlyContinue'
 
-If($PDF -eq $Null)
+#V2.60 added
+If($Log) 
 {
-	$PDF = $False
-}
-If($Text -eq $Null)
-{
-	$Text = $False
-}
-If($MSWord -eq $Null)
-{
-	$MSWord = $False
-}
-If($HTML -eq $Null)
-{
-	$HTML = $False
-}
-If($AddDateTime -eq $Null)
-{
-	$AddDateTime = $False
-}
-If($Hardware -eq $Null)
-{
-	$Hardware = $False
-}
-If($ComputerName -eq $Null)
-{
-	$ComputerName = "LocalHost"
+	#start transcript logging
+	$Script:ThisScriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
+	$Script:LogPath = "$Script:ThisScriptPath\NSDocScriptTranscript_$(Get-Date -f yyyy-MM-dd_HHmm).txt"
+	
+	try 
+	{
+		Start-Transcript -Path $Script:LogPath -Force -Verbose:$false | Out-Null
+		Write-Verbose "$(Get-Date): Transcript/log started at $Script:LogPath"
+		$Script:StartLog = $true
+	} 
+	catch 
+	{
+		Write-Verbose "$(Get-Date): Transcript/log failed at $Script:LogPath"
+		$Script:StartLog = $false
+	}
 }
 
-If(!(Test-Path Variable:PDF))
+If($Dev)
 {
-	$PDF = $False
-}
-If(!(Test-Path Variable:Text))
-{
-	$Text = $False
-}
-If(!(Test-Path Variable:MSWord))
-{
-	$MSWord = $False
-}
-If(!(Test-Path Variable:HTML))
-{
-	$HTML = $False
-}
-If(!(Test-Path Variable:AddDateTime))
-{
-	$AddDateTime = $False
-}
-If(!(Test-Path Variable:Hardware))
-{
-	$Hardware = $False
-}
-If(!(Test-Path Variable:ComputerName))
-{
-	$ComputerName = "LocalHost"
+	$Error.Clear()
+	$Script:DevErrorFile = "$($pwd.Path)\NSInventoryScriptErrors_$(Get-Date -f yyyy-MM-dd_HHmm).txt"
 }
 
 If($MSWord -eq $Null)
 {
-	If($Text -or $HTML -or $PDF)
+	If($PDF)
 	{
 		$MSWord = $False
 	}
@@ -461,7 +572,7 @@ If($MSWord -eq $Null)
 	}
 }
 
-If($MSWord -eq $False -and $PDF -eq $False -and $Text -eq $False -and $HTML -eq $False)
+If($MSWord -eq $False -and $PDF -eq $False)
 {
 	$MSWord = $True
 }
@@ -476,14 +587,6 @@ ElseIf($PDF)
 {
 	Write-Verbose "$(Get-Date): PDF is set"
 }
-ElseIf($Text)
-{
-	Write-Verbose "$(Get-Date): Text is set"
-}
-ElseIf($HTML)
-{
-	Write-Verbose "$(Get-Date): HTML is set"
-}
 Else
 {
 	$ErrorActionPreference = $SaveEAPreference
@@ -496,30 +599,49 @@ Else
 	{
 		Write-Verbose "$(Get-Date): PDF is Null"
 	}
-	ElseIf($Text -eq $Null)
-	{
-		Write-Verbose "$(Get-Date): Text is Null"
-	}
-	ElseIf($HTML -eq $Null)
-	{
-		Write-Verbose "$(Get-Date): HTML is Null"
-	}
 	Else
 	{
 		Write-Verbose "$(Get-Date): MSWord is $($MSWord)"
 		Write-Verbose "$(Get-Date): PDF is $($PDF)"
-		Write-Verbose "$(Get-Date): Text is $($Text)"
-		Write-Verbose "$(Get-Date): HTML is $($HTML)"
 	}
 	Write-Error "Unable to determine output parameter.  Script cannot continue"
 	Exit
 }
 
+If($Folder -ne "")
+{
+	Write-Verbose "$(Get-Date): Testing folder path"
+	#does it exist
+	If(Test-Path $Folder -EA 0)
+	{
+		#it exists, now check to see if it is a folder and not a file
+		If(Test-Path $Folder -pathType Container -EA 0)
+		{
+			#it exists and it is a folder
+			Write-Verbose "$(Get-Date): Folder path $Folder exists and is a folder"
+		}
+		Else
+		{
+			#it exists but it is a file not a folder
+			Write-Error "Folder $Folder is a file, not a folder.  Script cannot continue"
+			Exit
+		}
+	}
+	Else
+	{
+		#does not exist
+		Write-Error "Folder $Folder does not exist.  Script cannot continue"
+		Exit
+	}
+}
+
+[string]$Script:RunningOS = (Get-WmiObject -class Win32_OperatingSystem -EA 0).Caption
+
 If($MSWord -or $PDF)
 {
 	#try and fix the issue with the $CompanyName variable
-	$CoName = $CompanyName
-	Write-Verbose "$(Get-Date): CoName is $($CoName)"
+	$Script:CoName = $CompanyName
+	Write-Verbose "$(Get-Date): CoName is $($Script:CoName)"
 	
 	#the following values were attained from 
 	#http://groovy.codehaus.org/modules/scriptom/1.6.0/scriptom-office-2K3-tlb/apidocs/
@@ -536,6 +658,7 @@ If($MSWord -or $PDF)
 	[int]$wdWord2007 = 12
 	[int]$wdWord2010 = 14
 	[int]$wdWord2013 = 15
+	[int]$wdWord2016 = 16
 	[int]$wdFormatDocumentDefault = 16
 	[int]$wdFormatPDF = 17
 	#http://blogs.technet.com/b/heyscriptingguy/archive/2006/03/01/how-can-i-right-align-a-single-column-in-a-word-table.aspx
@@ -571,6 +694,7 @@ If($MSWord -or $PDF)
 	[int]$wdStyleHeading4 = -5
 	[int]$wdStyleNoSpacing = -158
 	[int]$wdTableGrid = -155
+	[int]$wdTableLightListAccent3 = -206
 
 	#http://groovy.codehaus.org/modules/scriptom/1.6.0/scriptom-office-2K3-tlb/apidocs/org/codehaus/groovy/scriptom/tlb/office/word/WdLineStyle.html
 	[int]$wdLineStyleNone = 0
@@ -578,955 +702,20 @@ If($MSWord -or $PDF)
 
 	[int]$wdHeadingFormatTrue = -1
 	[int]$wdHeadingFormatFalse = 0 
-
-	[string]$RunningOS = (Get-WmiObject -class Win32_OperatingSystem -EA 0).Caption
+	
+	[string]$Script:RunningOS = (Get-WmiObject -class Win32_OperatingSystem -EA 0).Caption
 }
-
-Function GetComputerWMIInfo
+Else
 {
-	Param([string]$RemoteComputerName)
-	
-	# original work by Kees Baggerman, 
-	# Senior Technical Consultant @ Inter Access
-	# k.baggerman@myvirtualvision.com
-	# @kbaggerman on Twitter
-	# http://blog.myvirtualvision.com
-	# modified 1-May-2014 to work in trusted AD Forests and using different domain admin credentials	
-
-	#Get Computer info
-	Write-Verbose "$(Get-Date): `t`tProcessing WMI Computer information"
-	Write-Verbose "$(Get-Date): `t`t`tHardware information"
-	If($MSWord -or $PDF)
-	{
-		WriteWordLine 3 0 "Computer Information"
-		WriteWordLine 0 1 "General Computer"
-	}
-	ElseIf($Text)
-	{
-		Line 0 "Computer Information"
-		Line 1 "General Computer"
-	}
-	ElseIf($HTML)
-	{
-	}
-	
-	[bool]$GotComputerItems = $True
-	
-	Try
-	{
-		$Results = Get-WmiObject -computername $RemoteComputerName win32_computersystem
-	}
-	
-	Catch
-	{
-		$Results = $Null
-	}
-	
-	If($? -and $Results -ne $Null)
-	{
-		$ComputerItems = $Results | Select Manufacturer, Model, Domain, @{N="TotalPhysicalRam"; E={[math]::round(($_.TotalPhysicalMemory / 1GB),0)}}
-		$Results = $Null
-
-		ForEach($Item in $ComputerItems)
-		{
-			OutputComputerItem $Item
-		}
-	}
-	ElseIf(!$?)
-	{
-		Write-Verbose "$(Get-Date): Get-WmiObject win32_computersystem failed for $($RemoteComputerName)"
-		Write-Warning "Get-WmiObject win32_computersystem failed for $($RemoteComputerName)"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "Get-WmiObject win32_computersystem failed for $($RemoteComputerName)" "" $Null 0 $False $True
-			WriteWordLine 0 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository" "" $Null 0 $False $True
-			WriteWordLine 0 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may" "" $Null 0 $False $True
-			WriteWordLine 0 2 "need to rerun the script with Domain Admin credentials from the trusted Forest." "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "Get-WmiObject win32_computersystem failed for $($RemoteComputerName)"
-			Line 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository"
-			Line 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may"
-			Line 2 "need to rerun the script with Domain Admin credentials from the trusted Forest."
-			Line 2 ""
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	Else
-	{
-		Write-Verbose "$(Get-Date): No results returned for Computer information"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "No results returned for Computer information" "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "No results returned for Computer information"
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	
-	#Get Disk info
-	Write-Verbose "$(Get-Date): `t`t`tDrive information"
-
-	If($MSWord -or $PDF)
-	{
-		WriteWordLine 0 1 "Drive(s)"
-	}
-	ElseIf($Text)
-	{
-		Line 1 "Drive(s)"
-	}
-	ElseIf($HTML)
-	{
-	}
-
-	[bool]$GotDrives = $True
-	
-	Try
-	{
-		$Results = Get-WmiObject -computername $RemoteComputerName Win32_LogicalDisk
-	}
-	
-	Catch
-	{
-		$Results = $Null
-	}
-
-	If($? -and $Results -ne $Null)
-	{
-		$drives = $Results | Select caption, @{N="drivesize"; E={[math]::round(($_.size / 1GB),0)}}, 
-		filesystem, @{N="drivefreespace"; E={[math]::round(($_.freespace / 1GB),0)}}, 
-		volumename, drivetype, volumedirty, volumeserialnumber
-		$Results = $Null
-		ForEach($drive in $drives)
-		{
-			If($drive.caption -ne "A:" -and $drive.caption -ne "B:")
-			{
-				OutputDriveItem $drive
-			}
-		}
-	}
-	ElseIf(!$?)
-	{
-		Write-Verbose "$(Get-Date): Get-WmiObject Win32_LogicalDisk failed for $($RemoteComputerName)"
-		Write-Warning "Get-WmiObject Win32_LogicalDisk failed for $($RemoteComputerName)"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "Get-WmiObject Win32_LogicalDisk failed for $($RemoteComputerName)" "" $Null 0 $False $True
-			WriteWordLine 0 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository" "" $Null 0 $False $True
-			WriteWordLine 0 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may" "" $Null 0 $False $True
-			WriteWordLine 0 2 "need to rerun the script with Domain Admin credentials from the trusted Forest." "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "Get-WmiObject Win32_LogicalDisk failed for $($RemoteComputerName)"
-			Line 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository"
-			Line 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may"
-			Line 2 "need to rerun the script with Domain Admin credentials from the trusted Forest."
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	Else
-	{
-		Write-Verbose "$(Get-Date): No results returned for Drive information"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "No results returned for Drive information" "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "No results returned for Drive information"
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	
-
-	#Get CPU's and stepping
-	Write-Verbose "$(Get-Date): `t`t`tProcessor information"
-
-	If($MSWord -or $PDF)
-	{
-		WriteWordLine 0 1 "Processor(s)"
-	}
-	ElseIf($Text)
-	{
-		Line 1 "Processor(s)"
-	}
-	ElseIf($HTML)
-	{
-	}
-
-	[bool]$GotProcessors = $True
-	
-	Try
-	{
-		$Results = Get-WmiObject -computername $RemoteComputerName win32_Processor
-	}
-	
-	Catch
-	{
-		$Results = $Null
-	}
-
-	If($? -and $Results -ne $Null)
-	{
-		$Processors = $Results | Select availability, name, description, maxclockspeed, 
-		l2cachesize, l3cachesize, numberofcores, numberoflogicalprocessors
-		$Results = $Null
-		ForEach($processor in $processors)
-		{
-			OutputProcessorItem $processor
-		}
-	}
-	ElseIf(!$?)
-	{
-		Write-Verbose "$(Get-Date): Get-WmiObject win32_Processor failed for $($RemoteComputerName)"
-		Write-Warning "Get-WmiObject win32_Processor failed for $($RemoteComputerName)"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "Get-WmiObject win32_Processor failed for $($RemoteComputerName)" "" $Null 0 $False $True
-			WriteWordLine 0 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository" "" $Null 0 $False $True
-			WriteWordLine 0 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may" "" $Null 0 $False $True
-			WriteWordLine 0 2 "need to rerun the script with Domain Admin credentials from the trusted Forest." "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "Get-WmiObject win32_Processor failed for $($RemoteComputerName)"
-			Line 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository"
-			Line 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may"
-			Line 2 "need to rerun the script with Domain Admin credentials from the trusted Forest."
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	Else
-	{
-		Write-Verbose "$(Get-Date): No results returned for Processor information"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "No results returned for Processor information" "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "No results returned for Processor information"
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-
-	#Get Nics
-	Write-Verbose "$(Get-Date): `t`t`tNIC information"
-
-	If($MSWord -or $PDF)
-	{
-		WriteWordLine 0 1 "Network Interface(s)"
-	}
-	ElseIf($Text)
-	{
-		Line 1 "Network Interface(s)"
-	}
-	ElseIf($HTML)
-	{
-	}
-
-	[bool]$GotNics = $True
-	
-	Try
-	{
-		$Results = Get-WmiObject -computername $RemoteComputerName win32_networkadapterconfiguration
-	}
-	
-	Catch
-	{
-		$Results
-	}
-
-	If($? -and $Results -ne $Null)
-	{
-		$Nics = $Results | Where {$_.ipaddress -ne $Null}
-		$Results = $Null
-
-		If($Nics -eq $Null ) 
-		{ 
-			$GotNics = $False 
-		} 
-		Else 
-		{ 
-			$GotNics = !($Nics.__PROPERTY_COUNT -eq 0) 
-		} 
-	
-		If($GotNics)
-		{
-			ForEach($nic in $nics)
-			{
-				Try
-				{
-					$ThisNic = Get-WmiObject -computername $RemoteComputerName win32_networkadapter | Where {$_.index -eq $nic.index}
-				}
-				
-				Catch 
-				{
-					$ThisNic = $Null
-				}
-				
-				If($? -and $ThisNic -ne $Null)
-				{
-					OutputNicItem $Nic $ThisNic
-				}
-				ElseIf(!$?)
-				{
-					Write-Warning "$(Get-Date): Error retrieving NIC information"
-					Write-Verbose "$(Get-Date): Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)"
-					Write-Warning "Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)"
-					If($MSWORD -or $PDF)
-					{
-						WriteWordLine 0 2 "Error retrieving NIC information" "" $Null 0 $False $True
-						WriteWordLine 0 2 "Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)" "" $Null 0 $False $True
-						WriteWordLine 0 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository" "" $Null 0 $False $True
-						WriteWordLine 0 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may" "" $Null 0 $False $True
-						WriteWordLine 0 2 "need to rerun the script with Domain Admin credentials from the trusted Forest." "" $Null 0 $False $True
-					}
-					ElseIf($Text)
-					{
-						Line 2 "Error retrieving NIC information"
-						Line 2 "Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)"
-						Line 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository"
-						Line 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may"
-						Line 2 "need to rerun the script with Domain Admin credentials from the trusted Forest."
-					}
-					ElseIf($HTML)
-					{
-					}
-				}
-				Else
-				{
-					Write-Verbose "$(Get-Date): No results returned for NIC information"
-					If($MSWORD -or $PDF)
-					{
-						WriteWordLine 0 2 "No results returned for NIC information" "" $Null 0 $False $True
-					}
-					ElseIf($Text)
-					{
-						Line 2 "No results returned for NIC information"
-					}
-					ElseIf($HTML)
-					{
-					}
-				}
-			}
-		}	
-	}
-	ElseIf(!$?)
-	{
-		Write-Warning "$(Get-Date): Error retrieving NIC configuration information"
-		Write-Verbose "$(Get-Date): Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)"
-		Write-Warning "Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "Error retrieving NIC configuration information" "" $Null 0 $False $True
-			WriteWordLine 0 2 "Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)" "" $Null 0 $False $True
-			WriteWordLine 0 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository" "" $Null 0 $False $True
-			WriteWordLine 0 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may" "" $Null 0 $False $True
-			WriteWordLine 0 2 "need to rerun the script with Domain Admin credentials from the trusted Forest." "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "Error retrieving NIC configuration information"
-			Line 2 "Get-WmiObject win32_networkadapterconfiguration failed for $($RemoteComputerName)"
-			Line 2 "On $($RemoteComputerName) you may need to run winmgmt /verifyrepository"
-			Line 2 "and winmgmt /salvagerepository.  If this is a trusted Forest, you may"
-			Line 2 "need to rerun the script with Domain Admin credentials from the trusted Forest."
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	Else
-	{
-		Write-Verbose "$(Get-Date): No results returned for NIC configuration information"
-		If($MSWORD -or $PDF)
-		{
-			WriteWordLine 0 2 "No results returned for NIC configuration information" "" $Null 0 $False $True
-		}
-		ElseIf($Text)
-		{
-			Line 2 "No results returned for NIC configuration information"
-		}
-		ElseIf($HTML)
-		{
-		}
-	}
-	
-	If($MSWORD -or $PDF)
-	{
-		WriteWordLine 0 0 ""
-	}
-	ElseIf($Text)
-	{
-		Line 0 ""
-	}
-	ElseIf($HTML)
-	{
-	}
-
-	$Results = $Null
-	$ComputerItems = $Null
-	$Drives = $Null
-	$Processors = $Null
-	$Nics = $Null
-}
-
-Function OutputComputerItem
-{
-	Param([object]$Item)
-	If($MSWord -or $PDF)
-	{
-		[System.Collections.Hashtable[]] $ItemInformation = @()
-		$ItemInformation += @{ Data = "Manufacturer"; Value = $Item.manufacturer; }
-		$ItemInformation += @{ Data = "Model"; Value = $Item.model; }
-		$ItemInformation += @{ Data = "Domain"; Value = $Item.domain; }
-		$ItemInformation += @{ Data = "Total Ram"; Value = "$($Item.totalphysicalram) GB"; }
-		$Table = AddWordTable -Hashtable $ItemInformation -Columns Data,Value -List -AutoFit $wdAutoFitFixed;
-
-		## Set first column format
-		SetWordCellFormat -Collection $Table.Columns.Item(1).Cells -Bold -BackgroundColor $wdColorGray15;
-
-		## IB - set column widths without recursion
-		$Table.Columns.Item(1).Width = 125;
-		$Table.Columns.Item(2).Width = 100;
-
-		$Table.Rows.SetLeftIndent($Indent2TabStops,$wdAdjustNone)
-
-		FindWordDocumentEnd
-		$TableRange = $Null
-		$Table = $Null
-		WriteWordLine 0 2 ""
-		
-	}
-	ElseIf($Text)
-	{
-		Line 2 "Manufacturer`t: " $Item.manufacturer
-		Line 2 "Model`t`t: " $Item.model
-		Line 2 "Domain`t`t: " $Item.domain
-		Line 2 "Total Ram`t: $($Item.totalphysicalram) GB"
-		Line 2 ""
-	}
-	ElseIf($HTML)
-	{
-	}
-}
-
-Function OutputDriveItem
-{
-	Param([object]$Drive)
-	If($MSWORD -or $PDF)
-	{
-		[System.Collections.Hashtable[]] $DriveInformation = @()
-		$DriveInformation += @{ Data = "Caption"; Value = $Drive.caption; }
-		$DriveInformation += @{ Data = "Size"; Value = "$($drive.drivesize) GB"; }
-		If(![String]::IsNullOrEmpty($drive.filesystem))
-		{
-			$DriveInformation += @{ Data = "File System"; Value = $Drive.filesystem; }
-		}
-		$DriveInformation += @{ Data = "Free Space"; Value = "$($drive.drivefreespace) GB"; }
-		If(![String]::IsNullOrEmpty($drive.volumename))
-		{
-			$DriveInformation += @{ Data = "Volume Name"; Value = $Drive.volumename; }
-		}
-		If(![String]::IsNullOrEmpty($drive.volumedirty))
-		{
-			If($drive.volumedirty)
-			{
-				$tmp = "Yes"
-			}
-			Else
-			{
-				$tmp = "No"
-			}
-			$DriveInformation += @{ Data = "Volume is Dirty"; Value = $tmp; }
-		}
-		If(![String]::IsNullOrEmpty($drive.volumeserialnumber))
-		{
-			$DriveInformation += @{ Data = "Volume Serial Number"; Value = $Drive.volumeserialnumber; }
-		}
-		Switch ($drive.drivetype)
-		{
-			0	{$tmp = "Unknown"}
-			1	{$tmp = "No Root Directory"}
-			2	{$tmp = "Removable Disk"}
-			3	{$tmp = "Local Disk"}
-			4	{$tmp = "Network Drive"}
-			5	{$tmp = "Compact Disc"}
-			6	{$tmp = "RAM Disk"}
-			Default {$tmp = "Unknown"}
-		}
-		$DriveInformation += @{ Data = "Drive Type"; Value = $tmp; }
-		$Table = AddWordTable -Hashtable $DriveInformation -Columns Data,Value -List -AutoFit $wdAutoFitContent;
-
-		## Set first column format
-		SetWordCellFormat -Collection $Table.Columns.Item(1).Cells -Bold -BackgroundColor $wdColorGray15;
-
-		## IB - set column widths without recursion
-		$Table.Columns.Item(1).Width = 125;
-		$Table.Columns.Item(2).Width = 100;
-
-		$Table.Rows.SetLeftIndent($Indent2TabStops,$wdAdjustNone)
-
-		FindWordDocumentEnd
-		$TableRange = $Null
-		$Table = $Null
-		WriteWordLine 0 2 ""
-	}
-	ElseIf($Text)
-	{
-		Line 2 "Caption`t`t: " $drive.caption
-		Line 2 "Size`t`t: $($drive.drivesize) GB"
-		If(![String]::IsNullOrEmpty($drive.filesystem))
-		{
-			Line 2 "File System`t: " $drive.filesystem
-		}
-		Line 2 "Free Space`t: $($drive.drivefreespace) GB"
-		If(![String]::IsNullOrEmpty($drive.volumename))
-		{
-			Line 2 "Volume Name`t: " $drive.volumename
-		}
-		If(![String]::IsNullOrEmpty($drive.volumedirty))
-		{
-			Line 2 "Volume is Dirty`t: " -nonewline
-			If($drive.volumedirty)
-			{
-				Line 0 "Yes"
-			}
-			Else
-			{
-				Line 0 "No"
-			}
-		}
-		If(![String]::IsNullOrEmpty($drive.volumeserialnumber))
-		{
-			Line 2 "Volume Serial #`t: " $drive.volumeserialnumber
-		}
-		Line 2 "Drive Type`t: " -nonewline
-		Switch ($drive.drivetype)
-		{
-			0	{Line 0 "Unknown"}
-			1	{Line 0 "No Root Directory"}
-			2	{Line 0 "Removable Disk"}
-			3	{Line 0 "Local Disk"}
-			4	{Line 0 "Network Drive"}
-			5	{Line 0 "Compact Disc"}
-			6	{Line 0 "RAM Disk"}
-			Default {Line 0 "Unknown"}
-		}
-		Line 2 ""
-	}
-	ElseIf($HTML)
-	{
-	}
-}
-
-Function OutputProcessorItem
-{
-	Param([object]$Processor)
-	If($MSWORD -or $PDF)
-	{
-		[System.Collections.Hashtable[]] $ProcessorInformation = @()
-		$ProcessorInformation += @{ Data = "Name"; Value = $Processor.name; }
-		$ProcessorInformation += @{ Data = "Description"; Value = $Processor.description; }
-		$ProcessorInformation += @{ Data = "Max Clock Speed"; Value = "$($processor.maxclockspeed) MHz"; }
-		If($processor.l2cachesize -gt 0)
-		{
-			$ProcessorInformation += @{ Data = "L2 Cache Size"; Value = "$($processor.l2cachesize) KB"; }
-		}
-		If($processor.l3cachesize -gt 0)
-		{
-			$ProcessorInformation += @{ Data = "L3 Cache Size"; Value = "$($processor.l3cachesize) KB"; }
-		}
-		If($processor.numberofcores -gt 0)
-		{
-			$ProcessorInformation += @{ Data = "Number of Cores"; Value = $Processor.numberofcores; }
-		}
-		If($processor.numberoflogicalprocessors -gt 0)
-		{
-			$ProcessorInformation += @{ Data = "Number of Logical Processors"; Value = $Processor.numberoflogicalprocessors; }
-		}
-		Switch ($processor.availability)
-		{
-			1	{$tmp = "Other"}
-			2	{$tmp = "Unknown"}
-			3	{$tmp = "Running or Full Power"}
-			4	{$tmp = "Warning"}
-			5	{$tmp = "In Test"}
-			6	{$tmp = "Not Applicable"}
-			7	{$tmp = "Power Off"}
-			8	{$tmp = "Off Line"}
-			9	{$tmp = "Off Duty"}
-			10	{$tmp = "Degraded"}
-			11	{$tmp = "Not Installed"}
-			12	{$tmp = "Install Error"}
-			13	{$tmp = "Power Save - Unknown"}
-			14	{$tmp = "Power Save - Low Power Mode"}
-			15	{$tmp = "Power Save - Standby"}
-			16	{$tmp = "Power Cycle"}
-			17	{$tmp = "Power Save - Warning"}
-			Default	{$tmp = "Unknown"}
-		}
-		$ProcessorInformation += @{ Data = "Availability"; Value = $tmp; }
-		$Table = AddWordTable -Hashtable $ProcessorInformation -Columns Data,Value -List -AutoFit $wdAutoFitFixed;
-
-		## Set first column format
-		SetWordCellFormat -Collection $Table.Columns.Item(1).Cells -Bold -BackgroundColor $wdColorGray15;
-
-		## IB - set column widths without recursion
-		$Table.Columns.Item(1).Width = 150;
-		$Table.Columns.Item(2).Width = 200;
-
-		$Table.Rows.SetLeftIndent($Indent2TabStops,$wdAdjustNone)
-
-		FindWordDocumentEnd
-		$TableRange = $Null
-		$Table = $Null
-		WriteWordLine 0 2 ""
-	}
-	ElseIf($Text)
-	{
-		Line 2 "Name`t`t`t: " $processor.name
-		Line 2 "Description`t`t: " $processor.description
-		Line 2 "Max Clock Speed`t`t: $($processor.maxclockspeed) MHz"
-		If($processor.l2cachesize -gt 0)
-		{
-			Line 2 "L2 Cache Size`t`t: $($processor.l2cachesize) KB"
-		}
-		If($processor.l3cachesize -gt 0)
-		{
-			Line 2 "L3 Cache Size`t`t: $($processor.l3cachesize) KB"
-		}
-		If($processor.numberofcores -gt 0)
-		{
-			Line 2 "# of Cores`t`t: " $processor.numberofcores
-		}
-		If($processor.numberoflogicalprocessors -gt 0)
-		{
-			Line 2 "# of Logical Procs`t: " $processor.numberoflogicalprocessors
-		}
-		Line 2 "Availability`t`t: " -nonewline
-		Switch ($processor.availability)
-		{
-			1	{Line 0 "Other"}
-			2	{Line 0 "Unknown"}
-			3	{Line 0 "Running or Full Power"}
-			4	{Line 0 "Warning"}
-			5	{Line 0 "In Test"}
-			6	{Line 0 "Not Applicable"}
-			7	{Line 0 "Power Off"}
-			8	{Line 0 "Off Line"}
-			9	{Line 0 "Off Duty"}
-			10	{Line 0 "Degraded"}
-			11	{Line 0 "Not Installed"}
-			12	{Line 0 "Install Error"}
-			13	{Line 0 "Power Save - Unknown"}
-			14	{Line 0 "Power Save - Low Power Mode"}
-			15	{Line 0 "Power Save - Standby"}
-			16	{Line 0 "Power Cycle"}
-			17	{Line 0 "Power Save - Warning"}
-			Default	{Line 0 "Unknown"}
-		}
-		Line 2 ""
-	}
-	ElseIf($HTML)
-	{
-	}
-}
-
-Function OutputNicItem
-{
-	Param([object]$Nic, [object]$ThisNic)
-	If($MSWORD -or $PDF)
-	{
-		[System.Collections.Hashtable[]] $NicInformation = @()
-		If($ThisNic.Name -eq $nic.description)
-		{
-			$NicInformation += @{ Data = "Name"; Value = $ThisNic.Name; }
-		}
-		Else
-		{
-			$NicInformation += @{ Data = "Name"; Value = $ThisNic.Name; }
-			$NicInformation += @{ Data = "Description"; Value = $Nic.description; }
-		}
-		$NicInformation += @{ Data = "Connection ID"; Value = $ThisNic.NetConnectionID; }
-		$NicInformation += @{ Data = "Manufacturer"; Value = $Nic.manufacturer; }
-		Switch ($ThisNic.availability)
-		{
-			1	{$tmp = "Other"}
-			2	{$tmp = "Unknown"}
-			3	{$tmp = "Running or Full Power"}
-			4	{$tmp = "Warning"}
-			5	{$tmp = "In Test"}
-			6	{$tmp = "Not Applicable"}
-			7	{$tmp = "Power Off"}
-			8	{$tmp = "Off Line"}
-			9	{$tmp = "Off Duty"}
-			10	{$tmp = "Degraded"}
-			11	{$tmp = "Not Installed"}
-			12	{$tmp = "Install Error"}
-			13	{$tmp = "Power Save - Unknown"}
-			14	{$tmp = "Power Save - Low Power Mode"}
-			15	{$tmp = "Power Save - Standby"}
-			16	{$tmp = "Power Cycle"}
-			17	{$tmp = "Power Save - Warning"}
-			Default	{$tmp = "Unknown"}
-		}
-		$NicInformation += @{ Data = "Availability"; Value = $tmp; }
-		$NicInformation += @{ Data = "Physical Address"; Value = $Nic.macaddress; }
-		$NicInformation += @{ Data = "IP Address"; Value = $Nic.ipaddress; }
-		$NicInformation += @{ Data = "Default Gateway"; Value = $Nic.Defaultipgateway; }
-		$NicInformation += @{ Data = "Subnet Mask"; Value = $Nic.ipsubnet; }
-		If($nic.dhcpenabled)
-		{
-			$DHCPLeaseObtainedDate = $nic.ConvertToDateTime($nic.dhcpleaseobtained)
-			$DHCPLeaseExpiresDate = $nic.ConvertToDateTime($nic.dhcpleaseexpires)
-			$NicInformation += @{ Data = "DHCP Enabled"; Value = $Nic.dhcpenabled; }
-			$NicInformation += @{ Data = "DHCP Lease Obtained"; Value = $dhcpleaseobtaineddate; }
-			$NicInformation += @{ Data = "DHCP Lease Expires"; Value = $dhcpleaseexpiresdate; }
-			$NicInformation += @{ Data = "DHCP Server"; Value = $Nic.dhcpserver; }
-		}
-		If(![String]::IsNullOrEmpty($nic.dnsdomain))
-		{
-			$NicInformation += @{ Data = "DNS Domain"; Value = $Nic.dnsdomain; }
-		}
-		If($nic.dnsdomainsuffixsearchorder -ne $Null -and $nic.dnsdomainsuffixsearchorder.length -gt 0)
-		{
-			[int]$x = 1
-			WriteWordLine 0 2 "DNS Search Suffixes`t:" -nonewline
-			$nicdnsdomainsuffixsearchorder = $nic.dnsdomainsuffixsearchorder
-			$tmp = @()
-			ForEach($DNSDomain in $nicdnsdomainsuffixsearchorder)
-			{
-				$tmp += "$($DNSDomain)`r"
-			}
-			$NicInformation += @{ Data = "DNS Search Suffixes"; Value = $tmp; }
-		}
-		If($nic.dnsenabledforwinsresolution)
-		{
-			$tmp = "Yes"
-		}
-		Else
-		{
-			$tmp = "No"
-		}
-		$NicInformation += @{ Data = "DNS WINS Enabled"; Value = $tmp; }
-		If($nic.dnsserversearchorder -ne $Null -and $nic.dnsserversearchorder.length -gt 0)
-		{
-			$nicdnsserversearchorder = $nic.dnsserversearchorder
-			$tmp = @()
-			ForEach($DNSServer in $nicdnsserversearchorder)
-			{
-				$tmp += "$($DNSServer)`r"
-			}
-			$NicInformation += @{ Data = "DNS Servers"; Value = $tmp; }
-		}
-		Switch ($nic.TcpipNetbiosOptions)
-		{
-			0	{$tmp = "Use NetBIOS setting from DHCP Server"}
-			1	{$tmp = "Enable NetBIOS"}
-			2	{$tmp = "Disable NetBIOS"}
-			Default	{$tmp = "Unknown"}
-		}
-		$NicInformation += @{ Data = "NetBIOS Setting"; Value = $tmp; }
-		If($nic.winsenablelmhostslookup)
-		{
-			$tmp = "Yes"
-		}
-		Else
-		{
-			$tmp = "No"
-		}
-		$NicInformation += @{ Data = "WINS: Enabled LMHosts"; Value = $tmp; }
-		If(![String]::IsNullOrEmpty($nic.winshostlookupfile))
-		{
-			$NicInformation += @{ Data = "Host Lookup File"; Value = $Nic.winshostlookupfile; }
-		}
-		If(![String]::IsNullOrEmpty($nic.winsprimaryserver))
-		{
-			$NicInformation += @{ Data = "Primary Server"; Value = $Nic.winsprimaryserver; }
-		}
-		If(![String]::IsNullOrEmpty($nic.winssecondaryserver))
-		{
-			$NicInformation += @{ Data = "Secondary Server"; Value = $Nic.winssecondaryserver; }
-		}
-		If(![String]::IsNullOrEmpty($nic.winsscopeid))
-		{
-			$NicInformation += @{ Data = "Scope ID"; Value = $Nic.winsscopeid; }
-		}
-		$Table = AddWordTable -Hashtable $NicInformation -Columns Data,Value -List -AutoFit $wdAutoFitFixed;
-
-		## Set first column format
-		SetWordCellFormat -Collection $Table.Columns.Item(1).Cells -Bold -BackgroundColor $wdColorGray15;
-
-		## IB - set column widths without recursion
-		$Table.Columns.Item(1).Width = 150;
-		$Table.Columns.Item(2).Width = 200;
-
-		$Table.Rows.SetLeftIndent($Indent2TabStops,$wdAdjustNone)
-
-		FindWordDocumentEnd
-		$TableRange = $Null
-		$Table = $Null
-	}
-	ElseIf($Text)
-	{
-		If($ThisNic.Name -eq $nic.description)
-		{
-			Line 2 "Name`t`t`t: " $ThisNic.Name
-		}
-		Else
-		{
-			Line 2 "Name`t`t`t: " $ThisNic.Name
-			Line 2 "Description`t`t: " $nic.description
-		}
-		Line 2 "Connection ID`t`t: " $ThisNic.NetConnectionID
-		Line 2 "Manufacturer`t`t: " $ThisNic.manufacturer
-		Line 2 "Availability`t`t: " -nonewline
-		Switch ($ThisNic.availability)
-		{
-			1	{Line 0 "Other"}
-			2	{Line 0 "Unknown"}
-			3	{Line 0 "Running or Full Power"}
-			4	{Line 0 "Warning"}
-			5	{Line 0 "In Test"}
-			6	{Line 0 "Not Applicable"}
-			7	{Line 0 "Power Off"}
-			8	{Line 0 "Off Line"}
-			9	{Line 0 "Off Duty"}
-			10	{Line 0 "Degraded"}
-			11	{Line 0 "Not Installed"}
-			12	{Line 0 "Install Error"}
-			13	{Line 0 "Power Save - Unknown"}
-			14	{Line 0 "Power Save - Low Power Mode"}
-			15	{Line 0 "Power Save - Standby"}
-			16	{Line 0 "Power Cycle"}
-			17	{Line 0 "Power Save - Warning"}
-			Default	{Line 0 "Unknown"}
-		}
-		Line 2 "Physical Address`t: " $nic.macaddress
-		Line 2 "IP Address`t`t: " $nic.ipaddress
-		Line 2 "Default Gateway`t`t: " $nic.Defaultipgateway
-		Line 2 "Subnet Mask`t`t: " $nic.ipsubnet
-		If($nic.dhcpenabled)
-		{
-			$DHCPLeaseObtainedDate = $nic.ConvertToDateTime($nic.dhcpleaseobtained)
-			$DHCPLeaseExpiresDate = $nic.ConvertToDateTime($nic.dhcpleaseexpires)
-			Line 2 "DHCP Enabled`t`t: " $nic.dhcpenabled
-			Line 2 "DHCP Lease Obtained`t: " $dhcpleaseobtaineddate
-			Line 2 "DHCP Lease Expires`t: " $dhcpleaseexpiresdate
-			Line 2 "DHCP Server`t`t:" $nic.dhcpserver
-		}
-		If(![String]::IsNullOrEmpty($nic.dnsdomain))
-		{
-			Line 2 "DNS Domain`t`t: " $nic.dnsdomain
-		}
-		If($nic.dnsdomainsuffixsearchorder -ne $Null -and $nic.dnsdomainsuffixsearchorder.length -gt 0)
-		{
-			[int]$x = 1
-			Line 2 "DNS Search Suffixes`t:" -nonewline
-			$nicdnsdomainsuffixsearchorder = $nic.dnsdomainsuffixsearchorder
-			ForEach($DNSDomain in $nicdnsdomainsuffixsearchorder)
-			{
-				If($x -eq 1)
-				{
-					$x = 2
-					Line 0 " $($DNSDomain)"
-				}
-				Else
-				{
-					Line 5 " $($DNSDomain)"
-				}
-			}
-		}
-		Line 2 "DNS WINS Enabled`t: " -nonewline
-		If($nic.dnsenabledforwinsresolution)
-		{
-			Line 0 "Yes"
-		}
-		Else
-		{
-			Line 0 "No"
-		}
-		If($nic.dnsserversearchorder -ne $Null -and $nic.dnsserversearchorder.length -gt 0)
-		{
-			[int]$x = 1
-			Line 2 "DNS Servers`t`t:" -nonewline
-			$nicdnsserversearchorder = $nic.dnsserversearchorder
-			ForEach($DNSServer in $nicdnsserversearchorder)
-			{
-				If($x -eq 1)
-				{
-					$x = 2
-					Line 0 " $($DNSServer)"
-				}
-				Else
-				{
-					Line 5 " $($DNSServer)"
-				}
-			}
-		}
-		Line 2 "NetBIOS Setting`t`t: " -nonewline
-		Switch ($nic.TcpipNetbiosOptions)
-		{
-			0	{Line 0 "Use NetBIOS setting from DHCP Server"}
-			1	{Line 0 "Enable NetBIOS"}
-			2	{Line 0 "Disable NetBIOS"}
-			Default	{Line 0 "Unknown"}
-		}
-		Line 2 "WINS:"
-		Line 3 "Enabled LMHosts`t: " -nonewline
-		If($nic.winsenablelmhostslookup)
-		{
-			Line 0 "Yes"
-		}
-		Else
-		{
-			Line 0 "No"
-		}
-		If(![String]::IsNullOrEmpty($nic.winshostlookupfile))
-		{
-			Line 3 "Host Lookup File`t: " $nic.winshostlookupfile
-		}
-		If(![String]::IsNullOrEmpty($nic.winsprimaryserver))
-		{
-			Line 3 "Primary Server`t`t: " $nic.winsprimaryserver
-		}
-		If(![String]::IsNullOrEmpty($nic.winssecondaryserver))
-		{
-			Line 3 "Secondary Server`t: " $nic.winssecondaryserver
-		}
-		If(![String]::IsNullOrEmpty($nic.winsscopeid))
-		{
-			Line 3 "Scope ID`t`t: " $nic.winsscopeid
-		}
-	}
-	ElseIf($HTML)
-	{
-	}
+	$Script:CoName = ""
 }
 
 Function SetWordHashTable
 {
 	Param([string]$CultureCode)
-	$hash = @{}
-	    
+
+	#optimized by Michael B. Smith
+	
 	# DE and FR translations for Word 2010 by Vladimir Radojevic
 	# Vladimir.Radojevic@Commerzreal.com
 
@@ -1547,94 +736,35 @@ Function SetWordHashTable
 	#nl - Dutch
 	#pt - Portuguese
 	#sv - Swedish
+	#zh - Chinese
+	
+	[string]$toc = $(
+		Switch ($CultureCode)
+		{
+			'ca-'	{ 'Taula automática 2'; Break }
+			'da-'	{ 'Automatisk tabel 2'; Break }
+			'de-'	{ 'Automatische Tabelle 2'; Break }
+			'en-'	{ 'Automatic Table 2'; Break }
+			'es-'	{ 'Tabla automática 2'; Break }
+			'fi-'	{ 'Automaattinen taulukko 2'; Break }
+#			'fr-'	{ 'Sommaire Automatique 2'; Break }
+			'fr-'	{ 'Table automatique 2'; Break } #changed 10-feb-2017 david roquier and samuel legrand
+			'nb-'	{ 'Automatisk tabell 2'; Break }
+			'nl-'	{ 'Automatische inhoudsopgave 2'; Break }
+			'pt-'	{ 'Sumário Automático 2'; Break }
+			'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+			'zh-'	{ '自动目录 2'; Break }
+		}
+	)
 
-	Switch ($CultureCode)
-	{
-		'ca-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Taula automática 2'
-				}
-			}
-
-		'da-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Automatisk tabel 2'
-				}
-			}
-
-		'de-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Automatische Tabelle 2'
-				}
-			}
-
-		'en-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents'  = 'Automatic Table 2'
-				}
-			}
-
-		'es-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Tabla automática 2'
-				}
-			}
-
-		'fi-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Automaattinen taulukko 2'
-				}
-			}
-
-		'fr-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Sommaire Automatique 2'
-				}
-			}
-
-		'nb-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Automatisk tabell 2'
-				}
-			}
-
-		'nl-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Automatische inhoudsopgave 2'
-				}
-			}
-
-		'pt-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Sumário Automático 2'
-				}
-			}
-
-		'sv-'	{
-				$hash.($($CultureCode)) = @{
-					'Word_TableOfContents' = 'Automatisk innehållsförteckning2'
-				}
-			}
-
-		Default	{$hash.('en-') = @{
-					'Word_TableOfContents'  = 'Automatic Table 2'
-				}
-			}
-	}
-
-	$Script:myHash = $hash.$CultureCode
-
-	If($Script:myHash -eq $Null)
-	{
-		$Script:myHash = $hash.('en-')
-	}
-
-	$Script:myHash.Word_NoSpacing = $wdStyleNoSpacing
-	$Script:myHash.Word_Heading1 = $wdStyleheading1
-	$Script:myHash.Word_Heading2 = $wdStyleheading2
-	$Script:myHash.Word_Heading3 = $wdStyleheading3
-	$Script:myHash.Word_Heading4 = $wdStyleheading4
-	$Script:myHash.Word_TableGrid = $wdTableGrid
+	$Script:myHash                      = @{}
+	$Script:myHash.Word_TableOfContents = $toc
+	$Script:myHash.Word_NoSpacing       = $wdStyleNoSpacing
+	$Script:myHash.Word_Heading1        = $wdStyleheading1
+	$Script:myHash.Word_Heading2        = $wdStyleheading2
+	$Script:myHash.Word_Heading3        = $wdStyleheading3
+	$Script:myHash.Word_Heading4        = $wdStyleheading4
+	$Script:myHash.Word_TableGrid       = $wdTableGrid
 }
 
 Function GetCulture
@@ -1644,6 +774,7 @@ Function GetCulture
 	#codes obtained from http://support.microsoft.com/kb/221435
 	#http://msdn.microsoft.com/en-us/library/bb213877(v=office.12).aspx
 	$CatalanArray = 1027
+	$ChineseArray = 2052,3076,5124,4100
 	$DanishArray = 1030
 	$DutchArray = 2067, 1043
 	$EnglishArray = 3081, 10249, 4105, 9225, 6153, 8201, 5129, 13321, 7177, 11273, 2057, 1033, 12297
@@ -1666,20 +797,22 @@ Function GetCulture
 	#nl - Dutch
 	#pt - Portuguese
 	#sv - Swedish
+	#zh - Chinese
 
 	Switch ($WordValue)
 	{
-		{$CatalanArray -contains $_} {$CultureCode = "ca-"}
-		{$DanishArray -contains $_} {$CultureCode = "da-"}
-		{$DutchArray -contains $_} {$CultureCode = "nl-"}
-		{$EnglishArray -contains $_} {$CultureCode = "en-"}
-		{$FinnishArray -contains $_} {$CultureCode = "fi-"}
-		{$FrenchArray -contains $_} {$CultureCode = "fr-"}
-		{$GermanArray -contains $_} {$CultureCode = "de-"}
-		{$NorwegianArray -contains $_} {$CultureCode = "nb-"}
-		{$PortugueseArray -contains $_} {$CultureCode = "pt-"}
-		{$SpanishArray -contains $_} {$CultureCode = "es-"}
-		{$SwedishArray -contains $_} {$CultureCode = "sv-"}
+		{$CatalanArray -contains $_}	{$CultureCode = "ca-"}
+		{$ChineseArray -contains $_}	{$CultureCode = "zh-"}
+		{$DanishArray -contains $_}		{$CultureCode = "da-"}
+		{$DutchArray -contains $_}		{$CultureCode = "nl-"}
+		{$EnglishArray -contains $_}	{$CultureCode = "en-"}
+		{$FinnishArray -contains $_}	{$CultureCode = "fi-"}
+		{$FrenchArray -contains $_}		{$CultureCode = "fr-"}
+		{$GermanArray -contains $_}		{$CultureCode = "de-"}
+		{$NorwegianArray -contains $_}	{$CultureCode = "nb-"}
+		{$PortugueseArray -contains $_}	{$CultureCode = "pt-"}
+		{$SpanishArray -contains $_}	{$CultureCode = "es-"}
+		{$SwedishArray -contains $_}	{$CultureCode = "sv-"}
 		Default {$CultureCode = "en-"}
 	}
 	
@@ -1695,7 +828,14 @@ Function ValidateCoverPage
 	Switch ($CultureCode)
 	{
 		'ca-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2016)
+				{
+					$xArray = ("Austin", "En bandes", "Faceta", "Filigrana",
+					"Integral", "Ió (clar)", "Ió (fosc)", "Línia lateral",
+					"Moviment", "Quadrícula", "Retrospectiu", "Sector (clar)",
+					"Sector (fosc)", "Semàfor", "Visualització principal", "Whisp")
+				}
+				ElseIf($xWordVersion -eq $wdWord2013)
 				{
 					$xArray = ("Austin", "En bandes", "Faceta", "Filigrana",
 					"Integral", "Ió (clar)", "Ió (fosc)", "Línia lateral",
@@ -1710,16 +850,17 @@ Function ValidateCoverPage
 					"Perspectiva", "Piles", "Quadrícula", "Sobri",
 					"Transcendir", "Trencaclosques")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alfabet", "Anual", "Conservador", "Contrast",
-					"Cubicles", "Diplomàtic", "En mosaic", "Exposició", "Línia lateral",
-					"Mod", "Moviment", "Piles", "Sobri", "Transcendir", "Trencaclosques")
-				}
 			}
 
 		'da-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2016)
+				{
+					$xArray = ("Austin", "BevægElse", "Brusen", "Facet", "Filigran", 
+					"Gitter", "Integral", "Ion (lys)", "Ion (mørk)", 
+					"Retro", "Semafor", "Sidelinje", "Stribet", 
+					"Udsnit (lys)", "Udsnit (mørk)", "Visningsmaster")
+				}
+				ElseIf($xWordVersion -eq $wdWord2013)
 				{
 					$xArray = ("BevægElse", "Brusen", "Ion (lys)", "Filigran",
 					"Retro", "Semafor", "Visningsmaster", "Integral",
@@ -1733,17 +874,18 @@ Function ValidateCoverPage
 					"Gitter", "Austin", "Eksponering", "Sidelinje", "Enkel",
 					"Nålestribet", "Årlig", "Avispapir", "Tradionel")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alfabet", "Årlig", "BevægElse", "Eksponering",
-					"Enkel", "Firkanter", "Fliser", "Gåde", "Kontrast",
-					"Mod", "Nålestribet", "Overskrid", "Sidelinje", "Stakke",
-					"Tradionel")
-				}
 			}
 
 		'de-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2016)
+				{
+					$xArray = ("Austin", "Bewegung", "Facette", "Filigran", 
+					"Gebändert", "Integral", "Ion (dunkel)", "Ion (hell)", 
+					"Pfiff", "Randlinie", "Raster", "Rückblick", 
+					"Segment (dunkel)", "Segment (hell)", "Semaphor", 
+					"ViewMaster")
+				}
+				ElseIf($xWordVersion -eq $wdWord2013)
 				{
 					$xArray = ("Semaphor", "Segment (hell)", "Ion (hell)",
 					"Raster", "Ion (dunkel)", "Filigran", "Rückblick", "Pfiff",
@@ -1757,17 +899,10 @@ Function ValidateCoverPage
 					"Modern", "Nadelstreifen", "Perspektive", "Puzzle", "Randlinie",
 					"Raster", "Schlicht", "Stapel", "Traditionell", "Zeitungspapier")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alphabet", "Bewegung", "Durchscheinend", "Herausgestellt",
-					"Jährlich", "Kacheln", "Kontrast", "Kubistisch", "Modern",
-					"Nadelstreifen", "Puzzle", "Randlinie", "Raster", "Schlicht", "Stapel",
-					"Traditionell")
-				}
 			}
 
 		'en-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
 					$xArray = ("Austin", "Banded", "Facet", "Filigree", "Grid",
 					"Integral", "Ion (Dark)", "Ion (Light)", "Motion", "Retrospect",
@@ -1780,16 +915,17 @@ Function ValidateCoverPage
 					"Contrast", "Cubicles", "Exposure", "Grid", "Mod", "Motion", "Newsprint",
 					"Perspective", "Pinstripes", "Puzzle", "Sideline", "Stacks", "Tiles", "Transcend")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alphabet", "Annual", "Austere", "Conservative", "Contrast",
-					"Cubicles", "Exposure", "Mod", "Motion", "Pinstripes", "Puzzle",
-					"Sideline", "Stacks", "Tiles", "Transcend")
-				}
 			}
 
 		'es-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2016)
+				{
+					$xArray = ("Austin", "Con bandas", "Cortar (oscuro)", "Cuadrícula", 
+					"Whisp", "Faceta", "Filigrana", "Integral", "Ion (claro)", 
+					"Ion (oscuro)", "Línea lateral", "Movimiento", "Retrospectiva", 
+					"Semáforo", "Slice (luz)", "Vista principal", "Whisp")
+				}
+				ElseIf($xWordVersion -eq $wdWord2013)
 				{
 					$xArray = ("Whisp", "Vista principal", "Filigrana", "Austin",
 					"Slice (luz)", "Faceta", "Semáforo", "Retrospectiva", "Cuadrícula",
@@ -1803,17 +939,17 @@ Function ValidateCoverPage
 					"Moderno", "Mosaicos", "Movimiento", "Papel periódico",
 					"Perspectiva", "Pilas", "Puzzle", "Rayas", "Sobrepasar")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alfabeto", "Anual", "Austero", "Conservador",
-					"Contraste", "Cubículos", "Exposición", "Línea lateral",
-					"Moderno", "Mosaicos", "Movimiento", "Pilas", "Puzzle",
-					"Rayas", "Sobrepasar")
-				}
 			}
 
 		'fi-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2016)
+				{
+					$xArray = ("Filigraani", "Integraali", "Ioni (tumma)",
+					"Ioni (vaalea)", "Opastin", "Pinta", "Retro", "Sektori (tumma)",
+					"Sektori (vaalea)", "Vaihtuvavärinen", "ViewMaster", "Austin",
+					"Kuiskaus", "Liike", "Ruudukko", "Sivussa")
+				}
+				ElseIf($xWordVersion -eq $wdWord2013)
 				{
 					$xArray = ("Filigraani", "Integraali", "Ioni (tumma)",
 					"Ioni (vaalea)", "Opastin", "Pinta", "Retro", "Sektori (tumma)",
@@ -1827,39 +963,28 @@ Function ValidateCoverPage
 					"Palapeli", "Perinteinen", "Perspektiivi", "Pinot", "Ruudukko",
 					"Ruudut", "Sanomalehtipaperi", "Sivussa", "Vuotuinen", "Ylitys")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Aakkoset", "Alttius", "Kontrasti", "Kuvakkeet ja tiedot",
-					"Liike" , "Liituraita" , "Mod" , "Palapeli", "Perinteinen", "Pinot",
-					"Sivussa", "Työpisteet", "Vuosittainen", "Yksinkertainen", "Ylitys")
-				}
 			}
 
 		'fr-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
-					$xArray = ("ViewMaster", "Secteur (foncé)", "Sémaphore",
-					"Rétrospective", "Ion (foncé)", "Ion (clair)", "Intégrale",
-					"Filigrane", "Facette", "Secteur (clair)", "À bandes", "Austin",
-					"Guide", "Whisp", "Lignes latérales", "Quadrillage")
+					$xArray = ("À bandes", "Austin", "Facette", "Filigrane", 
+					"Guide", "Intégrale", "Ion (clair)", "Ion (foncé)", 
+					"Lignes latérales", "Quadrillage", "Rétrospective", "Secteur (clair)", 
+					"Secteur (foncé)", "Sémaphore", "ViewMaster", "Whisp")
 				}
 				ElseIf($xWordVersion -eq $wdWord2010)
 				{
-					$xArray = ("Mosaïques", "Ligne latérale", "Annuel", "Perspective",
-					"Contraste", "Emplacements de bureau", "Moderne", "Blocs empilés",
-					"Rayures fines", "Austère", "Transcendant", "Classique", "Quadrillage",
-					"Exposition", "Alphabet", "Mots croisés", "Papier journal", "Austin", "Guide")
-				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alphabet", "Annuel", "Austère", "Blocs empilés", "Blocs superposés",
-					"Classique", "Contraste", "Exposition", "Guide", "Ligne latérale", "Moderne",
-					"Mosaïques", "Mots croisés", "Rayures fines", "Transcendant")
+					$xArray = ("Alphabet", "Annuel", "Austère", "Austin", 
+					"Blocs empilés", "Classique", "Contraste", "Emplacements de bureau", 
+					"Exposition", "Guide", "Ligne latérale", "Moderne", 
+					"Mosaïques", "Mots croisés", "Papier journal", "Perspective",
+					"Quadrillage", "Rayures fines", "Transcendant")
 				}
 			}
 
 		'nb-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
 					$xArray = ("Austin", "BevegElse", "Dempet", "Fasett", "Filigran",
 					"Integral", "Ion (lys)", "Ion (mørk)", "Retrospekt", "Rutenett",
@@ -1873,16 +998,10 @@ Function ValidateCoverPage
 					"Kontrast", "Mod", "Perspektiv", "Puslespill", "Rutenett", "Sidelinje",
 					"Smale striper", "Stabler", "Transcenderende")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alfabet", "Årlig", "Avlukker", "BevegElse", "Engasjement",
-					"Enkel", "Fliser", "Konservativ", "Kontrast", "Mod", "Puslespill",
-					"Sidelinje", "Smale striper", "Stabler", "Transcenderende")
-				}
 			}
 
 		'nl-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
 					$xArray = ("Austin", "Beweging", "Facet", "Filigraan", "Gestreept",
 					"Integraal", "Ion (donker)", "Ion (licht)", "Raster",
@@ -1897,19 +1016,13 @@ Function ValidateCoverPage
 					"Puzzel", "Raster", "Stapels",
 					"Tegels", "Terzijde")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Aantrekkelijk", "Alfabet", "Bescheiden", "Beweging",
-					"Blikvanger", "Contrast", "Eenvoudig", "Jaarlijks", "Krijtstreep",
-					"Mod", "Puzzel", "Stapels", "Tegels", "Terzijde", "Werkplekken")
-				}
 			}
 
 		'pt-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
 					$xArray = ("Animação", "Austin", "Em Tiras", "Exibição Mestra",
-					"Faceta", "Fatia (Clara)", "Fatia (Escura)", "Filete", "Filigrana",
+					"Faceta", "Fatia (Clara)", "Fatia (Escura)", "Filete", "Filigrana", 
 					"Grade", "Integral", "Íon (Claro)", "Íon (Escuro)", "Linha Lateral",
 					"Retrospectiva", "Semáforo")
 				}
@@ -1920,16 +1033,10 @@ Function ValidateCoverPage
 					"Linha Lateral", "Listras", "Mod", "Papel Jornal", "Perspectiva", "Pilhas",
 					"Quebra-cabeça", "Transcend")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
-				{
-					$xArray = ("Alfabeto", "Animação", "Anual", "Austero", "Baias", "Conservador",
-					"Contraste", "Exposição", "Ladrilhos", "Linha Lateral", "Listras", "Mod",
-					"Pilhas", "Quebra-cabeça", "Transcendente")
-				}
 			}
 
 		'sv-'	{
-				If($xWordVersion -eq $wdWord2013)
+				If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
 					$xArray = ("Austin", "Band", "Fasett", "Filigran", "Integrerad", "Jon (ljust)",
 					"Jon (mörkt)", "Knippe", "Rutnät", "RörElse", "Sektor (ljus)", "Sektor (mörk)",
@@ -1942,32 +1049,31 @@ Function ValidateCoverPage
 					"RörElse", "Sidlinje", "Sobert", "Staplat", "Tidningspapper", "Årligt",
 					"Övergående")
 				}
-				ElseIf($xWordVersion -eq $wdWord2007)
+			}
+
+		'zh-'	{
+				If($xWordVersion -eq $wdWord2010 -or $xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 				{
-					$xArray = ("Alfabetmönster", "Årligt", "Enkelt", "Exponering", "Konservativt",
-					"Kontrast", "Kritstreck", "Kuber", "Övergående", "Plattor", "Pussel", "RörElse",
-					"Sidlinje", "Sobert", "Staplat")
+					$xArray = ('奥斯汀', '边线型', '花丝', '怀旧', '积分',
+					'离子(浅色)', '离子(深色)', '母版型', '平面', '切片(浅色)',
+					'切片(深色)', '丝状', '网格', '镶边', '信号灯',
+					'运动型')
 				}
 			}
 
 		Default	{
-					If($xWordVersion -eq $wdWord2013)
+					If($xWordVersion -eq $wdWord2013 -or $xWordVersion -eq $wdWord2016)
 					{
-						$xArray = ("Austin", "Banded", "Facet", "Filigree", "Grid", "Integral",
-						"Ion (Dark)", "Ion (Light)", "Motion", "Retrospect", "Semaphore",
-						"Sideline", "Slice (Dark)", "Slice (Light)", "ViewMaster", "Whisp")
+						$xArray = ("Austin", "Banded", "Facet", "Filigree", "Grid",
+						"Integral", "Ion (Dark)", "Ion (Light)", "Motion", "Retrospect",
+						"Semaphore", "Sideline", "Slice (Dark)", "Slice (Light)", "ViewMaster",
+						"Whisp")
 					}
 					ElseIf($xWordVersion -eq $wdWord2010)
 					{
 						$xArray = ("Alphabet", "Annual", "Austere", "Austin", "Conservative",
 						"Contrast", "Cubicles", "Exposure", "Grid", "Mod", "Motion", "Newsprint",
 						"Perspective", "Pinstripes", "Puzzle", "Sideline", "Stacks", "Tiles", "Transcend")
-					}
-					ElseIf($xWordVersion -eq $wdWord2007)
-					{
-						$xArray = ("Alphabet", "Annual", "Austere", "Conservative", "Contrast",
-						"Cubicles", "Exposure", "Mod", "Motion", "Pinstripes", "Puzzle",
-						"Sideline", "Stacks", "Tiles", "Transcend")
 					}
 				}
 	}
@@ -1997,25 +1103,13 @@ Function CheckWordPrereq
 	$SessionID = (Get-Process -PID $PID).SessionId
 	
 	#Find out if winword is running in our session
-	[bool]$wordrunning = ((Get-Process 'WinWord' -ea 0)|?{$_.SessionId -eq $SessionID}) -ne $Null
+	[bool]$wordrunning = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}) -ne $Null
 	If($wordrunning)
 	{
 		$ErrorActionPreference = $SaveEAPreference
 		Write-Host "`n`n`tPlease close all instances of Microsoft Word before running this report.`n`n"
 		Exit
 	}
-}
-
-Function CheckWord2007SaveAsPDFInstalled
-{
-	If((Test-Path  REGISTRY::HKEY_CLASSES_ROOT\Installer\Products\000021090B0090400000000000F01FEC) -eq $False)
-	{
-		Write-Host "`n`n`t`tWord 2007 is detected and the option to SaveAs PDF was selected but the Word 2007 SaveAs PDF add-in is not installed."
-		Write-Host "`n`n`t`tThe add-in can be downloaded from http://www.microsoft.com/en-us/download/details.aspx?id=9943"
-		Write-Host "`n`n`t`tInstall the SaveAs PDF add-in and rerun the script."
-		Return $False
-	}
-	Return $True
 }
 
 Function ValidateCompanyName
@@ -2061,26 +1155,46 @@ Function Get-RegistryValue($path, $name)
 	}
 }
 
-Function line
-#function created by Michael B. Smith, Exchange MVP
-#@essentialexchange on Twitter
-#http://TheEssentialExchange.com
-#for creating the formatted text report
-#created March 2011
-#updated March 2014
-{
-	Param( [int]$tabs = 0, [string]$name = '', [string]$value = '', [string]$newline = "`r`n", [switch]$nonewline )
-	While( $tabs -gt 0 ) { $Global:Output += "`t"; $tabs--; }
-	If( $nonewline )
-	{
-		$Global:Output += $name + $value
-	}
-	Else
-	{
-		$Global:Output += $name + $value + $newline
-	}
+Function Set-DocumentProperty {
+    <#
+	.SYNOPSIS
+	Function to set the Title Page document properties in MS Word
+	.DESCRIPTION
+	Long description
+	.PARAMETER Document
+	Current Document Object
+	.PARAMETER DocProperty
+	Parameter description
+	.PARAMETER Value
+	Parameter description
+	.EXAMPLE
+	Set-DocumentProperty -Document $Script:Doc -DocProperty Title -Value 'MyTitle'
+	.EXAMPLE
+	Set-DocumentProperty -Document $Script:Doc -DocProperty Company -Value 'MyCompany'
+	.EXAMPLE
+	Set-DocumentProperty -Document $Script:Doc -DocProperty Author -Value 'Jim Moyle'
+	.EXAMPLE
+	Set-DocumentProperty -Document $Script:Doc -DocProperty Subject -Value 'MySubjectTitle'
+	.NOTES
+	Function Created by Jim Moyle June 2017
+	Twitter : @JimMoyle
+	#>
+    param (
+        [object]$Document,
+        [String]$DocProperty,
+        [string]$Value
+    )
+    try {
+        $binding = "System.Reflection.BindingFlags" -as [type]
+        $builtInProperties = $Document.BuiltInDocumentProperties
+        $property = [System.__ComObject].invokemember("item", $binding::GetProperty, $null, $BuiltinProperties, $DocProperty)
+        [System.__ComObject].invokemember("value", $binding::SetProperty, $null, $property, $Value)
+    }
+    catch {
+        Write-Warning "Failed to set $DocProperty to $Value"
+    }
 }
-	
+
 Function WriteWordLine
 #Function created by Ryan Revord
 #@rsrevord on Twitter
@@ -2101,12 +1215,12 @@ Function WriteWordLine
 	[string]$output = ""
 	Switch ($style)
 	{
-		0 {$Script:Selection.Style = $myHash.Word_NoSpacing}
-		1 {$Script:Selection.Style = $myHash.Word_Heading1}
-		2 {$Script:Selection.Style = $myHash.Word_Heading2}
-		3 {$Script:Selection.Style = $myHash.Word_Heading3}
-		4 {$Script:Selection.Style = $myHash.Word_Heading4}
-		Default {$Script:Selection.Style = $myHash.Word_NoSpacing}
+		0 {$Script:Selection.Style = $Script:MyHash.Word_NoSpacing; Break}
+		1 {$Script:Selection.Style = $Script:MyHash.Word_Heading1; Break}
+		2 {$Script:Selection.Style = $Script:MyHash.Word_Heading2; Break}
+		3 {$Script:Selection.Style = $Script:MyHash.Word_Heading3; Break}
+		4 {$Script:Selection.Style = $Script:MyHash.Word_Heading4; Break}
+		Default {$Script:Selection.Style = $Script:MyHash.Word_NoSpacing; Break}
 	}
 	
 	#build # of tabs
@@ -2150,31 +1264,17 @@ Function WriteWordLine
 	}
 }
 
-Function _SetDocumentProperty 
-{
-	#jeff hicks
-	Param([object]$Properties,[string]$Name,[string]$Value)
-	#get the property object
-	$prop = $properties | ForEach { 
-		$propname=$_.GetType().InvokeMember("Name","GetProperty",$Null,$_,$Null)
-		If($propname -eq $Name) 
-		{
-			Return $_
-		}
-	} #ForEach
-
-	#set the value
-	$Prop.GetType().InvokeMember("Value","SetProperty",$Null,$prop,$Value)
-}
-
 Function AbortScript
 {
-	$Script:Word.quit()
-	Write-Verbose "$(Get-Date): System Cleanup"
-	[System.Runtime.Interopservices.Marshal]::ReleaseComObject($Script:Word) | Out-Null
-	If(Test-Path variable:global:word)
+	If($MSWord -or $PDF)
 	{
-		Remove-Variable -Name word -Scope Global
+		$Script:Word.quit()
+		Write-Verbose "$(Get-Date): System Cleanup"
+		[System.Runtime.Interopservices.Marshal]::ReleaseComObject($Script:Word) | Out-Null
+		If(Test-Path variable:global:word)
+		{
+			Remove-Variable -Name word -Scope Global 4>$Null
+		}
 	}
 	[gc]::collect() 
 	[gc]::WaitForPendingFinalizers()
@@ -2185,7 +1285,7 @@ Function AbortScript
 
 Function FindWordDocumentEnd
 {
-	#return focus to main document    
+	#Return focus to main document    
 	$Script:Doc.ActiveWindow.ActivePane.view.SeekView = $wdSeekMainDocument
 	#move to the end of the current document
 	$Script:Selection.EndKey($wdStory,$wdMove) | Out-Null
@@ -2201,7 +1301,7 @@ Function FindWordDocumentEnd
 	Using this function is quicker than setting each table cell individually but can
 	only utilise the built-in MS Word table autoformats. Individual tables cells can
 	be altered after the table has been appended to the document (a table reference
-	is returned).
+	is Returned).
 .EXAMPLE
 	AddWordTable -Hashtable $HashtableArray
 
@@ -2245,37 +1345,38 @@ Function AddWordTable
 	Param
 	(
 		# Array of Hashtable (including table headers)
-		[Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, ParameterSetName='Hashtable', Position=0)]
+		[Parameter(Mandatory=$True, ValueFromPipelineByPropertyName=$True, ParameterSetName='Hashtable', Position=0)]
 		[ValidateNotNullOrEmpty()] [System.Collections.Hashtable[]] $Hashtable,
 		# Array of PSCustomObjects
-		[Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, ParameterSetName='CustomObject', Position=0)]
+		[Parameter(Mandatory=$True, ValueFromPipelineByPropertyName=$True, ParameterSetName='CustomObject', Position=0)]
 		[ValidateNotNullOrEmpty()] [PSCustomObject[]] $CustomObject,
 		# Array of Hashtable key names or PSCustomObject property names to include, in display order.
 		# If not supplied then all Hashtable keys or all PSCustomObject properties will be displayed.
-		[Parameter(ValueFromPipelineByPropertyName=$true)] [AllowNull()] [string[]] $Columns = $null,
+		[Parameter(ValueFromPipelineByPropertyName=$True)] [AllowNull()] [string[]] $Columns = $Null,
 		# Array of custom table header strings in display order.
-		[Parameter(ValueFromPipelineByPropertyName=$true)] [AllowNull()] [string[]] $Headers = $null,
+		[Parameter(ValueFromPipelineByPropertyName=$True)] [AllowNull()] [string[]] $Headers = $Null,
 		# AutoFit table behavior.
-		[Parameter(ValueFromPipelineByPropertyName=$true)] [AllowNull()] [int] $AutoFit = -1,
+		[Parameter(ValueFromPipelineByPropertyName=$True)] [AllowNull()] [int] $AutoFit = -1,
 		# List view (no headers)
 		[Switch] $List,
 		# Grid lines
 		[Switch] $NoGridLines,
+		[Switch] $NoInternalGridLines,
 		# Built-in Word table formatting style constant
 		# Would recommend only $wdTableFormatContempory for normal usage (possibly $wdTableFormatList5 for List view)
-		[Parameter(ValueFromPipelineByPropertyName=$true)] [int] $Format = 0
+		[Parameter(ValueFromPipelineByPropertyName=$True)] [int] $Format = 0
 	)
 
 	Begin 
 	{
 		Write-Debug ("Using parameter set '{0}'" -f $PSCmdlet.ParameterSetName);
 		## Check if -Columns wasn't specified but -Headers were (saves some additional parameter sets!)
-		If(($Columns -eq $null) -and ($Headers -ne $null)) 
+		If(($Null -eq $Columns) -and ($Null -eq $Headers)) 
 		{
 			Write-Warning "No columns specified and therefore, specified headers will be ignored.";
-			$Columns = $null;
+			$Columns = $Null;
 		}
-		ElseIf(($Columns -ne $null) -and ($Headers -ne $null)) 
+		ElseIf(($Null -ne $Columns) -and ($Null -ne $Headers)) 
 		{
 			## Check if number of specified -Columns matches number of specified -Headers
 			If($Columns.Length -ne $Headers.Length) 
@@ -2288,13 +1389,13 @@ Function AddWordTable
 	Process
 	{
 		## Build the Word table data string to be converted to a range and then a table later.
-        [System.Text.StringBuilder] $WordRangeString = New-Object System.Text.StringBuilder;
+		[System.Text.StringBuilder] $WordRangeString = New-Object System.Text.StringBuilder;
 
 		Switch ($PSCmdlet.ParameterSetName) 
 		{
 			'CustomObject' 
 			{
-				If($Columns -eq $null) 
+				If($Null -eq $Columns) 
 				{
 					## Build the available columns from all availble PSCustomObject note properties
 					[string[]] $Columns = @();
@@ -2309,13 +1410,13 @@ Function AddWordTable
 				If(-not $List) 
 				{
 					Write-Debug ("$(Get-Date): `t`tBuilding table headers");
-					If($Headers -ne $null) 
+					If($Null -ne $Headers) 
 					{
-                        [ref] $null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Headers));
+                        [ref] $Null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Headers));
 					}
 					Else 
 					{ 
-                        [ref] $null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Columns));
+                        [ref] $Null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Columns));
 					}
 				}
 
@@ -2330,14 +1431,14 @@ Function AddWordTable
 						$OrderedValues += $Object.$Column; 
 					}
 					## Use the ordered list to add each column in specified order
-                    [ref] $null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $OrderedValues));
-				} ## end foreach
+					[ref] $Null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $OrderedValues));
+				} ## end ForEach
 				Write-Debug ("$(Get-Date): `t`t`tAdded '{0}' table rows" -f ($CustomObject.Count));
 			} ## end CustomObject
 
 			Default 
 			{   ## Hashtable
-				If($Columns -eq $null) 
+				If($Null -eq $Columns) 
 				{
 					## Build the available columns from all available hashtable keys. Hopefully
 					## all Hashtables have the same keys (they should for a table).
@@ -2348,13 +1449,13 @@ Function AddWordTable
 				If(-not $List) 
 				{
 					Write-Debug ("$(Get-Date): `t`tBuilding table headers");
-					If($Headers -ne $null) 
+					If($Null -ne $Headers) 
 					{ 
-                        [ref] $null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Headers));
+						[ref] $Null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Headers));
 					}
 					Else 
 					{
-                        [ref] $null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Columns));
+						[ref] $Null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $Columns));
 					}
 				}
                 
@@ -2369,8 +1470,8 @@ Function AddWordTable
 						$OrderedValues += $Hash.$Column; 
 					}
 					## Use the ordered list to add each column in specified order
-                    [ref] $null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $OrderedValues));
-				} ## end foreach
+					[ref] $Null = $WordRangeString.AppendFormat("{0}`n", [string]::Join("`t", $OrderedValues));
+				} ## end ForEach
 
 				Write-Debug ("$(Get-Date): `t`t`tAdded '{0}' table rows" -f $Hashtable.Count);
 			} ## end default
@@ -2388,17 +1489,17 @@ Function AddWordTable
 		If($Format -ge 0) 
 		{
 			$ConvertToTableArguments.Add("Format", $Format);
-			$ConvertToTableArguments.Add("ApplyBorders", $true);
-			$ConvertToTableArguments.Add("ApplyShading", $true);
-			$ConvertToTableArguments.Add("ApplyFont", $true);
-			$ConvertToTableArguments.Add("ApplyColor", $true);
+			$ConvertToTableArguments.Add("ApplyBorders", $True);
+			$ConvertToTableArguments.Add("ApplyShading", $True);
+			$ConvertToTableArguments.Add("ApplyFont", $True);
+			$ConvertToTableArguments.Add("ApplyColor", $True);
 			If(!$List) 
 			{ 
-				$ConvertToTableArguments.Add("ApplyHeadingRows", $true); 
+				$ConvertToTableArguments.Add("ApplyHeadingRows", $True); 
 			}
-			$ConvertToTableArguments.Add("ApplyLastRow", $true);
-			$ConvertToTableArguments.Add("ApplyFirstColumn", $true);
-			$ConvertToTableArguments.Add("ApplyLastColumn", $true);
+			$ConvertToTableArguments.Add("ApplyLastRow", $True);
+			$ConvertToTableArguments.Add("ApplyFirstColumn", $True);
+			$ConvertToTableArguments.Add("ApplyLastColumn", $True);
 		}
 
 		## Invoke ConvertToTable method - with named arguments - to convert Word range to a table
@@ -2408,11 +1509,11 @@ Function AddWordTable
 		$WordTable = $WordRange.GetType().InvokeMember(
 			"ConvertToTable",                               # Method name
 			[System.Reflection.BindingFlags]::InvokeMethod, # Flags
-			$null,                                          # Binder
+			$Null,                                          # Binder
 			$WordRange,                                     # Target (self!)
 			([Object[]]($ConvertToTableArguments.Values)),  ## Named argument values
-			$null,                                          # Modifiers
-			$null,                                          # Culture
+			$Null,                                          # Modifiers
+			$Null,                                          # Culture
 			([String[]]($ConvertToTableArguments.Keys))     ## Named argument names
 		);
 
@@ -2429,12 +1530,25 @@ Function AddWordTable
 			$WordTable.AutoFitBehavior($AutoFit); 
 		}
 
-		#the next line causes the heading row to flow across page breaks
-		$WordTable.Rows.First.Headingformat = $wdHeadingFormatTrue;
+		If(!$List)
+		{
+			#the next line causes the heading row to flow across page breaks
+			$WordTable.Rows.First.Headingformat = $wdHeadingFormatTrue;
+		}
 
 		If(!$NoGridLines) 
 		{
 			$WordTable.Borders.InsideLineStyle = $wdLineStyleSingle;
+			$WordTable.Borders.OutsideLineStyle = $wdLineStyleSingle;
+		}
+		If($NoGridLines) 
+		{
+			$WordTable.Borders.InsideLineStyle = $wdLineStyleNone;
+			$WordTable.Borders.OutsideLineStyle = $wdLineStyleNone;
+		}
+		If($NoInternalGridLines) 
+		{
+			$WordTable.Borders.InsideLineStyle = $wdLineStyleNone;
 			$WordTable.Borders.OutsideLineStyle = $wdLineStyleSingle;
 		}
 
@@ -2466,7 +1580,7 @@ Function AddWordTable
 
 	This example sets all text to size 8 and bold for all cells that are contained
 	within the first row of the table.
-	Note: the $Table.Rows.First.Cells returns a collection of Word COM cells objects
+	Note: the $Table.Rows.First.Cells Returns a collection of Word COM cells objects
 	that are in the first table row.
 .EXAMPLE
 	$ColumnCollection = $Table.Columns.Item(2).Cells
@@ -2474,14 +1588,14 @@ Function AddWordTable
 
 	This example sets the background (shading) of all cells in the table's second
 	column to red.
-	Note: the $Table.Columns.Item(2).Cells returns a collection of Word COM cells objects
+	Note: the $Table.Columns.Item(2).Cells Returns a collection of Word COM cells objects
 	that are in the table's second column.
 .EXAMPLE
 	SetWordCellFormat -Cell $Table.Cell(17,3) -Font "Tahoma" -Color 16711680
 
 	This example sets the font to Tahoma and the text color to blue for the cell located
 	in the table's 17th row and 3rd column.
-	Note: the $Table.Cell(17,3) returns a single Word COM cells object.
+	Note: the $Table.Cell(17,3) Returns a single Word COM cells object.
 #>
 
 Function SetWordCellFormat 
@@ -2489,21 +1603,21 @@ Function SetWordCellFormat
 	[CmdletBinding(DefaultParameterSetName='Collection')]
 	Param (
 		# Word COM object cell collection reference
-		[Parameter(Mandatory=$true, ValueFromPipeline=$true, ParameterSetName='Collection', Position=0)] [ValidateNotNullOrEmpty()] $Collection,
+		[Parameter(Mandatory=$True, ValueFromPipeline=$True, ParameterSetName='Collection', Position=0)] [ValidateNotNullOrEmpty()] $Collection,
 		# Word COM object individual cell reference
-		[Parameter(Mandatory=$true, ParameterSetName='Cell', Position=0)] [ValidateNotNullOrEmpty()] $Cell,
+		[Parameter(Mandatory=$True, ParameterSetName='Cell', Position=0)] [ValidateNotNullOrEmpty()] $Cell,
 		# Hashtable of cell co-ordinates
-		[Parameter(Mandatory=$true, ParameterSetName='Hashtable', Position=0)] [ValidateNotNullOrEmpty()] [System.Collections.Hashtable[]] $Coordinates,
+		[Parameter(Mandatory=$True, ParameterSetName='Hashtable', Position=0)] [ValidateNotNullOrEmpty()] [System.Collections.Hashtable[]] $Coordinates,
 		# Word COM object table reference
-		[Parameter(Mandatory=$true, ParameterSetName='Hashtable', Position=1)] [ValidateNotNullOrEmpty()] $Table,
+		[Parameter(Mandatory=$True, ParameterSetName='Hashtable', Position=1)] [ValidateNotNullOrEmpty()] $Table,
 		# Font name
-		[Parameter()] [AllowNull()] [string] $Font = $null,
+		[Parameter()] [AllowNull()] [string] $Font = $Null,
 		# Font color
-		[Parameter()] [AllowNull()] $Color = $null,
+		[Parameter()] [AllowNull()] $Color = $Null,
 		# Font size
 		[Parameter()] [ValidateNotNullOrEmpty()] [int] $Size = 0,
 		# Cell background color
-		[Parameter()] [AllowNull()] $BackgroundColor = $null,
+		[Parameter()] [AllowNull()] $BackgroundColor = $Null,
 		# Force solid background color
 		[Switch] $Solid,
 		[Switch] $Bold,
@@ -2523,25 +1637,25 @@ Function SetWordCellFormat
 			'Collection' {
 				ForEach($Cell in $Collection) 
 				{
-					If($BackgroundColor -ne $null) { $Cell.Shading.BackgroundPatternColor = $BackgroundColor; }
-					If($Bold) { $Cell.Range.Font.Bold = $true; }
-					If($Italic) { $Cell.Range.Font.Italic = $true; }
+					If($Null -ne $BackgroundColor) { $Cell.Shading.BackgroundPatternColor = $BackgroundColor; }
+					If($Bold) { $Cell.Range.Font.Bold = $True; }
+					If($Italic) { $Cell.Range.Font.Italic = $True; }
 					If($Underline) { $Cell.Range.Font.Underline = 1; }
-					If($Font -ne $null) { $Cell.Range.Font.Name = $Font; }
-					If($Color -ne $null) { $Cell.Range.Font.Color = $Color; }
+					If($Null -ne $Font) { $Cell.Range.Font.Name = $Font; }
+					If($Null -ne $Color) { $Cell.Range.Font.Color = $Color; }
 					If($Size -ne 0) { $Cell.Range.Font.Size = $Size; }
 					If($Solid) { $Cell.Shading.Texture = 0; } ## wdTextureNone
-				} # end foreach
+				} # end ForEach
 			} # end Collection
 			'Cell' 
 			{
-				If($Bold) { $Cell.Range.Font.Bold = $true; }
-				If($Italic) { $Cell.Range.Font.Italic = $true; }
+				If($Bold) { $Cell.Range.Font.Bold = $True; }
+				If($Italic) { $Cell.Range.Font.Italic = $True; }
 				If($Underline) { $Cell.Range.Font.Underline = 1; }
-				If($Font -ne $null) { $Cell.Range.Font.Name = $Font; }
-				If($Color -ne $null) { $Cell.Range.Font.Color = $Color; }
+				If($Null -ne $Font) { $Cell.Range.Font.Name = $Font; }
+				If($Null -ne $Color) { $Cell.Range.Font.Color = $Color; }
 				If($Size -ne 0) { $Cell.Range.Font.Size = $Size; }
-				If($BackgroundColor -ne $null) { $Cell.Shading.BackgroundPatternColor = $BackgroundColor; }
+				If($Null -ne $BackgroundColor) { $Cell.Shading.BackgroundPatternColor = $BackgroundColor; }
 				If($Solid) { $Cell.Shading.Texture = 0; } ## wdTextureNone
 			} # end Cell
 			'Hashtable' 
@@ -2549,13 +1663,13 @@ Function SetWordCellFormat
 				ForEach($Coordinate in $Coordinates) 
 				{
 					$Cell = $Table.Cell($Coordinate.Row, $Coordinate.Column);
-					If($Bold) { $Cell.Range.Font.Bold = $true; }
-					If($Italic) { $Cell.Range.Font.Italic = $true; }
+					If($Bold) { $Cell.Range.Font.Bold = $True; }
+					If($Italic) { $Cell.Range.Font.Italic = $True; }
 					If($Underline) { $Cell.Range.Font.Underline = 1; }
-					If($Font -ne $null) { $Cell.Range.Font.Name = $Font; }
-					If($Color -ne $null) { $Cell.Range.Font.Color = $Color; }
+					If($Null -ne $Font) { $Cell.Range.Font.Name = $Font; }
+					If($Null -ne $Color) { $Cell.Range.Font.Color = $Color; }
 					If($Size -ne 0) { $Cell.Range.Font.Size = $Size; }
-					If($BackgroundColor -ne $null) { $Cell.Shading.BackgroundPatternColor = $BackgroundColor; }
+					If($Null -ne $BackgroundColor) { $Cell.Shading.BackgroundPatternColor = $BackgroundColor; }
 					If($Solid) { $Cell.Shading.Texture = 0; } ## wdTextureNone
 				}
 			} # end Hashtable
@@ -2592,11 +1706,11 @@ Function SetWordTableAlternateRowColor
 	[CmdletBinding()]
 	Param (
 		# Word COM object table reference
-		[Parameter(Mandatory=$true, ValueFromPipeline=$true, Position=0)] [ValidateNotNullOrEmpty()] $Table,
+		[Parameter(Mandatory=$True, ValueFromPipeline=$True, Position=0)] [ValidateNotNullOrEmpty()] $Table,
 		# Alternate row background color
-		[Parameter(Mandatory=$true, Position=1)] [ValidateNotNull()] [int] $BackgroundColor,
+		[Parameter(Mandatory=$True, Position=1)] [ValidateNotNull()] [int] $BackgroundColor,
 		# Alternate row starting seed
-		[Parameter(ValueFromPipelineByPropertyName=$true, Position=2)] [ValidateSet('First','Second')] [string] $Seed = 'First'
+		[Parameter(ValueFromPipelineByPropertyName=$True, Position=2)] [ValidateSet('First','Second')] [string] $Seed = 'First'
 	)
 
 	Process 
@@ -2630,28 +1744,44 @@ Function ShowScriptOptions
 {
 	Write-Verbose "$(Get-Date): "
 	Write-Verbose "$(Get-Date): "
-	Write-Verbose "$(Get-Date): Company Name : $($Script:CoName)"
-	Write-Verbose "$(Get-Date): Cover Page   : $($CoverPage)"
-	Write-Verbose "$(Get-Date): User Name    : $($UserName)"
-	Write-Verbose "$(Get-Date): Save As PDF  : $($PDF)"
-	Write-Verbose "$(Get-Date): Save As TEXT : $($TEXT)"
-	Write-Verbose "$(Get-Date): Save As WORD : $($MSWORD)"
-	Write-Verbose "$(Get-Date): Save As HTML : $($HTML)"
-	Write-Verbose "$(Get-Date): Add DateTime : $($AddDateTime)"
-	Write-Verbose "$(Get-Date): HW Inventory : $($Hardware)"
-	Write-Verbose "$(Get-Date): Filename1    : $($Script:FileName1)"
+	Write-Verbose "$(Get-Date): Add DateTime    : $($AddDateTime)"
+	Write-Verbose "$(Get-Date): Company Name    : $($Script:CoName)"
+	Write-Verbose "$(Get-Date): Company Address : $($CompanyAddress)"
+	Write-Verbose "$(Get-Date): Company Email   : $($CompanyEmail)"
+	Write-Verbose "$(Get-Date): Company Fax     : $($CompanyFax)"
+	Write-Verbose "$(Get-Date): Company Phone   : $($CompanyPhone)"
+	Write-Verbose "$(Get-Date): Cover Page      : $($CoverPage)"
+	Write-Verbose "$(Get-Date): Dev             : $($Dev)"
+	If($Dev)
+	{
+		Write-Verbose "$(Get-Date): DevErrorFile    : $($Script:DevErrorFile)"
+	}
+	Write-Verbose "$(Get-Date): Filename1       : $($Script:FileName1)"
 	If($PDF)
 	{
-		Write-Verbose "$(Get-Date): Filename2    : $($Script:FileName2)"
+		Write-Verbose "$(Get-Date): Filename2       : $($Script:FileName2)"
 	}
-	Write-Verbose "$(Get-Date): OS Detected  : $($RunningOS)"
-	Write-Verbose "$(Get-Date): PSUICulture  : $($PSUICulture)"
-	Write-Verbose "$(Get-Date): PSCulture    : $($PSCulture)"
-	Write-Verbose "$(Get-Date): Word version : $($Script:WordProduct)"
-	Write-Verbose "$(Get-Date): Word language: $($Script:WordLanguageValue)"
-	Write-Verbose "$(Get-Date): PoSH version : $($Host.Version)"
+	Write-Verbose "$(Get-Date): Folder          : $($Folder)"
+	Write-Verbose "$(Get-Date): From            : $($From)"
+	Write-Verbose "$(Get-Date): Log             : $($Log)"
+	Write-Verbose "$(Get-Date): Save As PDF     : $($PDF)"
+	Write-Verbose "$(Get-Date): Save As WORD    : $($MSWORD)"
+	Write-Verbose "$(Get-Date): ScriptInfo      : $($ScriptInfo)"
+	Write-Verbose "$(Get-Date): Smtp Port       : $($SmtpPort)"
+	Write-Verbose "$(Get-Date): Smtp Server     : $($SmtpServer)"
+	Write-Verbose "$(Get-Date): Title           : $($Script:Title)"
+	Write-Verbose "$(Get-Date): To              : $($To)"
+	Write-Verbose "$(Get-Date): Use SSL         : $($UseSSL)"
+	Write-Verbose "$(Get-Date): User Name       : $($UserName)"
 	Write-Verbose "$(Get-Date): "
-	Write-Verbose "$(Get-Date): Script start : $($Script:StartTime)"
+	Write-Verbose "$(Get-Date): OS Detected     : $($RunningOS)"
+	Write-Verbose "$(Get-Date): PSUICulture     : $($PSUICulture)"
+	Write-Verbose "$(Get-Date): PSCulture       : $($PSCulture)"
+	Write-Verbose "$(Get-Date): Word version    : $($Script:WordProduct)"
+	Write-Verbose "$(Get-Date): Word language   : $($Script:WordLanguageValue)"
+	Write-Verbose "$(Get-Date): PoSH version    : $($Host.Version)"
+	Write-Verbose "$(Get-Date): "
+	Write-Verbose "$(Get-Date): Script start    : $($Script:StartTime)"
 	Write-Verbose "$(Get-Date): "
 	Write-Verbose "$(Get-Date): "
 }
@@ -2659,11 +1789,11 @@ Function ShowScriptOptions
 Function validStateProp( [object] $object, [string] $topLevel, [string] $secondLevel )
 {
 	#function created 8-jan-2014 by Michael B. Smith
-	if( $object )
+	If( $object )
 	{
-		If( ( gm -Name $topLevel -InputObject $object ) )
+		If((Get-Member -Name $topLevel -InputObject $object))
 		{
-			If( ( gm -Name $secondLevel -InputObject $object.$topLevel ) )
+			If((Get-Member -Name $secondLevel -InputObject $object.$topLevel))
 			{
 				Return $True
 			}
@@ -2677,10 +1807,10 @@ Function SetupWord
 	Write-Verbose "$(Get-Date): Setting up Word"
     
 	# Setup word for output
-	Write-Verbose "$(Get-Date): Create Word comObject.  If you are not running Word 2007, ignore the next message."
-	$Script:Word = New-Object -comobject "Word.Application" -EA 0
-
-	If(!$? -or $Script:Word -eq $Null)
+	Write-Verbose "$(Get-Date): Create Word comObject."
+	$Script:Word = New-Object -comobject "Word.Application" -EA 0 4>$Null
+	
+	If(!$? -or $Null -eq $Script:Word)
 	{
 		Write-Warning "The Word object could not be created.  You may need to repair your Word installation."
 		$ErrorActionPreference = $SaveEAPreference
@@ -2711,7 +1841,11 @@ Function SetupWord
 	SetWordHashTable $Script:WordCultureCode
 	
 	[int]$Script:WordVersion = [int]$Script:Word.Version
-	If($Script:WordVersion -eq $wdWord2013)
+	If($Script:WordVersion -eq $wdWord2016)
+	{
+		$Script:WordProduct = "Word 2016"
+	}
+	ElseIf($Script:WordVersion -eq $wdWord2013)
 	{
 		$Script:WordProduct = "Word 2013"
 	}
@@ -2721,7 +1855,9 @@ Function SetupWord
 	}
 	ElseIf($Script:WordVersion -eq $wdWord2007)
 	{
-		$Script:WordProduct = "Word 2007"
+		$ErrorActionPreference = $SaveEAPreference
+		Write-Error "`n`n`t`tMicrosoft Word 2007 is no longer supported.`n`n`t`tScript will end.`n`n"
+		AbortScript
 	}
 	Else
 	{
@@ -2730,21 +1866,8 @@ Function SetupWord
 		AbortScript
 	}
 
-	If($PDF -and $Script:WordVersion -eq $wdWord2007)
-	{
-		Write-Verbose "$(Get-Date): Verify the Word 2007 Save As PDF add-in is installed"
-		If(CheckWord2007SaveAsPDFInstalled)
-		{
-			Write-Verbose "$(Get-Date): The Word 2007 Save As PDF add-in is installed"
-		}
-		Else
-		{
-			AbortScript
-		}
-	}
-
 	#only validate CompanyName if the field is blank
-	If([String]::IsNullOrEmpty($CoName))
+	If([String]::IsNullOrEmpty($Script:CoName))
 	{
 		Write-Verbose "$(Get-Date): Company name is blank.  Retrieve company name from registry."
 		$TmpName = ValidateCompanyName
@@ -2811,7 +1934,7 @@ Function SetupWord
 			'fr-'	{
 					If($CoverPage -eq "Sideline")
 					{
-						If($Script:WordVersion -eq $wdWord2013)
+						If($Script:WordVersion -eq $wdWord2013 -or $Script:WordVersion -eq $wdWord2016)
 						{
 							$CoverPage = "Lignes latérales"
 							$CPChanged = $True
@@ -2855,6 +1978,14 @@ Function SetupWord
 						$CPChanged = $True
 					}
 				}
+
+			'zh-'	{
+					If($CoverPage -eq "Sideline")
+					{
+						$CoverPage = "边线型"
+						$CPChanged = $True
+					}
+				}
 		}
 
 		If($CPChanged)
@@ -2889,28 +2020,21 @@ Function SetupWord
 	[bool]$BuildingBlocksExist = $False
 
 	$Script:Word.Templates.LoadBuildingBlocks()
-	If($Script:WordVersion -eq $wdWord2007)
-	{
-		$BuildingBlocksCollection = $Script:Word.Templates | Where {$_.name -eq "Building Blocks.dotx"}
-	}
-	Else
-	{
-		#word 2010/2013
-		$BuildingBlocksCollection = $Script:Word.Templates | Where {$_.name -eq "Built-In Building Blocks.dotx"}
-	}
+	#word 2010/2013/2016
+	$BuildingBlocksCollection = $Script:Word.Templates | Where-Object{$_.name -eq "Built-In Building Blocks.dotx"}
 
 	Write-Verbose "$(Get-Date): Attempt to load cover page $($CoverPage)"
 	$part = $Null
 
 	$BuildingBlocksCollection | 
-	ForEach{
+	ForEach-Object {
 		If ($_.BuildingBlockEntries.Item($CoverPage).Name -eq $CoverPage) 
 		{
 			$BuildingBlocks = $_
 		}
 	}        
 
-	If($BuildingBlocks -ne $Null)
+	If($Null -ne $BuildingBlocks)
 	{
 		$BuildingBlocksExist = $True
 
@@ -2924,7 +2048,7 @@ Function SetupWord
 			$part = $Null
 		}
 
-		If($part -ne $Null)
+		If($Null -ne $part)
 		{
 			$Script:CoverPagesExist = $True
 		}
@@ -2939,7 +2063,7 @@ Function SetupWord
 
 	Write-Verbose "$(Get-Date): Create empty word doc"
 	$Script:Doc = $Script:Word.Documents.Add()
-	If($Script:Doc -eq $Null)
+	If($Null -eq $Script:Doc)
 	{
 		Write-Verbose "$(Get-Date): "
 		$ErrorActionPreference = $SaveEAPreference
@@ -2948,7 +2072,7 @@ Function SetupWord
 	}
 
 	$Script:Selection = $Script:Word.Selection
-	If($Script:Selection -eq $Null)
+	If($Null -eq $Script:Selection)
 	{
 		Write-Verbose "$(Get-Date): "
 		$ErrorActionPreference = $SaveEAPreference
@@ -2977,12 +2101,12 @@ Function SetupWord
 		$Script:Selection.InsertNewPage()
 
 		#table of contents
-		Write-Verbose "$(Get-Date): Table of Contents - $($myHash.Word_TableOfContents)"
-		$toc = $BuildingBlocks.BuildingBlockEntries.Item($myHash.Word_TableOfContents)
-		If($toc -eq $Null)
+		Write-Verbose "$(Get-Date): Table of Contents - $($Script:MyHash.Word_TableOfContents)"
+		$toc = $BuildingBlocks.BuildingBlockEntries.Item($Script:MyHash.Word_TableOfContents)
+		If($Null -eq $toc)
 		{
 			Write-Verbose "$(Get-Date): "
-			Write-Verbose "$(Get-Date): Table of Content - $($myHash.Word_TableOfContents) could not be retrieved."
+			Write-Verbose "$(Get-Date): Table of Content - $($Script:MyHash.Word_TableOfContents) could not be retrieved."
 			Write-Warning "This report will not have a Table of Contents."
 		}
 		Else
@@ -3030,24 +2154,24 @@ Function SetupWord
 Function UpdateDocumentProperties
 {
 	Param([string]$AbstractTitle, [string]$SubjectTitle)
+	#updated 8-Jun-2017 with additional cover page fields
 	#Update document properties
 	If($MSWORD -or $PDF)
 	{
 		If($Script:CoverPagesExist)
 		{
 			Write-Verbose "$(Get-Date): Set Cover Page Properties"
-			_SetDocumentProperty $Script:Doc.BuiltInDocumentProperties "Company" $Script:CoName
-			_SetDocumentProperty $Script:Doc.BuiltInDocumentProperties "Title" $Script:title
-			_SetDocumentProperty $Script:Doc.BuiltInDocumentProperties "Author" $username
-
-			_SetDocumentProperty $Script:Doc.BuiltInDocumentProperties "Subject" $SubjectTitle
+			#8-Jun-2017 put these 4 items in alpha order
+            Set-DocumentProperty -Document $Script:Doc -DocProperty Author -Value $UserName
+            Set-DocumentProperty -Document $Script:Doc -DocProperty Company -Value $Script:CoName
+            Set-DocumentProperty -Document $Script:Doc -DocProperty Subject -Value $SubjectTitle
+            Set-DocumentProperty -Document $Script:Doc -DocProperty Title -Value $Script:title
 
 			#Get the Coverpage XML part
-			$cp = $Script:Doc.CustomXMLParts | Where {$_.NamespaceURI -match "coverPageProps$"}
+			$cp = $Script:Doc.CustomXMLParts | Where-Object{$_.NamespaceURI -match "coverPageProps$"}
 
 			#get the abstract XML part
-			$ab = $cp.documentelement.ChildNodes | Where {$_.basename -eq "Abstract"}
-
+			$ab = $cp.documentelement.ChildNodes | Where-Object{$_.basename -eq "Abstract"}
 			#set the text
 			If([String]::IsNullOrEmpty($Script:CoName))
 			{
@@ -3055,12 +2179,35 @@ Function UpdateDocumentProperties
 			}
 			Else
 			{
-				[string]$abstract = "$($AbstractTitle) for $Script:CoName"
+				[string]$abstract = "$($AbstractTitle) for $($Script:CoName)"
 			}
-
 			$ab.Text = $abstract
 
-			$ab = $cp.documentelement.ChildNodes | Where {$_.basename -eq "PublishDate"}
+			#added 8-Jun-2017
+			$ab = $cp.documentelement.ChildNodes | Where-Object{$_.basename -eq "CompanyAddress"}
+			#set the text
+			[string]$abstract = $CompanyAddress
+			$ab.Text = $abstract
+
+			#added 8-Jun-2017
+			$ab = $cp.documentelement.ChildNodes | Where-Object{$_.basename -eq "CompanyEmail"}
+			#set the text
+			[string]$abstract = $CompanyEmail
+			$ab.Text = $abstract
+
+			#added 8-Jun-2017
+			$ab = $cp.documentelement.ChildNodes | Where-Object{$_.basename -eq "CompanyFax"}
+			#set the text
+			[string]$abstract = $CompanyFax
+			$ab.Text = $abstract
+
+			#added 8-Jun-2017
+			$ab = $cp.documentelement.ChildNodes | Where-Object{$_.basename -eq "CompanyPhone"}
+			#set the text
+			[string]$abstract = $CompanyPhone
+			$ab.Text = $abstract
+
+			$ab = $cp.documentelement.ChildNodes | Where-Object{$_.basename -eq "PublishDate"}
 			#set the text
 			[string]$abstract = (Get-Date -Format d).ToString()
 			$ab.Text = $abstract
@@ -3083,50 +2230,7 @@ Function SaveandCloseDocumentandShutdownWord
 	$Script:Word.Options.CheckSpellingAsYouType = $Script:CurrentSpellingOption
 
 	Write-Verbose "$(Get-Date): Save and Close document and Shutdown Word"
-	If($Script:WordVersion -eq $wdWord2007)
-	{
-		If($PDF)
-		{
-			Write-Verbose "$(Get-Date): Saving as DOCX file first before saving to PDF"
-		}
-		Else
-		{
-			Write-Verbose "$(Get-Date): Saving DOCX file"
-		}
-		If($AddDateTime)
-		{
-			$Script:FileName1 += "_$(Get-Date -f yyyy-MM-dd_HHmm).docx"
-			If($PDF)
-			{
-				$Script:FileName2 += "_$(Get-Date -f yyyy-MM-dd_HHmm).pdf"
-			}
-		}
-		Write-Verbose "$(Get-Date): Running Word 2007 and detected operating system $($RunningOS)"
-		If($RunningOS.Contains("Server 2008 R2") -or $RunningOS.Contains("Server 2012"))
-		{
-			$SaveFormat = "microsoft.office.interop.word.WdSaveFormat" -as [type] 
-			$Script:Doc.SaveAs($Script:FileName1, $SaveFormat)
-			If($PDF)
-			{
-				Write-Verbose "$(Get-Date): Now saving as PDF"
-				$SaveFormat = $wdFormatPDF
-				$Script:Doc.SaveAs($Script:FileName2, $SaveFormat)
-			}
-		}
-		Else
-		{
-			#works for Server 2008 and Windows 7
-			$saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatDocumentDefault")
-			$Script:Doc.SaveAs([REF]$Script:FileName1, [ref]$SaveFormat)
-			If($PDF)
-			{
-				Write-Verbose "$(Get-Date): Now saving as PDF"
-				$saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatPDF")
-				$Script:Doc.SaveAs([REF]$Script:FileName2, [ref]$saveFormat)
-			}
-		}
-	}
-	ElseIf($Script:WordVersion -eq $wdWord2010)
+	If($Script:WordVersion -eq $wdWord2010)
 	{
 		#the $saveFormat below passes StrictMode 2
 		#I found this at the following two links
@@ -3148,6 +2252,7 @@ Function SaveandCloseDocumentandShutdownWord
 				$Script:FileName2 += "_$(Get-Date -f yyyy-MM-dd_HHmm).pdf"
 			}
 		}
+		Write-Verbose "$(Get-Date): Running $($Script:WordProduct) and detected operating system $($Script:RunningOS)"
 		$saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatDocumentDefault")
 		$Script:Doc.SaveAs([REF]$Script:FileName1, [ref]$SaveFormat)
 		If($PDF)
@@ -3157,7 +2262,7 @@ Function SaveandCloseDocumentandShutdownWord
 			$Script:Doc.SaveAs([REF]$Script:FileName2, [ref]$saveFormat)
 		}
 	}
-	ElseIf($Script:WordVersion -eq $wdWord2013)
+	ElseIf($Script:WordVersion -eq $wdWord2013 -or $Script:WordVersion -eq $wdWord2016)
 	{
 		If($PDF)
 		{
@@ -3175,13 +2280,11 @@ Function SaveandCloseDocumentandShutdownWord
 				$Script:FileName2 += "_$(Get-Date -f yyyy-MM-dd_HHmm).pdf"
 			}
 		}
-		Write-Verbose "$(Get-Date): Running Word 2013 and detected operating system $($RunningOS)"
-		#$saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatDocumentDefault")
+		Write-Verbose "$(Get-Date): Running $($Script:WordProduct) and detected operating system $($Script:RunningOS)"
 		$Script:Doc.SaveAs2([REF]$Script:FileName1, [ref]$wdFormatDocumentDefault)
 		If($PDF)
 		{
 			Write-Verbose "$(Get-Date): Now saving as PDF"
-			#$saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatPDF")
 			$Script:Doc.SaveAs([REF]$Script:FileName2, [ref]$wdFormatPDF)
 		}
 	}
@@ -3191,42 +2294,72 @@ Function SaveandCloseDocumentandShutdownWord
 	$Script:Word.Quit()
 	If($PDF)
 	{
-		Write-Verbose "$(Get-Date): Deleting $($Script:FileName1) since only $($Script:FileName2) is needed"
-		Remove-Item $Script:FileName1
+		[int]$cnt = 0
+		While(Test-Path $Script:FileName1)
+		{
+			$cnt++
+			If($cnt -gt 1)
+			{
+				Write-Verbose "$(Get-Date): Waiting another 10 seconds to allow Word to fully close (try # $($cnt))"
+				Start-Sleep -Seconds 10
+				$Script:Word.Quit()
+				If($cnt -gt 2)
+				{
+					#kill the winword process
+
+					#find out our session (usually "1" except on TS/RDC or Citrix)
+					$SessionID = (Get-Process -PID $PID).SessionId
+					
+					#Find out if winword is running in our session
+					$wordprocess = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}).Id
+					If($wordprocess -gt 0)
+					{
+						Write-Verbose "$(Get-Date): Attempting to stop WinWord process # $($wordprocess)"
+						Stop-Process $wordprocess -EA 0
+					}
+				}
+			}
+			Write-Verbose "$(Get-Date): Attempting to delete $($Script:FileName1) since only $($Script:FileName2) is needed (try # $($cnt))"
+			Remove-Item $Script:FileName1 -EA 0 4>$Null
+		}
 	}
 	Write-Verbose "$(Get-Date): System Cleanup"
 	[System.Runtime.Interopservices.Marshal]::ReleaseComObject($Script:Word) | Out-Null
 	If(Test-Path variable:global:word)
 	{
-		Remove-Variable -Name word -Scope Global
+		Remove-Variable -Name word -Scope Global 4>$Null
 	}
 	$SaveFormat = $Null
 	[gc]::collect() 
 	[gc]::WaitForPendingFinalizers()
-}
+	
+	#is the winword process still running? kill it
 
-Function SaveandCloseTextDocument
-{
-	If($AddDateTime)
+	#find out our session (usually "1" except on TS/RDC or Citrix)
+	$SessionID = (Get-Process -PID $PID).SessionId
+
+	#Find out if winword is running in our session
+	$wordprocess = $Null
+	$wordprocess = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}).Id
+	If($null -ne $wordprocess -and $wordprocess -gt 0)
 	{
-		$Script:FileName1 += "_$(Get-Date -f yyyy-MM-dd_HHmm).txt"
-	}
-
-	Write-Output $Global:Output | Out-File $Script:Filename1
-}
-
-Function SaveandCloseHTMLDocument
-{
-	If($AddDateTime)
-	{
-		$Script:FileName1 += "_$(Get-Date -f yyyy-MM-dd_HHmm).html"
+		Write-Verbose "$(Get-Date): WinWord process is still running. Attempting to stop WinWord process # $($wordprocess)"
+		Stop-Process $wordprocess -EA 0
 	}
 }
 
 Function SetFileName1andFileName2
 {
 	Param([string]$OutputFileName)
-	$pwdpath = $pwd.Path
+	
+	If($Folder -eq "")
+	{
+		$pwdpath = $pwd.Path
+	}
+	Else
+	{
+		$pwdpath = $Folder
+	}
 
 	If($pwdpath.EndsWith("\"))
 	{
@@ -3234,7 +2367,7 @@ Function SetFileName1andFileName2
 		$pwdpath = $pwdpath.SubString(0, ($pwdpath.Length - 1))
 	}
 
-	#set $filename1 and $filename2 with no file extension
+	#set $Script:Filename1 and $Script:Filename2 with no file extension
 	If($AddDateTime)
 	{
 		[string]$Script:FileName1 = "$($pwdpath)\$($OutputFileName)"
@@ -3247,6 +2380,11 @@ Function SetFileName1andFileName2
 	If($MSWord -or $PDF)
 	{
 		CheckWordPreReq
+		
+		If($DeliveryGroupsUtilization)
+		{
+			CheckExcelPreReq
+		}
 
 		If(!$AddDateTime)
 		{
@@ -3259,95 +2397,11 @@ Function SetFileName1andFileName2
 
 		SetupWord
 	}
-	ElseIf($Text)
-	{
-		If(!$AddDateTime)
-		{
-			[string]$Script:FileName1 = "$($pwdpath)\$($OutputFileName).txt"
-		}
-	}
-	ElseIf($HTML)
-	{
-		If(!$AddDateTime)
-		{
-			[string]$Script:FileName1 = "$($pwdpath)\$($OutputFileName).html"
-		}
-	}
-}
-
-Function TestComputerName
-{
-	Param([string]$Cname)
-	If(![String]::IsNullOrEmpty($CName)) 
-	{
-		#get computer name
-		#first test to make sure the computer is reachable
-		Write-Verbose "$(Get-Date): Testing to see if $($CName) is online and reachable"
-		If(Test-Connection -ComputerName $CName -quiet)
-		{
-			Write-Verbose "$(Get-Date): Server $($CName) is online."
-		}
-		Else
-		{
-			Write-Verbose "$(Get-Date): Computer $($CName) is offline"
-			$ErrorActionPreference = $SaveEAPreference
-			Write-Error "`n`n`t`tComputer $($CName) is offline.`nScript cannot continue.`n`n"
-			Exit
-		}
-	}
-
-	#if computer name is localhost, get actual computer name
-	If($CName -eq "localhost")
-	{
-		$CName = $env:ComputerName
-		Write-Verbose "$(Get-Date): Computer name has been renamed from localhost to $($CName)"
-		Return $CName
-	}
-
-	#if computer name is an IP address, get host name from DNS
-	#http://blogs.technet.com/b/gary/archive/2009/08/29/resolve-ip-addresses-to-hostname-using-powershell.aspx
-	#help from Michael B. Smith
-	$ip = $CName -as [System.Net.IpAddress]
-	If($ip)
-	{
-		$Result = [System.Net.Dns]::gethostentry($ip)
-		
-		If($? -and $Result -ne $Null)
-		{
-			$CName = $Result.HostName
-			Write-Verbose "$(Get-Date): Computer name has been renamed from $($ip) to $($CName)"
-			Return $CName
-		}
-		Else
-		{
-			Write-Warning "Unable to resolve $($CName) to a hostname"
-		}
-	}
-	Else
-	{
-		#computer is online but for some reason $ComputerName cannot be converted to a System.Net.IpAddress
-	}
-	Return $CName
 }
 
 #Script begins
 
 $script:startTime = Get-Date
-
-If($TEXT)
-{
-	$global:output = ""
-}
-
-$ComputerName = TestComputerName $ComputerName
-
-<#
-###The function SetFileName1andFileName2 needs your script output filename
-SetFileName1andFileName2 "Script_Template"
-
-###change title for your report
-[string]$Script:Title = "This is the Report Title"
-#>
 
 #endregion script template
 
@@ -3361,9 +2415,6 @@ SetFileName1andFileName2 "NetScaler Documentation"
 
 #region NetScaler Documentation Script Complete
 
-## Barry Schiffer Use Stopwatch class to time script execution
-$sw = [Diagnostics.Stopwatch]::StartNew()
-
 $selection.InsertNewPage()
 
 #region NetScaler Documentation Functions
@@ -3375,7 +2426,7 @@ $selection.InsertNewPage()
    Returns a case-insensitive property from a string, assuming the property is
    named before the actual property value and is separated by a space. For
    example, if the specified SearchString contained "-property1 <value1>
-   -property2 <value2>�, searching for "-Property1" would return "<value1>".
+   -property2 <value2>�, searching for "-Property1" would return "<value1>".
 .PARAMETER SearchString
    String to search for the specified property name.
 .PARAMETER PropertyName
@@ -3431,8 +2482,8 @@ function Get-StringProperty {
     )
 
     Process {
-        # First replace escaped quotes with '�'
-        $SearchString = $SearchString.Replace('\"', "�");
+        # First replace escaped quotes with '�'
+        $SearchString = $SearchString.Replace('\"', "�");
         # Locate and replace quotes with '^^' and quoted spaces '^' to aid with parsing, until there are none left
         while ($SearchString.Contains('"')) {
             # Store the right-hand side temporarily, skipping the first quote
@@ -3455,8 +2506,8 @@ function Get-StringProperty {
                     # Remove quotes
                     if ($RemoveQuotes) { $propertyValue = $propertyValue.Trim('"'); }
                     # Replace escaped quotes
-                    if ($ReplaceEscapedQuotes) { return $propertyValue.Replace('�','"'); }
-                    else { return $propertyValue.Replace('�','\"'); }
+                    if ($ReplaceEscapedQuotes) { return $propertyValue.Replace('�','"'); }
+                    else { return $propertyValue.Replace('�','\"'); }
                 }
             }
         }
@@ -3528,8 +2579,8 @@ function Get-StringPropertySplit {
     )
 
     Process {
-        # First replace escaped quotes with '�'
-        $SearchString = $SearchString.Replace('\"', '�');
+        # First replace escaped quotes with '�'
+        $SearchString = $SearchString.Replace('\"', '�');
         
         while ($SearchString.Contains('"')) {
             # Store the right-hand side temporarily, skipping the first quote
@@ -3547,8 +2598,8 @@ function Get-StringPropertySplit {
             # Remove quotes
             if ($RemoveQuotes) { $stringArray[$i] = $stringArray[$i].Trim('"'); }
             # Replace escaped quotes
-            if ($ReplaceEscapedQuotes) { $stringArray[$i] = $stringArray[$i].Replace('�','"'); }
-            else { $stringArray[$i] = $stringArray[$i].Replace('�','\"'); }
+            if ($ReplaceEscapedQuotes) { $stringArray[$i] = $stringArray[$i].Replace('�','"'); }
+            else { $stringArray[$i] = $stringArray[$i].Replace('�','\"'); }
         }
 
         if ($Index -ne -1) { return $stringArray[$Index]; }
@@ -3590,14 +2641,14 @@ function Get-NetScalerExpression {
     Process {
         $searchStringLeftPosition = $SearchString.IndexOf('q/');
         if ($searchStringLeftPosition -eq -1) { return $null; }
-        $SearchString = $SearchString.Replace('q/', '��');
+        $SearchString = $SearchString.Replace('q/', '��');
 
         $searchStringRightPosition = $SearchString.IndexOf('/');
         if ($searchStringRightPosition -eq -1) { return $null; }
-        $SearchString = $SearchString.Replace('/', '�');
+        $SearchString = $SearchString.Replace('/', '�');
 
         $NetScalerExpression = $SearchString.Substring($searchStringLeftPosition, (($searchStringRightPosition +1)- $searchStringLeftPosition));
-        return $NetScalerExpression.Replace('��','q/').Replace('�','/');
+        return $NetScalerExpression.Replace('��','q/').Replace('�','/');
     }
 }
 
@@ -3607,7 +2658,7 @@ function Get-NetScalerExpression {
 .DESCRIPTION
    Tests for the presence of a property value in a string and returns a boolean
    value. For example, if the specified SearchString contained "-property1
-   -property2 <value2>�, searching for "-Property1" or "-Property2" would return
+   -property2 <value2>�, searching for "-Property1" or "-Property2" would return
    $true, but searching for "-Property3" would return $false
 .PARAMETER SearchString
    String to search for the specified property name.
@@ -3789,7 +2840,6 @@ function Get-StringWithProperty {
 
 #region NetScaler documentation pre-requisites
 
-$Scriptver = 1
 $SourceFileName = "ns.conf";
 
 ## Iain Brighton - Try and resolve the ns.conf file in the current working directory
@@ -3877,6 +2927,10 @@ $CAGSESSIONPOLS = Get-StringWithProperty -SearchString $ADD -Like "add vpn sessi
 $CAGSESSIONACTS = Get-StringWithProperty -SearchString $ADD -Like "add vpn sessionAction *";
 $BINDVPNVSERVER = Get-StringWithProperty -SearchString $BIND -Like "bind vpn vserver *";
 $CAGURLPOLS = Get-StringWithProperty -SearchString $ADD -Like "add vpn url *";
+
+#new stuff added by Webster
+$AdminPartitions = Get-StringWithProperty -SearchString $Add -Like 'add ns partition *';
+$SSLProfiles = Get-StringWithProperty -SearchString $Add -Like 'add ssl profile *';
 #endregion NetScaler Create Collections
 
 #region NetScaler chaptercounters
@@ -3886,7 +2940,7 @@ $Chapter = 0
 
 #region NetScaler feature state
 ##Getting Feature states for usage later on and performance enhancements by not running parts of the script when feature is disabled
-$Enable | foreach { 
+$Enable | ForEach-Object { 
     if ($_ -like 'enable ns feature *') {
         If ($_.Contains("WL") -eq "True") {$FEATWL = "Enabled"} Else {$FEATWL = "Disabled"}
         If ($_.Contains(" SP ") -eq "True") {$FEATSP = "Enabled"} Else {$FEATSP = "Disabled"}
@@ -3925,7 +2979,7 @@ $Enable | foreach {
 #region NetScaler Version
 
 ## Get version and build
-$File | foreach { 
+$File | ForEach-Object { 
    if ($_ -like '#NS*') {
       $Y = ($_ -replace '#NS', '').split()
       $Version = $($Y[0]) 
@@ -3943,7 +2997,7 @@ $ScriptVersion = 10.1
 #region Basics
 WriteWordLine 2 0 "NetScaler Basic"
 
-$SETNS | Foreach {
+$SETNS | ForEach-Object {
     if ($_ -like 'set ns hostname *') {
         $NSHOSTNAMEPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'set ns' ,'') -RemoveQuotes;
         $NSHOSTNAME = $NSHOSTNAMEPropertyArray[1];
@@ -3951,7 +3005,7 @@ $SETNS | Foreach {
     }
 
 $SAVEDDATESTRING = Get-StringWithProperty -SearchString $File -Like '# Last *';
-$SAVEDDATESTRING | foreach { 
+$SAVEDDATESTRING | ForEach-Object { 
     $SAVEDDATE = ($_ -Replace '# Last modified by `save config`,' ,'') ;
     }
 
@@ -3981,7 +3035,7 @@ Write-Verbose "$(Get-Date): Chapter $Chapter/$Chapters NetScaler IP"
 
 WriteWordLine 2 0 "NetScaler Management IP Address"
 
-$SetNS | foreach {
+$SetNS | ForEach-Object {
    if ($_ -like 'set ns config -IPAddress *') {
         $Params = $null
         $NSIP = Get-StringProperty $_ "-IPAddress";
@@ -4008,7 +3062,7 @@ $Chapter++
 Write-Verbose "$(Get-Date): Chapter $Chapter/$Chapters NetScaler Global HTTP Parameters"
 
 WriteWordLine 2 0 "NetScaler Global HTTP Parameters"
-$SetNS | foreach {
+$SetNS | ForEach-Object {
     if ($_ -like 'set ns param *') {
         $IP = Get-StringProperty $_ "-cookieversion" "0";
         } else { $IP = "0" }
@@ -4041,7 +3095,7 @@ Write-Verbose "$(Get-Date): Chapter $Chapter/$Chapters NetScaler Global TCP Para
 
 WriteWordLine 2 0 "NetScaler Global TCP Parameters"
 
-$SETNS | foreach {
+$SETNS | ForEach-Object {
    if ($_ -like 'set ns tcpParam *') {
         $TCP = Test-StringPropertyEnabledDisabled $_ "-WS";
         $SACK = Test-StringPropertyEnabledDisabled $_ "-SACK";
@@ -4077,7 +3131,7 @@ $Chapter++
 Write-Verbose "$(Get-Date): Chapter $Chapter/$Chapters NetScaler Global Diameter Parameter"
 
 WriteWordLine 2 0 "NetScaler Global Diameter Parameters"
-$SetNS | foreach {
+$SetNS | ForEach-Object {
    if ($_ -like 'set ns diameter *') {
         $Params = $null
         $Params = @{
@@ -4105,7 +3159,7 @@ $Chapter++
 Write-Verbose "$(Get-Date): Chapter $Chapter/$Chapters NetScaler Time zone"
 WriteWordLine 2 0 "NetScaler Time Zone"
 
-$Setns | foreach {  
+$Setns | ForEach-Object {  
     if ($_ -like 'set ns param *') {
         $TIMEZONE = Get-StringProperty $_ "-timezone" "Coordinated Universal Time" -RemoveQuotes;
         } else {$TIMEZONE = "Coordinated Universal Time"; }
@@ -4135,7 +3189,7 @@ WriteWordLine 2 0 "NetScaler Management vLAN"
 
 $SETNSDIAMETER = Get-StringWithProperty -SearchString $SetNS -Like 'set ns config -nsvlan *';
 if($SETNSDIAMETER.Length -le 0) { WriteWordLine 0 0 "No Management vLAN has been configured"} else {
-    $SetNS | foreach {
+    $SetNS | ForEach-Object {
        if ($_ -like 'set ns config -nsvlan *') {
             $Params = $null
             $Params = @{
@@ -4175,7 +3229,7 @@ if($ADDHANODE.Length -le 0) { WriteWordLine 0 0 "High Availability has not been 
         NSNODE = $NSIP; #NSIP Variable set in chapter NetScaler IP Address
     }
 
-    $ADDHANODE | foreach {
+    $ADDHANODE | ForEach-Object {
         $HAPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'add HA node' ,'') -RemoveQuotes;
         $NSRPCH += @{
             NSNODE = $HAPropertyArray[1];
@@ -4285,51 +3339,57 @@ Write-Verbose "$(Get-Date): Chapter $Chapter/$Chapters NetScaler Admin Partition
 
 WriteWordLine 2 0 "NetScaler Admin Partitions"
 
-if($AdminPartitions.Length -le 0) { WriteWordLine 0 0 "No Admin Partitions have been configured"} else {
+if($AdminPartitions.Length -le 0) 
+{
+	WriteWordLine 0 0 "No Admin Partitions have been configured"
+} 
+else 
+{
        
-        ## IB - Use an array of hashtable to store the rows
-        [System.Collections.Hashtable[]] $APH = @();
-        
-        foreach ($AdminPartition in $AdminPartitions) {
-            ## IB - We can now utilise the Get-StringPropertySplit function to return all escaped properties, including quoted expressions
-            $AdminPartitionPropertyArray = Get-StringPropertySplit -SearchString ($AdminPartition -Replace 'add ns partition' ,'') -RemoveQuotes;
-            $AdminPartitionDisplayNameWithQoutes = Get-StringProperty $AdminPartition "partition";
-            
-            ## IB - Create parameters for the hashtable so that we can splat them otherwise the
-            ## IB - command will be able 400 characters wide!
+	## IB - Use an array of hashtable to store the rows
+	[System.Collections.Hashtable[]] $APH = @();
+	
+	foreach ($AdminPartition in $AdminPartitions) {
+		## IB - We can now utilise the Get-StringPropertySplit function to return all escaped properties, including quoted expressions
+		$AdminPartitionPropertyArray = Get-StringPropertySplit -SearchString ($AdminPartition -Replace 'add ns partition' ,'') -RemoveQuotes;
+		$AdminPartitionDisplayNameWithQoutes = Get-StringProperty $AdminPartition "partition";
+		
+		## IB - Create parameters for the hashtable so that we can splat them otherwise the
+		## IB - command will be able 400 characters wide!
 
-            $APBindMatches = Get-StringWithProperty -SearchString $AdminPartitionsBind -Like "bind ns partition $AdminPartitionDisplayNameWithQoutes *";
+		$APBindMatches = Get-StringWithProperty -SearchString $AdminPartitionsBind -Like "bind ns partition $AdminPartitionDisplayNameWithQoutes *";
 
-            $APBindMatches | foreach {
-                $vlanap = Get-StringProperty $_ "-vlan";
-                }
+        $vlanap = ""
+		$APBindMatches | ForEach-Object {
+			$vlanap = Get-StringProperty $_ "-vlan";
+			}
 
-            $APH += @{
-                ID = Get-StringProperty $AdminPartition "-partitionid";
-                APNAME = $AdminPartitionPropertyArray[0];
-                vLAN = $vlanap;
-                MinBand = Get-StringProperty $AdminPartition "-minBandwidth" "10240";
-                MaxBand = Get-StringProperty $AdminPartition "-maxBandwidth" "10240";
-                Maxconn = Get-StringProperty $AdminPartition "-maxConn" "1024";
-                Maxmem = Get-StringProperty $AdminPartition "-maxMemLimit" "10";
-                }
-            }
+		$APH += @{
+			ID = Get-StringProperty $AdminPartition "-partitionid";
+			APNAME = $AdminPartitionPropertyArray[0];
+			vLAN = $vlanap;
+			MinBand = Get-StringProperty $AdminPartition "-minBandwidth" "10240";
+			MaxBand = Get-StringProperty $AdminPartition "-maxBandwidth" "10240";
+			Maxconn = Get-StringProperty $AdminPartition "-maxConn" "1024";
+			Maxmem = Get-StringProperty $AdminPartition "-maxMemLimit" "10";
+			}
+	}
 
-            if ($APH.Length -gt 0) {
-                $Params = $null
-                $Params = @{
-                    Hashtable = $APH;
-                    Columns = "ID","APNAME","vLAN","MinBand","MaxBand","Maxconn","Maxmem";
-                    Headers = "ID","Name","vLAN","Minimum Bandwidth","Maximum Bandwidth","Maximum Connections","Maximum Memory";
-                    Format = -235; ## IB - Word constant for Light Grid Accent 5 (could use -207 for Accent 3 (grey))
-                    AutoFit = $wdAutoFitContent;
-                    }
-                $Table = AddWordTable @Params -NoGridLines;
-                FindWordDocumentEnd;
-                WriteWordLine 0 0 " "
-                }
-            }
-    
+	if ($APH.Length -gt 0) 
+	{
+		$Params = $null
+		$Params = @{
+			Hashtable = $APH;
+			Columns = "ID","APNAME","vLAN","MinBand","MaxBand","Maxconn","Maxmem";
+			Headers = "ID","Name","vLAN","Minimum Bandwidth","Maximum Bandwidth","Maximum Connections","Maximum Memory";
+			Format = -235; ## IB - Word constant for Light Grid Accent 5 (could use -207 for Accent 3 (grey))
+			AutoFit = $wdAutoFitContent;
+			}
+		$Table = AddWordTable @Params -NoGridLines;
+		FindWordDocumentEnd;
+		WriteWordLine 0 0 " "
+	}
+}
 #endregion NetScaler Admin Partitions
 
 #region NetScaler Features
@@ -4449,7 +3509,7 @@ If ($Version -gt $ScriptVersion) {
     WriteWordLine 0 0 ""
     }
 
-$Enable | foreach {  
+$Enable | ForEach-Object {  
     if ($_ -like 'enable ns mode *') {
         If ($_.Contains("FR") -eq "True") {$FR = "Enabled"} Else {$FR = "Disabled"}
         If ($_.Contains("L2") -eq "True") {$L2 = "Enabled"} Else {$L2 = "Disabled"}
@@ -5067,8 +4127,8 @@ $TD = Get-StringWithProperty -SearchString $Add -Like 'add ns trafficDomain *';
 
 if($TD.Length -le 0) { WriteWordLine 0 0 "No Traffic Domains have been configured"} else {
     WriteWordLine 0 0 "Only documents one assigned vLAN just like VLAN and Interface WIP"
-    $TD | foreach {
-        $Bind | foreach {  
+    $TD | ForEach-Object {
+        $Bind | ForEach-Object {  
             if ($_ -like 'bind ns trafficDomain *') {
                 $vLAN = Get-StringProperty $_ "-vlan"
                 }
@@ -5113,7 +4173,7 @@ if($TD.Length -le 0) { WriteWordLine 0 0 "No Traffic Domains have been configure
         ## IB - Use an array of hashtable to store the rows
         [System.Collections.Hashtable[]] $CSTDH = @();
 
-        $ContentSwitches | foreach {
+        $ContentSwitches | ForEach-Object {
             if ((Get-StringProperty $_ "-td") -eq $TDPropertyArray[0]) {
                 $CSTDPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'add cs vserver' ,'') -RemoveQuotes;
                 $CSTDH = @{
@@ -5142,7 +4202,7 @@ if($TD.Length -le 0) { WriteWordLine 0 0 "No Traffic Domains have been configure
         ## IB - Use an array of hashtable to store the rows
         [System.Collections.Hashtable[]] $LBTDH = @();
 
-        $LoadBalancers | foreach {
+        $LoadBalancers | ForEach-Object {
             if ((Get-StringProperty $_ "-td") -eq $TDPropertyArray[0]) {
                 $LBTDPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'add lb vserver' ,'') -RemoveQuotes;
                 $LBTDH += @{
@@ -5172,7 +4232,7 @@ if($TD.Length -le 0) { WriteWordLine 0 0 "No Traffic Domains have been configure
         ## IB - Use an array of hashtable to store the rows
         [System.Collections.Hashtable[]] $SVCTDH = @();
 
-        $Services | foreach {
+        $Services | ForEach-Object {
             if ((Get-StringProperty $_ "-td") -eq $TDPropertyArray[0]) {
                 $SVCTDPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'add service' ,'') -RemoveQuotes;
                 $SVCTDH += @{
@@ -5202,7 +4262,7 @@ if($TD.Length -le 0) { WriteWordLine 0 0 "No Traffic Domains have been configure
         ## IB - Use an array of hashtable to store the rows
         [System.Collections.Hashtable[]] $SVRTDH = @();
 
-        $Servers | foreach {
+        $Servers | ForEach-Object {
             if ((Get-StringProperty $_ "-td") -eq $TDPropertyArray[0]) {
                 $SVRTDPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'add server' ,'') -RemoveQuotes;
                 $SVRTDH += @{
@@ -5483,7 +4543,7 @@ if($CERTS.Length -le 0) { WriteWordLine 0 0 "No Certificate has been configured"
     ## IB - Use an array of hashtable to store the rows
     [System.Collections.Hashtable[]] $CERTSH = @();
     
-    $CERTS | foreach {
+    $CERTS | ForEach-Object {
         $CurrentRowIndex++;
         $CERTPropertyArray = Get-StringPropertySplit -SearchString ($_ -Replace 'add ssl certKey' ,'') -RemoveQuotes;
 
@@ -5584,7 +4644,7 @@ if($ContentSwitches.Length -le 0) { WriteWordLine 0 0 "No Content Switch has bee
                 if (Test-StringProperty -SearchString $CSBind -PropertyName "-policyName") {
                     ## Retrieve the service name from the Content Switch property array (position 3)
 
-                    $AddCsPolicy | foreach {
+                    $AddCsPolicy | ForEach-Object {
                         if ($_ -like "add cs policy $(Get-StringProperty $CSBIND "-policyName") *") {
 		                    $CSPOLRULE = Get-StringProperty $_ "-rule" -removequotes;
                           }
@@ -6536,7 +5596,7 @@ WriteWordLine 0 0 " "
 #region GlobalAuthentication
 WriteWordLine 3 0 "Global Settings Authentication Settings"
 
-$Set | foreach {  
+$Set | ForEach-Object {  
     if ($_ -like 'set aaa parameter *') {
         ## IB - Create an array of hashtables to store our columns. Note: If we need the
         ## IB - headers to include spaces we can override these at table creation time.
@@ -7149,7 +6209,7 @@ if ($POLICY -eq $null -or $POLICY.Length -le 0) {
 
             ## IB - Iterate over all load balancer bindings (uses new function)
             foreach ($POL in $POLICY) {
-                $Y = Get-StringPropertySplit $POL �RemoveQuotes
+                $Y = Get-StringPropertySplit $POL �RemoveQuotes
                 $POLICIESH += @{ "Responder Policy" = $Y[3]; }
                 } # end foreach
 
@@ -7179,7 +6239,7 @@ if ($POLRW -eq $null -or $POLRW.Length -le 0) {
             [System.Collections.Hashtable[]] $POLRWH = @();
 
             foreach ($POL in $POLRW) {
-                $Y = Get-StringPropertySplit $POL �RemoveQuotes
+                $Y = Get-StringPropertySplit $POL �RemoveQuotes
                 $POLRWH += @{ "Rewrite Policy" = $Y[3]; }
                 } # end foreach
 
@@ -7254,7 +6314,7 @@ if ($ACTRES -eq $null -or $ACTRES.Length -le 0) {
 
             ## IB - Iterate over all load balancer bindings (uses new function)
             foreach ($POL in $ACTRES) {
-                $Y = Get-StringPropertySplit $POL �RemoveQuotes                
+                $Y = Get-StringPropertySplit $POL �RemoveQuotes                
                 $ACTRESH += @{ 
                     Responder = $Y[3]; 
                     Rule = $Y[4];
@@ -7288,7 +6348,7 @@ if ($ACTRW -eq $null -or $ACTRW.Length -le 0) {
 
             ## IB - Iterate over all load balancer bindings (uses new function)
             foreach ($POL in $ACTRW) {
-                $Y = Get-StringPropertySplit $POL �RemoveQuotes
+                $Y = Get-StringPropertySplit $POL �RemoveQuotes
                 $ACTRWH += @{ 
                     Rewrite = $Y[3]; 
                     Rule = $Y[4];
@@ -7404,37 +6464,116 @@ $selection.InsertNewPage()
 
 #endregion NetScaler Documentation Script Complete
 
+#region email function
+Function SendEmail
+{
+	Param([string]$Attachments)
+	Write-Verbose "$(Get-Date): Prepare to email"
+	
+	$emailAttachment = $Attachments
+	$emailSubject = $Script:Title
+	$emailBody = @"
+Hello, <br />
+<br />
+$Script:Title is attached.
+"@ 
+
+	If($Dev)
+	{
+		Out-File -FilePath $Script:DevErrorFile -InputObject $error 4>$Null
+	}
+
+	$error.Clear()
+
+	If($UseSSL)
+	{
+		Write-Verbose "$(Get-Date): Trying to send email using current user's credentials with SSL"
+		Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+		-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
+		-UseSSL *>$Null
+	}
+	Else
+	{
+		Write-Verbose  "$(Get-Date): Trying to send email using current user's credentials without SSL"
+		Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+		-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To *>$Null
+	}
+
+	$e = $error[0]
+
+	If($e.Exception.ToString().Contains("5.7.57"))
+	{
+		#The server response was: 5.7.57 SMTP; Client was not authenticated to send anonymous mail during MAIL FROM
+		Write-Verbose "$(Get-Date): Current user's credentials failed. Ask for usable credentials."
+
+		If($Dev)
+		{
+			Out-File -FilePath $Script:DevErrorFile -InputObject $error -Append 4>$Null
+		}
+
+		$error.Clear()
+
+		$emailCredentials = Get-Credential -Message "Enter the email account and password to send email"
+
+		If($UseSSL)
+		{
+			Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+			-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
+			-UseSSL -credential $emailCredentials *>$Null 
+		}
+		Else
+		{
+			Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+			-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
+			-credential $emailCredentials *>$Null 
+		}
+
+		$e = $error[0]
+
+		If($? -and $Null -eq $e)
+		{
+			Write-Verbose "$(Get-Date): Email successfully sent using new credentials"
+		}
+		Else
+		{
+			Write-Verbose "$(Get-Date): Email was not sent:"
+			Write-Warning "$(Get-Date): Exception: $e.Exception" 
+		}
+	}
+	Else
+	{
+		Write-Verbose "$(Get-Date): Email was not sent:"
+		Write-Warning "$(Get-Date): Exception: $e.Exception" 
+	}
+}
+#endregion
+
 #region script template 2
 
 Write-Verbose "$(Get-Date): Finishing up document"
 #end of document processing
 
 ###Change the two lines below for your script
-$AbstractTitle = "Script Template Report"
-$SubjectTitle = "Sample Script Template Report"
+$AbstractTitle = "NetScaler Documentation Report"
+$SubjectTitle = "NetScaler Documentation Report"
 UpdateDocumentProperties $AbstractTitle $SubjectTitle
 
 If($MSWORD -or $PDF)
 {
     SaveandCloseDocumentandShutdownWord
 }
-ElseIf($Text)
-{
-    SaveandCloseTextDocument
-}
-ElseIf($HTML)
-{
-    SaveandCloseHTMLDocument
-}
 
 Write-Verbose "$(Get-Date): Script has completed"
 Write-Verbose "$(Get-Date): "
+
+$GotFile = $False
 
 If($PDF)
 {
 	If(Test-Path "$($Script:FileName2)")
 	{
 		Write-Verbose "$(Get-Date): $($Script:FileName2) is ready for use"
+		$GotFile = $True
 	}
 	Else
 	{
@@ -7447,12 +6586,27 @@ Else
 	If(Test-Path "$($Script:FileName1)")
 	{
 		Write-Verbose "$(Get-Date): $($Script:FileName1) is ready for use"
+		$GotFile = $True
 	}
 	Else
 	{
 		Write-Warning "$(Get-Date): Unable to save the output file, $($Script:FileName1)"
 		Write-Error "Unable to save the output file, $($Script:FileName1)"
 	}
+}
+
+#email output file if requested
+If($GotFile -and ![System.String]::IsNullOrEmpty( $SmtpServer ))
+{
+	If($PDF)
+	{
+		$emailAttachment = $Script:FileName2
+	}
+	Else
+	{
+		$emailAttachment = $Script:FileName1
+	}
+	SendEmail $emailAttachment
 }
 
 Write-Verbose "$(Get-Date): "
@@ -7470,178 +6624,82 @@ $Str = [string]::format("{0} days, {1} hours, {2} minutes, {3}.{4} seconds", `
 Write-Verbose "$(Get-Date): Elapsed time: $($Str)"
 $runtime = $Null
 $Str = $Null
+
+If($Dev)
+{
+	If($SmtpServer -eq "")
+	{
+		Out-File -FilePath $Script:DevErrorFile -InputObject $error 4>$Null
+	}
+	Else
+	{
+		Out-File -FilePath $Script:DevErrorFile -InputObject $error -Append 4>$Null
+	}
+}
+
+If($ScriptInfo)
+{
+	$SIFile = "$($pwd.Path)\XAXDV2InventoryScriptInfo_$(Get-Date -f yyyy-MM-dd_HHmm).txt"
+	Out-File -FilePath $SIFile -InputObject "" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Add DateTime       : $($AddDateTime)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Company Name       : $($Script:CoName)" 4>$Null		
+	Out-File -FilePath $SIFile -Append -InputObject "Company Address    : $($CompanyAddress)" 4>$Null		
+	Out-File -FilePath $SIFile -Append -InputObject "Company Email      : $($CompanyEmail)" 4>$Null		
+	Out-File -FilePath $SIFile -Append -InputObject "Company Fax        : $($CompanyFax)" 4>$Null		
+	Out-File -FilePath $SIFile -Append -InputObject "Company Phone      : $($CompanyPhone)" 4>$Null		
+	Out-File -FilePath $SIFile -Append -InputObject "Cover Page         : $($CoverPage)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Dev                : $($Dev)" 4>$Null
+	If($Dev)
+	{
+		Out-File -FilePath $SIFile -Append -InputObject "DevErrorFile       : $($Script:DevErrorFile)" 4>$Null
+	}
+	Out-File -FilePath $SIFile -Append -InputObject "Filename1          : $($Script:FileName1)" 4>$Null
+	If($PDF)
+	{
+		Out-File -FilePath $SIFile -Append -InputObject "Filename2          : $($Script:FileName2)" 4>$Null
+	}
+	Out-File -FilePath $SIFile -Append -InputObject "Folder             : $($Folder)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "From               : $($From)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Log                : $($Log)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Save As PDF        : $($PDF)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Save As WORD       : $($MSWORD)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Script Info        : $($ScriptInfo)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Smtp Port          : $($SmtpPort)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Smtp Server        : $($SmtpServer)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Title              : $($Script:Title)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "To                 : $($To)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Use SSL            : $($UseSSL)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "User Name          : $($UserName)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "OS Detected        : $($Script:RunningOS)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "PoSH version       : $($Host.Version)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "PSCulture          : $($PSCulture)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "PSUICulture        : $($PSUICulture)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Word language      : $($Script:WordLanguageValue)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Word version       : $($Script:WordProduct)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Script start       : $($Script:StartTime)" 4>$Null
+	Out-File -FilePath $SIFile -Append -InputObject "Elapsed time       : $($Str)" 4>$Null
+}
+
+#V2.10 added
+#stop transcript logging
+If($Log -eq $True) 
+{
+	If($Script:StartLog -eq $true) 
+	{
+		try 
+		{
+			Stop-Transcript | Out-Null
+			Write-Verbose "$(Get-Date): $Script:LogPath is ready for use"
+		} 
+		catch 
+		{
+			Write-Verbose "$(Get-Date): Transcript/log stop failed"
+		}
+	}
+}
+$ErrorActionPreference = $SaveEAPreference
+
 $ErrorActionPreference = $SaveEAPreference
 #endregion script template 2
-# SIG # Begin signature block
-# MIIgAAYJKoZIhvcNAQcCoIIf8TCCH+0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZtrAfu+2DoKbuD2/BzFlIq7h
-# +i6gghtnMIIDtzCCAp+gAwIBAgIQDOfg5RfYRv6P5WD8G/AwOTANBgkqhkiG9w0B
-# AQUFADBlMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYD
-# VQQLExB3d3cuZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBBc3N1cmVk
-# IElEIFJvb3QgQ0EwHhcNMDYxMTEwMDAwMDAwWhcNMzExMTEwMDAwMDAwWjBlMQsw
-# CQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cu
-# ZGlnaWNlcnQuY29tMSQwIgYDVQQDExtEaWdpQ2VydCBBc3N1cmVkIElEIFJvb3Qg
-# Q0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCtDhXO5EOAXLGH87dg
-# +XESpa7cJpSIqvTO9SA5KFhgDPiA2qkVlTJhPLWxKISKityfCgyDF3qPkKyK53lT
-# XDGEKvYPmDI2dsze3Tyoou9q+yHyUmHfnyDXH+Kx2f4YZNISW1/5WBg1vEfNoTb5
-# a3/UsDg+wRvDjDPZ2C8Y/igPs6eD1sNuRMBhNZYW/lmci3Zt1/GiSw0r/wty2p5g
-# 0I6QNcZ4VYcgoc/lbQrISXwxmDNsIumH0DJaoroTghHtORedmTpyoeb6pNnVFzF1
-# roV9Iq4/AUaG9ih5yLHa5FcXxH4cDrC0kqZWs72yl+2qp/C3xag/lRbQ/6GW6whf
-# GHdPAgMBAAGjYzBhMA4GA1UdDwEB/wQEAwIBhjAPBgNVHRMBAf8EBTADAQH/MB0G
-# A1UdDgQWBBRF66Kv9JLLgjEtUYunpyGd823IDzAfBgNVHSMEGDAWgBRF66Kv9JLL
-# gjEtUYunpyGd823IDzANBgkqhkiG9w0BAQUFAAOCAQEAog683+Lt8ONyc3pklL/3
-# cmbYMuRCdWKuh+vy1dneVrOfzM4UKLkNl2BcEkxY5NM9g0lFWJc1aRqoR+pWxnmr
-# EthngYTffwk8lOa4JiwgvT2zKIn3X/8i4peEH+ll74fg38FnSbNd67IJKusm7Xi+
-# fT8r87cmNW1fiQG2SVufAQWbqz0lwcy2f8Lxb4bG+mRo64EtlOtCt/qMHt1i8b5Q
-# Z7dsvfPxH2sMNgcWfzd8qVttevESRmCD1ycEvkvOl77DZypoEd+A5wwzZr8TDRRu
-# 838fYxAe+o0bJW1sj6W3YQGx0qMmoRBxna3iw/nDmVG3KwcIzi7mULKn+gpFL6Lw
-# 8jCCBTAwggQYoAMCAQICEAQJGBtf1btmdVNDtW+VUAgwDQYJKoZIhvcNAQELBQAw
-# ZTELMAkGA1UEBhMCVVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQ
-# d3d3LmRpZ2ljZXJ0LmNvbTEkMCIGA1UEAxMbRGlnaUNlcnQgQXNzdXJlZCBJRCBS
-# b290IENBMB4XDTEzMTAyMjEyMDAwMFoXDTI4MTAyMjEyMDAwMFowcjELMAkGA1UE
-# BhMCVVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2lj
-# ZXJ0LmNvbTExMC8GA1UEAxMoRGlnaUNlcnQgU0hBMiBBc3N1cmVkIElEIENvZGUg
-# U2lnbmluZyBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAPjTsxx/
-# DhGvZ3cH0wsxSRnP0PtFmbE620T1f+Wondsy13Hqdp0FLreP+pJDwKX5idQ3Gde2
-# qvCchqXYJawOeSg6funRZ9PG+yknx9N7I5TkkSOWkHeC+aGEI2YSVDNQdLEoJrsk
-# acLCUvIUZ4qJRdQtoaPpiCwgla4cSocI3wz14k1gGL6qxLKucDFmM3E+rHCiq85/
-# 6XzLkqHlOzEcz+ryCuRXu0q16XTmK/5sy350OTYNkO/ktU6kqepqCquE86xnTrXE
-# 94zRICUj6whkPlKWwfIPEvTFjg/BougsUfdzvL2FsWKDc0GCB+Q4i2pzINAPZHM8
-# np+mM6n9Gd8lk9ECAwEAAaOCAc0wggHJMBIGA1UdEwEB/wQIMAYBAf8CAQAwDgYD
-# VR0PAQH/BAQDAgGGMBMGA1UdJQQMMAoGCCsGAQUFBwMDMHkGCCsGAQUFBwEBBG0w
-# azAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMGCCsGAQUF
-# BzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVk
-# SURSb290Q0EuY3J0MIGBBgNVHR8EejB4MDqgOKA2hjRodHRwOi8vY3JsNC5kaWdp
-# Y2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURSb290Q0EuY3JsMDqgOKA2hjRodHRw
-# Oi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURSb290Q0EuY3Js
-# ME8GA1UdIARIMEYwOAYKYIZIAYb9bAACBDAqMCgGCCsGAQUFBwIBFhxodHRwczov
-# L3d3dy5kaWdpY2VydC5jb20vQ1BTMAoGCGCGSAGG/WwDMB0GA1UdDgQWBBRaxLl7
-# KgqjpepxA8Bg+S32ZXUOWDAfBgNVHSMEGDAWgBRF66Kv9JLLgjEtUYunpyGd823I
-# DzANBgkqhkiG9w0BAQsFAAOCAQEAPuwNWiSz8yLRFcgsfCUpdqgdXRwtOhrE7zBh
-# 134LYP3DPQ/Er4v97yrfIFU3sOH20ZJ1D1G0bqWOWuJeJIFOEKTuP3GOYw4TS63X
-# X0R58zYUBor3nEZOXP+QsRsHDpEV+7qvtVHCjSSuJMbHJyqhKSgaOnEoAjwukaPA
-# JRHinBRHoXpoaK+bp1wgXNlxsQyPu6j4xRJon89Ay0BEpRPw5mQMJQhCMrI2iiQC
-# /i9yfhzXSUWW6Fkd6fp0ZGuy62ZD2rOwjNXpDd32ASDOmTFjPQgaGLOBm0/GkxAG
-# /AeB+ova+YJJ92JuoVP6EpQYhS6SkepobEQysmah5xikmmRR7zCCBTUwggQdoAMC
-# AQICEA9d61FpHWqo9d26u4syvuEwDQYJKoZIhvcNAQELBQAwcjELMAkGA1UEBhMC
-# VVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2ljZXJ0
-# LmNvbTExMC8GA1UEAxMoRGlnaUNlcnQgU0hBMiBBc3N1cmVkIElEIENvZGUgU2ln
-# bmluZyBDQTAeFw0xNDEwMTQwMDAwMDBaFw0xNTEwMTkxMjAwMDBaMHwxCzAJBgNV
-# BAYTAlVTMQswCQYDVQQIEwJUTjESMBAGA1UEBxMJVHVsbGFob21hMSUwIwYDVQQK
-# ExxDYXJsIFdlYnN0ZXIgQ29uc3VsdGluZywgTExDMSUwIwYDVQQDExxDYXJsIFdl
-# YnN0ZXIgQ29uc3VsdGluZywgTExDMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
-# CgKCAQEAspvOyrygBQYA7knTpuj540TxFQ7GcC8GNR4kcjQtWsNdPRmP4id4h70e
-# BmFgdI1DM5xvZgKG32ULLAxW8Trhucn3Au+Zyjt01Hsc0HIvti3Zeuqzzahjz3Um
-# AHwhLOXeVDCx049X7G4EmTncSUDwfIWoiTcAoIXqpinVHZ2rdRApNQOag2j7zbK/
-# piK/0aPTS1t6Uf3Glu/wYYCZmCUxYX3LkyOitpexrdiFW33ZloRW8A5efJxMrDr3
-# G2wYSYQkYFjOfoYwTIRW4pqbG29EemTMLW9sydA85jX0XECtkV4WSioydjq4+pJm
-# TF0bAPTF2cC3GR4MyOdeM8ehzJx1FQIDAQABo4IBuzCCAbcwHwYDVR0jBBgwFoAU
-# WsS5eyoKo6XqcQPAYPkt9mV1DlgwHQYDVR0OBBYEFD6/rjYxtxvJ2+E96CA0EIM7
-# Maw+MA4GA1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzB3BgNVHR8E
-# cDBuMDWgM6Axhi9odHRwOi8vY3JsMy5kaWdpY2VydC5jb20vc2hhMi1hc3N1cmVk
-# LWNzLWcxLmNybDA1oDOgMYYvaHR0cDovL2NybDQuZGlnaWNlcnQuY29tL3NoYTIt
-# YXNzdXJlZC1jcy1nMS5jcmwwQgYDVR0gBDswOTA3BglghkgBhv1sAwEwKjAoBggr
-# BgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCBhAYIKwYBBQUH
-# AQEEeDB2MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTgYI
-# KwYBBQUHMAKGQmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFNI
-# QTJBc3N1cmVkSURDb2RlU2lnbmluZ0NBLmNydDAMBgNVHRMBAf8EAjAAMA0GCSqG
-# SIb3DQEBCwUAA4IBAQBS64rxnZ6S6z3wL2LEi4s9wjKQfPSWMi/tmj8pLm3I82vy
-# DckX4p9Nwsh8T1k1PvPh37Q3HquoIHtdEZBFYfDjAwtWl9GFzS5gZrMHfdnlBO1b
-# dZw2vx6+qHEuy+9jVjtndIJPYOtf1FrpuOvY5Ya+idd5wHXfrJXVS95WmLCVCuCe
-# Jv6mWclemL3S5t0aX9NgRVH7jcfjvh4jcoFjSMvt3irnJZBZ0a18+3CQPNoa6UC9
-# QIuVZH0Oq2RvtPpQwCcl2onBqDHOphX/rD4lmR7KubYcQS910Uxmpv03KvfWpYP6
-# a+lM+UzUz7zC340f/jiJvmpX1ZXQjpI2InbFeu4zMIIGajCCBVKgAwIBAgIQAwGa
-# Ajr/WLFr1tXq5hfwZjANBgkqhkiG9w0BAQUFADBiMQswCQYDVQQGEwJVUzEVMBMG
-# A1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMSEw
-# HwYDVQQDExhEaWdpQ2VydCBBc3N1cmVkIElEIENBLTEwHhcNMTQxMDIyMDAwMDAw
-# WhcNMjQxMDIyMDAwMDAwWjBHMQswCQYDVQQGEwJVUzERMA8GA1UEChMIRGlnaUNl
-# cnQxJTAjBgNVBAMTHERpZ2lDZXJ0IFRpbWVzdGFtcCBSZXNwb25kZXIwggEiMA0G
-# CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjZF38fLPggjXg4PbGKuZJdTvMbuBT
-# qZ8fZFnmfGt/a4ydVfiS457VWmNbAklQ2YPOb2bu3cuF6V+l+dSHdIhEOxnJ5fWR
-# n8YUOawk6qhLLJGJzF4o9GS2ULf1ErNzlgpno75hn67z/RJ4dQ6mWxT9RSOOhkRV
-# fRiGBYxVh3lIRvfKDo2n3k5f4qi2LVkCYYhhchhoubh87ubnNC8xd4EwH7s2AY3v
-# J+P3mvBMMWSN4+v6GYeofs/sjAw2W3rBerh4x8kGLkYQyI3oBGDbvHN0+k7Y/qpA
-# 8bLOcEaD6dpAoVk62RUJV5lWMJPzyWHM0AjMa+xiQpGsAsDvpPCJEY93AgMBAAGj
-# ggM1MIIDMTAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH/BAIwADAWBgNVHSUBAf8E
-# DDAKBggrBgEFBQcDCDCCAb8GA1UdIASCAbYwggGyMIIBoQYJYIZIAYb9bAcBMIIB
-# kjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCCAWQG
-# CCsGAQUFBwICMIIBVh6CAVIAQQBuAHkAIAB1AHMAZQAgAG8AZgAgAHQAaABpAHMA
-# IABDAGUAcgB0AGkAZgBpAGMAYQB0AGUAIABjAG8AbgBzAHQAaQB0AHUAdABlAHMA
-# IABhAGMAYwBlAHAAdABhAG4AYwBlACAAbwBmACAAdABoAGUAIABEAGkAZwBpAEMA
-# ZQByAHQAIABDAFAALwBDAFAAUwAgAGEAbgBkACAAdABoAGUAIABSAGUAbAB5AGkA
-# bgBnACAAUABhAHIAdAB5ACAAQQBnAHIAZQBlAG0AZQBuAHQAIAB3AGgAaQBjAGgA
-# IABsAGkAbQBpAHQAIABsAGkAYQBiAGkAbABpAHQAeQAgAGEAbgBkACAAYQByAGUA
-# IABpAG4AYwBvAHIAcABvAHIAYQB0AGUAZAAgAGgAZQByAGUAaQBuACAAYgB5ACAA
-# cgBlAGYAZQByAGUAbgBjAGUALjALBglghkgBhv1sAxUwHwYDVR0jBBgwFoAUFQAS
-# KxOYspkH7R7for5XDStnAs0wHQYDVR0OBBYEFGFaTSS2STKdSip5GoNL9B6Jwcp9
-# MH0GA1UdHwR2MHQwOKA2oDSGMmh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
-# Q2VydEFzc3VyZWRJRENBLTEuY3JsMDigNqA0hjJodHRwOi8vY3JsNC5kaWdpY2Vy
-# dC5jb20vRGlnaUNlcnRBc3N1cmVkSURDQS0xLmNybDB3BggrBgEFBQcBAQRrMGkw
-# JAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBBBggrBgEFBQcw
-# AoY1aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZElE
-# Q0EtMS5jcnQwDQYJKoZIhvcNAQEFBQADggEBAJ0lfhszTbImgVybhs4jIA+Ah+WI
-# //+x1GosMe06FxlxF82pG7xaFjkAneNshORaQPveBgGMN/qbsZ0kfv4gpFetW7ea
-# sGAm6mlXIV00Lx9xsIOUGQVrNZAQoHuXx/Y/5+IRQaa9YtnwJz04HShvOlIJ8Oxw
-# YtNiS7Dgc6aSwNOOMdgv420XEwbu5AO2FKvzj0OncZ0h3RTKFV2SQdr5D4HRmXQN
-# JsQOfxu19aDxxncGKBXp2JPlVRbwuwqrHNtcSCdmyKOLChzlldquxC5ZoGHd2vNt
-# omHpigtt7BIYvfdVVEADkitrwlHCCkivsNRu4PQUCjob4489yq9qjXvc2EQwggbN
-# MIIFtaADAgECAhAG/fkDlgOt6gAK6z8nu7obMA0GCSqGSIb3DQEBBQUAMGUxCzAJ
-# BgNVBAYTAlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5k
-# aWdpY2VydC5jb20xJDAiBgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBD
-# QTAeFw0wNjExMTAwMDAwMDBaFw0yMTExMTAwMDAwMDBaMGIxCzAJBgNVBAYTAlVT
-# MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j
-# b20xITAfBgNVBAMTGERpZ2lDZXJ0IEFzc3VyZWQgSUQgQ0EtMTCCASIwDQYJKoZI
-# hvcNAQEBBQADggEPADCCAQoCggEBAOiCLZn5ysJClaWAc0Bw0p5WVFypxNJBBo/J
-# M/xNRZFcgZ/tLJz4FlnfnrUkFcKYubR3SdyJxArar8tea+2tsHEx6886QAxGTZPs
-# i3o2CAOrDDT+GEmC/sfHMUiAfB6iD5IOUMnGh+s2P9gww/+m9/uizW9zI/6sVgWQ
-# 8DIhFonGcIj5BZd9o8dD3QLoOz3tsUGj7T++25VIxO4es/K8DCuZ0MZdEkKB4YNu
-# gnM/JksUkK5ZZgrEjb7SzgaurYRvSISbT0C58Uzyr5j79s5AXVz2qPEvr+yJIvJr
-# GGWxwXOt1/HYzx4KdFxCuGh+t9V3CidWfA9ipD8yFGCV/QcEogkCAwEAAaOCA3ow
-# ggN2MA4GA1UdDwEB/wQEAwIBhjA7BgNVHSUENDAyBggrBgEFBQcDAQYIKwYBBQUH
-# AwIGCCsGAQUFBwMDBggrBgEFBQcDBAYIKwYBBQUHAwgwggHSBgNVHSAEggHJMIIB
-# xTCCAbQGCmCGSAGG/WwAAQQwggGkMDoGCCsGAQUFBwIBFi5odHRwOi8vd3d3LmRp
-# Z2ljZXJ0LmNvbS9zc2wtY3BzLXJlcG9zaXRvcnkuaHRtMIIBZAYIKwYBBQUHAgIw
-# ggFWHoIBUgBBAG4AeQAgAHUAcwBlACAAbwBmACAAdABoAGkAcwAgAEMAZQByAHQA
-# aQBmAGkAYwBhAHQAZQAgAGMAbwBuAHMAdABpAHQAdQB0AGUAcwAgAGEAYwBjAGUA
-# cAB0AGEAbgBjAGUAIABvAGYAIAB0AGgAZQAgAEQAaQBnAGkAQwBlAHIAdAAgAEMA
-# UAAvAEMAUABTACAAYQBuAGQAIAB0AGgAZQAgAFIAZQBsAHkAaQBuAGcAIABQAGEA
-# cgB0AHkAIABBAGcAcgBlAGUAbQBlAG4AdAAgAHcAaABpAGMAaAAgAGwAaQBtAGkA
-# dAAgAGwAaQBhAGIAaQBsAGkAdAB5ACAAYQBuAGQAIABhAHIAZQAgAGkAbgBjAG8A
-# cgBwAG8AcgBhAHQAZQBkACAAaABlAHIAZQBpAG4AIABiAHkAIAByAGUAZgBlAHIA
-# ZQBuAGMAZQAuMAsGCWCGSAGG/WwDFTASBgNVHRMBAf8ECDAGAQH/AgEAMHkGCCsG
-# AQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
-# MEMGCCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNl
-# cnRBc3N1cmVkSURSb290Q0EuY3J0MIGBBgNVHR8EejB4MDqgOKA2hjRodHRwOi8v
-# Y3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURSb290Q0EuY3JsMDqg
-# OKA2hjRodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
-# b290Q0EuY3JsMB0GA1UdDgQWBBQVABIrE5iymQftHt+ivlcNK2cCzTAfBgNVHSME
-# GDAWgBRF66Kv9JLLgjEtUYunpyGd823IDzANBgkqhkiG9w0BAQUFAAOCAQEARlA+
-# ybcoJKc4HbZbKa9Sz1LpMUerVlx71Q0LQbPv7HUfdDjyslxhopyVw1Dkgrkj0bo6
-# hnKtOHisdV0XFzRyR4WUVtHruzaEd8wkpfMEGVWp5+Pnq2LN+4stkMLA0rWUvV5P
-# sQXSDj0aqRRbpoYxYqioM+SbOafE9c4deHaUJXPkKqvPnHZL7V/CSxbkS3BMAIke
-# /MV5vEwSV/5f4R68Al2o/vsHOE8Nxl2RuQ9nRc3Wg+3nkg2NsWmMT/tZ4CMP0qqu
-# AHzunEIOz5HXJ7cW7g/DvXwKoO4sCFWFIrjrGBpN/CohrUkxg0eVd3HcsRtLSxwQ
-# nHcUwZ1PL1qVCCkQJjGCBAMwggP/AgEBMIGGMHIxCzAJBgNVBAYTAlVTMRUwEwYD
-# VQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xMTAv
-# BgNVBAMTKERpZ2lDZXJ0IFNIQTIgQXNzdXJlZCBJRCBDb2RlIFNpZ25pbmcgQ0EC
-# EA9d61FpHWqo9d26u4syvuEwCQYFKw4DAhoFAKBAMBkGCSqGSIb3DQEJAzEMBgor
-# BgEEAYI3AgEEMCMGCSqGSIb3DQEJBDEWBBQG7Wvdjgf8RqTUmYetM/tB2Kgo3zAN
-# BgkqhkiG9w0BAQEFAASCAQCunbmgccGMrn2ShfwTMcd+2jYCSt2Qxi8llPQeO3r6
-# EIVmurnuic2fLp4BwuN/6Vj+Ko0krfHKpPtJj/n6T40QvHl1CyFZectuV1xQuWCy
-# lp2y5PR/e8O6LTgB6KWQ65AHE5U0HULQMr5/nRCgCLdFk/vjTL+Q0PvKvEFTnI25
-# dkA8Z7QoPMStp6Fq2SAqmP+SMIrnUjbWLMZVMoqTbHiOSEJ02xxkiyiCwZdOIlJq
-# gDHJW7LR3PUS3A3RO+cC8PDSg7ZpZDs5cJn5hlWMgZS++nKjUVBjfj4lY4zkGB6H
-# Pr/pCDhKQUnTtCpiG5RFw5u4iYw174Wux32VyIQhWkkooYICDzCCAgsGCSqGSIb3
-# DQEJBjGCAfwwggH4AgEBMHYwYjELMAkGA1UEBhMCVVMxFTATBgNVBAoTDERpZ2lD
-# ZXJ0IEluYzEZMBcGA1UECxMQd3d3LmRpZ2ljZXJ0LmNvbTEhMB8GA1UEAxMYRGln
-# aUNlcnQgQXNzdXJlZCBJRCBDQS0xAhADAZoCOv9YsWvW1ermF/BmMAkGBSsOAwIa
-# BQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0x
-# NDEyMTcwMDQ4NDVaMCMGCSqGSIb3DQEJBDEWBBRo/GpjCLN1UDdh2lZx9lZJqW2f
-# zTANBgkqhkiG9w0BAQEFAASCAQCFaIp3Ui+MwAiX9sCDje3I/uIH9eSuB3IND3FQ
-# oNSCsjZNxD7nhFl+jKYMuvmOm+2ojzJUCaxA9HtRqXABTNdi9xNTXezB3FhyMt5w
-# C1NPHe193rx8cRyxVqpSLZq2zdMyfxrVF4aZVaKm8Etdv9sVJQbynGpl+dlNSYMK
-# f0XQXLg4berwxBR4tq7haMg8vOSjmeeSBW7GD/ff4tMJQrjW1RGVQyopn8w4h1Gq
-# 2Ba9XoRv/zbmQmw9Mqk5r3ecaJ9abWe+fX9GxBsLNa1MjOBM9jGhc9FhZWKo4wW/
-# pUY7JspVa6PfOzfMYzjMWum8CT7wU1w4RO/V11BEI5LRrqlI
-# SIG # End signature block
