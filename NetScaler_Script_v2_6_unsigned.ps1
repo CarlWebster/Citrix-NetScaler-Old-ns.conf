@@ -140,8 +140,8 @@
 .PARAMETER AddDateTime
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2018 at 6PM is 2018-06-01_1800.
-	Output filename will be ReportName_2018-06-01_1800.docx (or .pdf).
+	June 1, 2020 at 6PM is 2020-06-01_1800.
+	Output filename will be ReportName_2020-06-01_1800.docx (or .pdf).
 	This parameter is disabled by default.
 .PARAMETER Folder
 	Specifies the optional output folder to save the output report. 
@@ -225,8 +225,8 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2018 at 6PM is 2018-06-01_1800.
-	Output filename will be Script_Template_2018-06-01_1800.docx
+	June 1, 2020 at 6PM is 2020-06-01_1800.
+	Output filename will be Script_Template_2020-06-01_1800.docx
 .EXAMPLE
 	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -PDF -AddDateTime
 	
@@ -241,8 +241,8 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2018 at 6PM is 2018-06-01_1800.
-	Output filename will be Script_Template_2018-06-01_1800.PDF
+	June 1, 2020 at 6PM is 2020-06-01_1800.
+	Output filename will be Script_Template_2020-06-01_1800.PDF
 .EXAMPLE
 	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes Consulting"
 	-CoverPage Exposure -UserName "Dr. Watson"
@@ -328,9 +328,9 @@
 	This script creates a Word or PDF document.
 .NOTES
 	NAME: NetScaler_Script_v2_6_unsigned.ps1
-	VERSION: 2.60
+	VERSION: 2.61
 	AUTHOR: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters, Barry Schiffer
-	LASTEDIT: August 28, 2018
+	LASTEDIT: December 17, 2019
 #>
 
 #endregion Support
@@ -443,6 +443,13 @@ Param(
 	AUTHOR NetScaler script: Barry Schiffer
     AUTHOR NetScaler script functions: Iain Brighton
     AUTHOR Script template: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters
+.Release Notes V2.61
+#	Fix Swedish Table of Contents (Thanks to Johan Kallio)
+#		From 
+#			'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+#		To
+#			'sv-'	{ 'Automatisk innehållsförteckn2'; Break }
+#	Updated help text
 .Release Notes V2.60
 	Added -Dev and -ScriptInfo parameters
 	Added Chinese language support
@@ -752,7 +759,8 @@ Function SetWordHashTable
 			'nb-'	{ 'Automatisk tabell 2'; Break }
 			'nl-'	{ 'Automatische inhoudsopgave 2'; Break }
 			'pt-'	{ 'Sumário Automático 2'; Break }
-			'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+			# fix in 2.61 thanks to Johan Kallio 'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+			'sv-'	{ 'Automatisk innehållsförteckn2'; Break }
 			'zh-'	{ '自动目录 2'; Break }
 		}
 	)
@@ -6702,4 +6710,11 @@ If($Log -eq $True)
 $ErrorActionPreference = $SaveEAPreference
 
 $ErrorActionPreference = $SaveEAPreference
+			
+Write-Host "                                                                                    " -BackgroundColor Black -ForegroundColor White
+Write-Host "               This FREE script was brought to you by Conversant Group              " -BackgroundColor Black -ForegroundColor White
+Write-Host "We design, build, and manage infrastructure for a secure, dependable user experience" -BackgroundColor Black -ForegroundColor White
+Write-Host "                       Visit our website conversantgroup.com                        " -BackgroundColor Black -ForegroundColor White
+Write-Host "                                                                                    " -BackgroundColor Black -ForegroundColor White
+
 #endregion script template 2
