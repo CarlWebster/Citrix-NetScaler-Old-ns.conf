@@ -7,9 +7,10 @@
 .SYNOPSIS
     Creates a complete inventory of a Citrix NetScaler configuration using Microsoft Word.
 .DESCRIPTION
-	Creates a complete inventory of a Citrix NetScaler configuration using Microsoft Word and PowerShell.
+	Creates a complete inventory of a Citrix NetScaler configuration using Microsoft Word 
+	and PowerShell.
 	Creates a Word document named after the Citrix NetScaler Configuration.
-	Document includes a Cover Page, Table of Contents and Footer.
+	Document includes a Cover Page, Table of Contents, and Footer.
 	Includes support for the following language versions of Microsoft Word:
 		Catalan
 		Chinese
@@ -25,7 +26,7 @@
 		Swedish
 		
 .PARAMETER CompanyAddress
-	Company Address to use for the Cover Page, if the Cover Page has the Address field.
+	Company Address to use for the Cover Page if the Cover Page has the Address field.
 	
 	The following Cover Pages have an Address field:
 		Banded (Word 2013/2016)
@@ -41,7 +42,7 @@
 	This parameter is only valid with the MSWORD and PDF output parameters.
 	This parameter has an alias of CA.
 .PARAMETER CompanyEmail
-	Company Email to use for the Cover Page, if the Cover Page has the Email field.  
+	Company Email to use for the Cover Page if the Cover Page has the Email field.  
 	
 	The following Cover Pages have an Email field:
 		Facet (Word 2013/2016)
@@ -49,7 +50,7 @@
 	This parameter is only valid with the MSWORD and PDF output parameters.
 	This parameter has an alias of CE.
 .PARAMETER CompanyFax
-	Company Fax to use for the Cover Page, if the Cover Page has the Fax field.  
+	Company Fax to use for the Cover Page if the Cover Page has the Fax field.  
 	
 	The following Cover Pages have a Fax field:
 		Contrast (Word 2010)
@@ -131,8 +132,6 @@
 .PARAMETER PDF
 	SaveAs PDF file instead of DOCX file.
 	This parameter is disabled by default.
-	For Word 2007, the Microsoft add-in for saving as a PDF muct be installed.
-	For Word 2007, please see http://www.microsoft.com/en-us/download/details.aspx?id=9943
 	The PDF file is roughly 5X to 10X larger than the DOCX file.
 .PARAMETER MSWord
 	SaveAs DOCX file
@@ -140,8 +139,8 @@
 .PARAMETER AddDateTime
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2020 at 6PM is 2020-06-01_1800.
-	Output filename will be ReportName_2020-06-01_1800.docx (or .pdf).
+	June 1, 2022 at 6PM is 2022-06-01_1800.
+	Output filename will be ReportName_2022-06-01_1800.docx (or .pdf).
 	This parameter is disabled by default.
 .PARAMETER Folder
 	Specifies the optional output folder to save the output report. 
@@ -179,8 +178,10 @@
 	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1
 	
 	Will use all default values.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry 
+	Schiffer" or
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry 
+	Schiffer"
 	$env:username = Administrator
 
 	Barry Schiffer for the Company Name.
@@ -190,22 +191,26 @@
 	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -PDF
 	
 	Will use all default values and save the document as a PDF file.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry 
+	Schiffer" or
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry 
+	Schiffer"
 	$env:username = Administrator
 
 	Barry Schiffer for the Company Name.
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
 .EXAMPLE
-	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Barry Schiffer Consulting" -CoverPage "Mod" -UserName "Barry Schiffer"
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Barry Schiffer 
+	Consulting" -CoverPage "Mod" -UserName "Barry Schiffer"
 
 	Will use:
 		Barry Schiffer Consulting for the Company Name.
 		Mod for the Cover Page format.
 		Barry Schiffer for the User Name.
 .EXAMPLE
-	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CN "Barry Schiffer Consulting" -CP "Mod" -UN "Barry Schiffer"
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CN "Barry Schiffer Consulting" -CP 
+	"Mod" -UN "Barry Schiffer"
 
 	Will use:
 		Barry Schiffer Consulting for the Company Name (alias CN).
@@ -215,8 +220,10 @@
 	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -AddDateTime
 	
 	Will use all default values.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry 
+	Schiffer" or
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry 
+	Schiffer"
 	$env:username = Administrator
 
 	Barry Schiffer for the Company Name.
@@ -225,14 +232,16 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2020 at 6PM is 2020-06-01_1800.
-	Output filename will be Script_Template_2020-06-01_1800.docx
+	June 1, 2022 at 6PM is 2022-06-01_1800.
+	Output filename will be Script_Template_2022-06-01_1800.docx
 .EXAMPLE
 	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -PDF -AddDateTime
 	
 	Will use all default values and save the document as a PDF file.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry Schiffer" or
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry Schiffer"
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Barry 
+	Schiffer" or
+	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Barry 
+	Schiffer"
 	$env:username = Administrator
 
 	Barry Schiffer for the Company Name.
@@ -241,14 +250,12 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2020 at 6PM is 2020-06-01_1800.
-	Output filename will be Script_Template_2020-06-01_1800.PDF
+	June 1, 2022 at 6PM is 2022-06-01_1800.
+	Output filename will be Script_Template_2022-06-01_1800.PDF
 .EXAMPLE
-	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes Consulting"
-	-CoverPage Exposure -UserName "Dr. Watson"
-	-CompanyAddress "221B Baker Street, London, England"
-	-CompanyFax "+44 1753 276600"
-	-CompanyPhone "+44 1753 276200"
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes 
+	Consulting" -CoverPage Exposure -UserName "Dr. Watson" -CompanyAddress "221B Baker 
+	Street, London, England" -CompanyFax "+44 1753 276600" -CompanyPhone "+44 1753 276200"
 	
 	Will use:
 		Sherlock Holmes Consulting for the Company Name.
@@ -258,9 +265,9 @@
 		+44 1753 276600 for the Company Fax.
 		+44 1753 276200 for the Company Phone.
 .EXAMPLE
-	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes Consulting"
-	-CoverPage Facet -UserName "Dr. Watson"
-	-CompanyEmail SuperSleuth@SherlockHolmes.com
+	PS C:\PSScript .\NetScaler_Script_v2_6.ps1 -CompanyName "Sherlock Holmes 
+	Consulting" -CoverPage Facet -UserName "Dr. Watson" -CompanyEmail 
+	SuperSleuth@SherlockHolmes.com
 
 	Will use:
 		Sherlock Holmes Consulting for the Company Name.
@@ -282,44 +289,92 @@
 	
 	Output file will be saved in the path \\FileServer\ShareName
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer mail.domain.tld
-	-From XDAdmin@domain.tld -To ITGroup@domain.tld	
+	PS C:\PSScript >.\NetScaler_Script_v2_6.ps1 -Dev -ScriptInfo -Log
 	
-	Will use all Default values.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl 
-	Webster" or 
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Carl Webster"
-	$env:username = Administrator
+	Creates the default report.
+	
+	Creates a text file named NSInventoryScriptErrors_yyyyMMddTHHmmssffff.txt that 
+	contains up to the last 250 errors reported by the script.
+	
+	Creates a text file named NSInventoryScriptInfo_yyyy-MM-dd_HHmm.txt that 
+	contains all the script parameters and other basic information.
+	
+	Creates a text file for transcript logging named 
+	NSDocScriptTranscript_yyyyMMddTHHmmssffff.txt.
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer mail.domain.tld -From 
+	XDAdmin@domain.tld -To ITGroup@domain.tld	
 
-	Carl Webster for the Company Name.
-	Sideline for the Cover Page format.
-	Administrator for the User Name.
-	
 	The script will use the email server mail.domain.tld, sending from XDAdmin@domain.tld, 
 	sending to ITGroup@domain.tld.
-	
-	The script will use the default SMTP port 25 and will not use SSL.
-	
-	If the current user's credentials are not valid to send email, 
+
+	The script will use the default SMTP port 25 and does not use SSL.
+
+	If the current user's credentials are not valid to send an email, 
 	the user will be prompted to enter valid credentials.
 .EXAMPLE
-	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer smtp.office365.com -SmtpPort 587
-	-UseSSL -From Webster@CarlWebster.com -To ITGroup@CarlWebster.com	
-	
-	Will use all Default values.
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl 
-	Webster" or 
-	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\Company="Carl Webster"
-	$env:username = Administrator
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer mailrelay.domain.tld -From 
+	Anonymous@domain.tld -To ITGroup@domain.tld	
 
-	Carl Webster for the Company Name.
-	Sideline for the Cover Page format.
-	Administrator for the User Name.
+	***SENDING UNAUTHENTICATED EMAIL***
+
+	The script will use the email server mailrelay.domain.tld, sending from 
+	anonymous@domain.tld, sending to ITGroup@domain.tld.
+
+	To send unauthenticated email using an email relay server requires the From email account 
+	to use the name Anonymous.
+
+	The script will use the default SMTP port 25 and does not use SSL.
 	
+	***GMAIL/G SUITE SMTP RELAY***
+	https://support.google.com/a/answer/2956491?hl=en
+	https://support.google.com/a/answer/176600?hl=en
+
+	To send email using a Gmail or g-suite account, you may have to turn ON
+	the "Less secure app access" option on your account.
+	***GMAIL/G SUITE SMTP RELAY***
+
+	The script generates an anonymous, secure password for the anonymous@domain.tld 
+	account.
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer 
+	labaddomain-com.mail.protection.outlook.com -UseSSL -From 
+	SomeEmailAddress@labaddomain.com -To ITGroupDL@labaddomain.com	
+
+	***OFFICE 365 Example***
+
+	https://docs.microsoft.com/en-us/exchange/mail-flow-best-practices/how-to-set-up-a-multifunction-device-or-application-to-send-email-using-office-3
+	
+	This uses Option 2 from the above link.
+	
+	***OFFICE 365 Example***
+
+	The script will use the email server labaddomain-com.mail.protection.outlook.com, 
+	sending from SomeEmailAddress@labaddomain.com, sending to ITGroupDL@labaddomain.com.
+
+	The script will use the default SMTP port 25 and will use SSL.
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer smtp.office365.com -SmtpPort 
+	587 -UseSSL -From Webster@CarlWebster.com -To ITGroup@CarlWebster.com	
+
 	The script will use the email server smtp.office365.com on port 587 using SSL, 
 	sending from webster@carlwebster.com, sending to ITGroup@carlwebster.com.
+
+	If the current user's credentials are not valid to send an email, 
+	the user will be prompted to enter valid credentials.
+.EXAMPLE
+	PS C:\PSScript > .\NetScaler_Script_v2_6.ps1 -SmtpServer smtp.gmail.com -SmtpPort 587
+	-UseSSL -From Webster@CarlWebster.com -To ITGroup@CarlWebster.com	
+
+	*** NOTE ***
+	To send email using a Gmail or g-suite account, you may have to turn ON
+	the "Less secure app access" option on your account.
+	*** NOTE ***
 	
-	If the current user's credentials are not valid to send email, 
+	The script will use the email server smtp.gmail.com on port 587 using SSL, 
+	sending from webster@gmail.com, sending to ITGroup@carlwebster.com.
+
+	If the current user's credentials are not valid to send an email, 
 	the user will be prompted to enter valid credentials.
 .INPUTS
 	None.  You cannot pipe objects to this script.
@@ -328,9 +383,9 @@
 	This script creates a Word or PDF document.
 .NOTES
 	NAME: NetScaler_Script_v2_6_unsigned.ps1
-	VERSION: 2.61
+	VERSION: 2.62
 	AUTHOR: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters, Barry Schiffer
-	LASTEDIT: December 17, 2019
+	LASTEDIT: February 18, 2022
 #>
 
 #endregion Support
@@ -443,6 +498,25 @@ Param(
 	AUTHOR NetScaler script: Barry Schiffer
     AUTHOR NetScaler script functions: Iain Brighton
     AUTHOR Script template: Carl Webster, Michael B. Smith, Iain Brighton, Jeff Wouters
+#Version 2.62 18-Feb-2022
+#	Changed the date format for the transcript and error log files from yyyy-MM-dd_HHmm format to the FileDateTime format
+#		The format is yyyyMMddTHHmmssffff (case-sensitive, using a 4-digit year, 2-digit month, 2-digit day, 
+#		the letter T as a time separator, 2-digit hour, 2-digit minute, 2-digit second, and 4-digit millisecond). 
+#		For example: 20221225T0840107271.
+#	Fixed $Null comparisons that were on the wrong side
+#	Fixed the German Table of Contents (Thanks to Rene Bigler)
+#		From 
+#			'de-'	{ 'Automatische Tabelle 2'; Break }
+#		To
+#			'de-'	{ 'Automatisches Verzeichnis 2'; Break }
+#	In Function AbortScript, add test for the winword process and terminate it if it is running
+#		Added stopping the transcript log if the log was enabled and started
+#	In Functions AbortScript and SaveandCloseDocumentandShutdownWord, add code from Guy Leech to test for the "Id" property before using it
+#	Replaced most script Exit calls with AbortScript to stop the transcript log if the log was enabled and started
+#	Updated Functions CheckWordPrereq and SendEmail to the latest version
+#	Updated the help text
+#	Updated the ReadMe file
+#
 .Release Notes V2.61
 #	Fix Swedish Table of Contents (Thanks to Johan Kallio)
 #		From 
@@ -534,6 +608,59 @@ Param(
 
 #>
 
+
+Function AbortScript
+{
+	If($MSWord -or $PDF)
+	{
+		Write-Verbose "$(Get-Date -Format G): System Cleanup"
+		If(Test-Path variable:global:word)
+		{
+			$Script:Word.quit()
+			[System.Runtime.Interopservices.Marshal]::ReleaseComObject($Script:Word) | Out-Null
+			Remove-Variable -Name word -Scope Global 4>$Null
+		}
+	}
+	[gc]::collect() 
+	[gc]::WaitForPendingFinalizers()
+
+	If($MSWord -or $PDF)
+	{
+		#is the winword Process still running? kill it
+
+		#find out our session (usually "1" except on TS/RDC or Citrix)
+		$SessionID = (Get-Process -PID $PID).SessionId
+
+		#Find out if winword running in our session
+		$wordprocess = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}) | Select-Object -Property Id 
+		If( $wordprocess -and $wordprocess.Id -gt 0)
+		{
+			Write-Verbose "$(Get-Date -Format G): WinWord Process is still running. Attempting to stop WinWord Process # $($wordprocess.Id)"
+			Stop-Process $wordprocess.Id -EA 0
+		}
+	}
+	
+	Write-Verbose "$(Get-Date -Format G): Script has been aborted"
+	#stop transcript logging
+	If($Log -eq $True) 
+	{
+		If($Script:StartLog -eq $True) 
+		{
+			try 
+			{
+				Stop-Transcript | Out-Null
+				Write-Verbose "$(Get-Date -Format G): $Script:LogPath is ready for use"
+			} 
+			catch 
+			{
+				Write-Verbose "$(Get-Date -Format G): Transcript/log stop failed"
+			}
+		}
+	}
+	$ErrorActionPreference = $SaveEAPreference
+	Exit
+}
+
 Set-StrictMode -Version 2
 
 #force -verbose on
@@ -546,7 +673,7 @@ If($Log)
 {
 	#start transcript logging
 	$Script:ThisScriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
-	$Script:LogPath = "$Script:ThisScriptPath\NSDocScriptTranscript_$(Get-Date -f yyyy-MM-dd_HHmm).txt"
+	$Script:LogPath = "$Script:ThisScriptPath\NSDocScriptTranscript_$(Get-Date -f FileDateTime).txt"
 	
 	try 
 	{
@@ -564,10 +691,10 @@ If($Log)
 If($Dev)
 {
 	$Error.Clear()
-	$Script:DevErrorFile = "$($pwd.Path)\NSInventoryScriptErrors_$(Get-Date -f yyyy-MM-dd_HHmm).txt"
+	$Script:DevErrorFile = "$($pwd.Path)\NSInventoryScriptErrors_$(Get-Date -f FileDateTime).txt"
 }
 
-If($MSWord -eq $Null)
+If($Null -eq $MSWord)
 {
 	If($PDF)
 	{
@@ -598,11 +725,11 @@ Else
 {
 	$ErrorActionPreference = $SaveEAPreference
 	Write-Verbose "$(Get-Date): Unable to determine output parameter"
-	If($MSWord -eq $Null)
+	If($Null -eq $MSWord)
 	{
 		Write-Verbose "$(Get-Date): MSWord is Null"
 	}
-	ElseIf($PDF -eq $Null)
+	ElseIf($Null -eq $PDF)
 	{
 		Write-Verbose "$(Get-Date): PDF is Null"
 	}
@@ -612,7 +739,7 @@ Else
 		Write-Verbose "$(Get-Date): PDF is $($PDF)"
 	}
 	Write-Error "Unable to determine output parameter.  Script cannot continue"
-	Exit
+	AbortScript
 }
 
 If($Folder -ne "")
@@ -631,14 +758,14 @@ If($Folder -ne "")
 		{
 			#it exists but it is a file not a folder
 			Write-Error "Folder $Folder is a file, not a folder.  Script cannot continue"
-			Exit
+			AbortScript
 		}
 	}
 	Else
 	{
 		#does not exist
 		Write-Error "Folder $Folder does not exist.  Script cannot continue"
-		Exit
+		AbortScript
 	}
 }
 
@@ -750,7 +877,8 @@ Function SetWordHashTable
 		{
 			'ca-'	{ 'Taula automática 2'; Break }
 			'da-'	{ 'Automatisk tabel 2'; Break }
-			'de-'	{ 'Automatische Tabelle 2'; Break }
+			#'de-'	{ 'Automatische Tabelle 2'; Break }
+			'de-'	{ 'Automatisches Verzeichnis 2'; Break } #changed 18-feb-2022 rene bigler
 			'en-'	{ 'Automatic Table 2'; Break }
 			'es-'	{ 'Tabla automática 2'; Break }
 			'fi-'	{ 'Automaattinen taulukko 2'; Break }
@@ -1103,20 +1231,29 @@ Function CheckWordPrereq
 	If((Test-Path  REGISTRY::HKEY_CLASSES_ROOT\Word.Application) -eq $False)
 	{
 		$ErrorActionPreference = $SaveEAPreference
-		Write-Host "`n`n`t`tThis script directly outputs to Microsoft Word, please install Microsoft Word`n`n"
-		Exit
+		
+		If(($MSWord -eq $False) -and ($PDF -eq $True))
+		{
+			Write-Host "`n`n`t`tThis script uses Microsoft Word's SaveAs PDF function, please install Microsoft Word`n`n"
+			AbortScript
+		}
+		Else
+		{
+			Write-Host "`n`n`t`tThis script directly outputs to Microsoft Word, please install Microsoft Word`n`n"
+			AbortScript
+		}
 	}
 
 	#find out our session (usually "1" except on TS/RDC or Citrix)
 	$SessionID = (Get-Process -PID $PID).SessionId
 	
 	#Find out if winword is running in our session
-	[bool]$wordrunning = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}) -ne $Null
+	[bool]$wordrunning = $null –ne ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID})
 	If($wordrunning)
 	{
 		$ErrorActionPreference = $SaveEAPreference
 		Write-Host "`n`n`tPlease close all instances of Microsoft Word before running this report.`n`n"
-		Exit
+		AbortScript
 	}
 }
 
@@ -1270,25 +1407,6 @@ Function WriteWordLine
 	{
 		$Script:Selection.TypeParagraph()
 	}
-}
-
-Function AbortScript
-{
-	If($MSWord -or $PDF)
-	{
-		$Script:Word.quit()
-		Write-Verbose "$(Get-Date): System Cleanup"
-		[System.Runtime.Interopservices.Marshal]::ReleaseComObject($Script:Word) | Out-Null
-		If(Test-Path variable:global:word)
-		{
-			Remove-Variable -Name word -Scope Global 4>$Null
-		}
-	}
-	[gc]::collect() 
-	[gc]::WaitForPendingFinalizers()
-	Write-Verbose "$(Get-Date): Script has been aborted"
-	$ErrorActionPreference = $SaveEAPreference
-	Exit
 }
 
 Function FindWordDocumentEnd
@@ -1823,7 +1941,7 @@ Function SetupWord
 		Write-Warning "The Word object could not be created.  You may need to repair your Word installation."
 		$ErrorActionPreference = $SaveEAPreference
 		Write-Error "`n`n`t`tThe Word object could not be created.  You may need to repair your Word installation.`n`n`t`tScript cannot continue.`n`n"
-		Exit
+		AbortScript
 	}
 
 	Write-Verbose "$(Get-Date): Determine Word language value"
@@ -2297,41 +2415,10 @@ Function SaveandCloseDocumentandShutdownWord
 		}
 	}
 
-	Write-Verbose "$(Get-Date): Closing Word"
+	Write-Verbose "$(Get-Date -Format G): Closing Word"
 	$Script:Doc.Close()
 	$Script:Word.Quit()
-	If($PDF)
-	{
-		[int]$cnt = 0
-		While(Test-Path $Script:FileName1)
-		{
-			$cnt++
-			If($cnt -gt 1)
-			{
-				Write-Verbose "$(Get-Date): Waiting another 10 seconds to allow Word to fully close (try # $($cnt))"
-				Start-Sleep -Seconds 10
-				$Script:Word.Quit()
-				If($cnt -gt 2)
-				{
-					#kill the winword process
-
-					#find out our session (usually "1" except on TS/RDC or Citrix)
-					$SessionID = (Get-Process -PID $PID).SessionId
-					
-					#Find out if winword is running in our session
-					$wordprocess = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}).Id
-					If($wordprocess -gt 0)
-					{
-						Write-Verbose "$(Get-Date): Attempting to stop WinWord process # $($wordprocess)"
-						Stop-Process $wordprocess -EA 0
-					}
-				}
-			}
-			Write-Verbose "$(Get-Date): Attempting to delete $($Script:FileName1) since only $($Script:FileName2) is needed (try # $($cnt))"
-			Remove-Item $Script:FileName1 -EA 0 4>$Null
-		}
-	}
-	Write-Verbose "$(Get-Date): System Cleanup"
+	Write-Verbose "$(Get-Date -Format G): System Cleanup"
 	[System.Runtime.Interopservices.Marshal]::ReleaseComObject($Script:Word) | Out-Null
 	If(Test-Path variable:global:word)
 	{
@@ -2341,18 +2428,17 @@ Function SaveandCloseDocumentandShutdownWord
 	[gc]::collect() 
 	[gc]::WaitForPendingFinalizers()
 	
-	#is the winword process still running? kill it
+	#is the winword Process still running? kill it
 
 	#find out our session (usually "1" except on TS/RDC or Citrix)
 	$SessionID = (Get-Process -PID $PID).SessionId
 
-	#Find out if winword is running in our session
-	$wordprocess = $Null
-	$wordprocess = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}).Id
-	If($null -ne $wordprocess -and $wordprocess -gt 0)
+	#Find out if winword running in our session
+	$wordprocess = ((Get-Process 'WinWord' -ea 0) | Where-Object {$_.SessionId -eq $SessionID}) | Select-Object -Property Id 
+	If( $wordprocess -and $wordprocess.Id -gt 0)
 	{
-		Write-Verbose "$(Get-Date): WinWord process is still running. Attempting to stop WinWord process # $($wordprocess)"
-		Stop-Process $wordprocess -EA 0
+		Write-Verbose "$(Get-Date -Format G): WinWord Process is still running. Attempting to stop WinWord Process # $($wordprocess.Id)"
+		Stop-Process $wordprocess.Id -EA 0
 	}
 }
 
@@ -2881,7 +2967,7 @@ Write-Verbose "$(Get-Date): NetScaler file : $SourceFile"
 $File = Get-Content $SourceFile
 
 #added by Carl Webster 24-May-2014
-If(!$? -or $File -eq $Null)
+If(!$? -or $Null -eq $File)
 {
 	Write-Error "`n`n`t`tUnable to read the NetScaler ns.conf file.`n`n`t`tScript cannot continue.`n`n"
 	AbortScript
@@ -4640,7 +4726,7 @@ if($ContentSwitches.Length -le 0) { WriteWordLine 0 0 "No Content Switch has bee
         $ContentSwitchBindMatches = Get-StringWithProperty -SearchString $ContentSwitchBind -Like "bind cs vserver $ContentSwitchDisplayNameWithQuotes *";
 
         ## Check if we have any specific Content Switch bind matches
-        if ($ContentSwitchBindMatches -eq $null -or $ContentSwitchBindMatches.Length -le 0) {
+        if ($Null -eq $ContentSwitchBindMatches -or $ContentSwitchBindMatches.Length -le 0) {
             WriteWordLine 0 0 "No Policy has been configured for this Content Switch"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -4875,7 +4961,7 @@ if($LoadBalancers.Length -le 0) { WriteWordLine 0 0 "No Load Balancer has been c
 
         $LoadBalancerBindMatches = Get-StringWithProperty -SearchString $LoadbalancerBind -Like "bind lb vserver $LoadBalancerDisplayNameWithQoutes *";
         ## Check if we have any specific load balancer bind matches
-        if ($LoadBalancerBindMatches -eq $null -or $LoadBalancerBindMatches.Length -le 0) {
+        if ($Null -eq $LoadBalancerBindMatches -or $LoadBalancerBindMatches.Length -le 0) {
             WriteWordLine 0 0 "No Service (Group) has been configured for this Load Balancer"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -5093,7 +5179,7 @@ if($Services.Length -le 0) { WriteWordLine 0 0 "No Service has been configured"}
 
         $ServiceBindMatches = Get-StringWithProperty -SearchString $ServiceBind -Like "bind service $ServiceDisplayNameWithQuotes *";
         ## Check if we have any specific Service bind matches
-        if ($ServiceBindMatches -eq $null -or $ServiceBindMatches.Length -le 0) {
+        if ($Null -eq $ServiceBindMatches -or $ServiceBindMatches.Length -le 0) {
             WriteWordLine 0 0 "No Monitor has been configured for this Service"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -5279,7 +5365,7 @@ if($ServiceGroups.Length -le 0) { WriteWordLine 0 0 "No Service Group has been c
 
         WriteWordLine 3 0 "Monitor"     
 
-        if ($ServicegroupBindMatches -eq $null -or $ServicegroupBindMatches.Length -le 0) {
+        if ($Null -eq $ServicegroupBindMatches -or $ServicegroupBindMatches.Length -le 0) {
             WriteWordLine 0 0 "No Monitor has been configured for this Service Group"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -5641,7 +5727,7 @@ WriteWordLine 0 0 " "
 WriteWordLine 3 0 "Global Settings Secure Ticket Authority Configuration"
 $STAMATCHES = Get-StringWithProperty -SearchString $Bind -Like "bind vpn global -staServer *";
 
-if ($STAMATCHES -eq $null -or $STAMatches.Length -le 0) {
+if ($Null -eq $STAMATCHES -or $STAMatches.Length -le 0) {
             WriteWordLine 0 0 "No Secure Ticket Authority has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -5669,7 +5755,7 @@ WriteWordLine 0 0 " "
 WriteWordLine 3 0 "Global Settings App Controller Configuration"
 $APPCMATCHES = Get-StringWithProperty -SearchString $Bind -Like "bind vpn global -appController *";
 
-if ($APPCMATCHES -eq $null -or $APPCMatches.Length -le 0) {
+if ($Null -eq $APPCMATCHES -or $APPCMatches.Length -le 0) {
             WriteWordLine 0 0 "No App Controller has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6180,7 +6266,7 @@ WriteWordLine 2 0 "NetScaler Custom Pattern Set Policies"
 Write-Verbose "$(Get-Date): `tTable: NetScaler Custom Pattern Set Policies"
 $PATSET1 = Get-StringWithProperty -SearchString $Add -Like 'add policy patset *';
 
-if ($PATSET1 -eq $null -or $PATSET1.Length -le 0) {
+if ($Nul -eq $PATSET1 -or $PATSET1.Length -le 0) {
         WriteWordLine 0 0 "No Custom Pattern Set Policy has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6209,7 +6295,7 @@ WriteWordLine 2 0 "NetScaler Custom Responder Policies"
 Write-Verbose "$(Get-Date): `tTable: NetScaler Custom Responder Policies"
 $POLICY = Get-StringWithProperty -SearchString $Add -Like 'add responder policy *';
 
-if ($POLICY -eq $null -or $POLICY.Length -le 0) {
+if ($Null -eq $POLICY -or $POLICY.Length -le 0) {
         WriteWordLine 0 0 "No Custom Responder Policy has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6240,7 +6326,7 @@ Write-Verbose "$(Get-Date): `tTable: NetScaler Custom Rewrite Policies"
 
 $POLRW = Get-StringWithProperty -SearchString $Add -Like 'add rewrite policylabel *';
 
-if ($POLRW -eq $null -or $POLRW.Length -le 0) {
+if ($Null -eq $POLRW -or $POLRW.Length -le 0) {
         WriteWordLine 0 0 "No Custom Rewrite Policy has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6283,7 +6369,7 @@ WriteWordLine 2 0 "NetScaler Custom Pattern Set Action"
 Write-Verbose "$(Get-Date): `tTable: NetScaler Custom Pattern Set Action"
 $ACTPATSET1 = Get-StringWithProperty -SearchString $Add -Like 'add action patset *';
 
-if ($ACTPATSET1 -eq $null -or $ACTPATSET1.Length -le 0) {
+if ($Null -eq $ACTPATSET1 -or $ACTPATSET1.Length -le 0) {
         WriteWordLine 0 0 "No Custom Pattern Set Action has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6314,7 +6400,7 @@ WriteWordLine 2 0 "NetScaler Responder Action"
 Write-Verbose "$(Get-Date): `tTable: NetScaler Custom Responder Action"
 $ACTRES = Get-StringWithProperty -SearchString $Add -Like 'add responder action *';
 
-if ($ACTRES -eq $null -or $ACTRES.Length -le 0) {
+if ($Null -eq $ACTRES -or $ACTRES.Length -le 0) {
         WriteWordLine 0 0 "No Custom Responder Action has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6348,7 +6434,7 @@ WriteWordLine 2 0 "NetScaler Custom Rewrite Action"
 Write-Verbose "$(Get-Date): `tTable: NetScaler Custom Rewrite Action"
 $ACTRW = Get-StringWithProperty -SearchString $Add -Like 'add rewrite action *';
 
-if ($ACTRW -eq $null -or $ACTRW.Length -le 0) {
+if ($Null -eq $ACTRW -or $ACTRW.Length -le 0) {
         WriteWordLine 0 0 "No Custom Rewrite Policy has been configured"
         } else {
             ## IB - Use an array of hashtable to store the rows
@@ -6475,15 +6561,16 @@ $selection.InsertNewPage()
 #region email function
 Function SendEmail
 {
-	Param([string]$Attachments)
-	Write-Verbose "$(Get-Date): Prepare to email"
-	
+	Param([array]$Attachments)
+	Write-Verbose "$(Get-Date -Format G): Prepare to email"
+
 	$emailAttachment = $Attachments
 	$emailSubject = $Script:Title
 	$emailBody = @"
 Hello, <br />
 <br />
 $Script:Title is attached.
+
 "@ 
 
 	If($Dev)
@@ -6492,66 +6579,105 @@ $Script:Title is attached.
 	}
 
 	$error.Clear()
-
-	If($UseSSL)
+	
+	If($From -Like "anonymous@*")
 	{
-		Write-Verbose "$(Get-Date): Trying to send email using current user's credentials with SSL"
-		Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
-		-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
-		-UseSSL *>$Null
-	}
-	Else
-	{
-		Write-Verbose  "$(Get-Date): Trying to send email using current user's credentials without SSL"
-		Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
-		-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To *>$Null
-	}
-
-	$e = $error[0]
-
-	If($e.Exception.ToString().Contains("5.7.57"))
-	{
-		#The server response was: 5.7.57 SMTP; Client was not authenticated to send anonymous mail during MAIL FROM
-		Write-Verbose "$(Get-Date): Current user's credentials failed. Ask for usable credentials."
-
-		If($Dev)
-		{
-			Out-File -FilePath $Script:DevErrorFile -InputObject $error -Append 4>$Null
-		}
-
-		$error.Clear()
-
-		$emailCredentials = Get-Credential -Message "Enter the email account and password to send email"
+		#https://serverfault.com/questions/543052/sending-unauthenticated-mail-through-ms-exchange-with-powershell-windows-server
+		$anonUsername = "anonymous"
+		$anonPassword = ConvertTo-SecureString -String "anonymous" -AsPlainText -Force
+		$anonCredentials = New-Object System.Management.Automation.PSCredential($anonUsername,$anonPassword)
 
 		If($UseSSL)
 		{
 			Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
 			-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
-			-UseSSL -credential $emailCredentials *>$Null 
+			-UseSSL -credential $anonCredentials *>$Null 
 		}
 		Else
 		{
 			Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
 			-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
-			-credential $emailCredentials *>$Null 
+			-credential $anonCredentials *>$Null 
 		}
-
-		$e = $error[0]
-
-		If($? -and $Null -eq $e)
+		
+		If($?)
 		{
-			Write-Verbose "$(Get-Date): Email successfully sent using new credentials"
+			Write-Verbose "$(Get-Date -Format G): Email successfully sent using anonymous credentials"
 		}
-		Else
+		ElseIf(!$?)
 		{
-			Write-Verbose "$(Get-Date): Email was not sent:"
-			Write-Warning "$(Get-Date): Exception: $e.Exception" 
+			$e = $error[0]
+
+			Write-Verbose "$(Get-Date -Format G): Email was not sent:"
+			Write-Warning "$(Get-Date -Format G): Exception: $e.Exception" 
 		}
 	}
 	Else
 	{
-		Write-Verbose "$(Get-Date): Email was not sent:"
-		Write-Warning "$(Get-Date): Exception: $e.Exception" 
+		If($UseSSL)
+		{
+			Write-Verbose "$(Get-Date -Format G): Trying to send email using current user's credentials with SSL"
+			Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+			-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
+			-UseSSL *>$Null
+		}
+		Else
+		{
+			Write-Verbose  "$(Get-Date -Format G): Trying to send email using current user's credentials without SSL"
+			Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+			-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To *>$Null
+		}
+
+		If(!$?)
+		{
+			$e = $error[0]
+			
+			#error 5.7.57 is O365 and error 5.7.0 is gmail
+			If($null -ne $e.Exception -and $e.Exception.ToString().Contains("5.7"))
+			{
+				#The server response was: 5.7.xx SMTP; Client was not authenticated to send anonymous mail during MAIL FROM
+				Write-Verbose "$(Get-Date -Format G): Current user's credentials failed. Ask for usable credentials."
+
+				If($Dev)
+				{
+					Out-File -FilePath $Script:DevErrorFile -InputObject $error -Append 4>$Null
+				}
+
+				$error.Clear()
+
+				$emailCredentials = Get-Credential -UserName $From -Message "Enter the password to send email"
+
+				If($UseSSL)
+				{
+					Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+					-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
+					-UseSSL -credential $emailCredentials *>$Null 
+				}
+				Else
+				{
+					Send-MailMessage -Attachments $emailAttachment -Body $emailBody -BodyAsHtml -From $From `
+					-Port $SmtpPort -SmtpServer $SmtpServer -Subject $emailSubject -To $To `
+					-credential $emailCredentials *>$Null 
+				}
+
+				If($?)
+				{
+					Write-Verbose "$(Get-Date -Format G): Email successfully sent using new credentials"
+				}
+				ElseIf(!$?)
+				{
+					$e = $error[0]
+
+					Write-Verbose "$(Get-Date -Format G): Email was not sent:"
+					Write-Warning "$(Get-Date -Format G): Exception: $e.Exception" 
+				}
+			}
+			Else
+			{
+				Write-Verbose "$(Get-Date -Format G): Email was not sent:"
+				Write-Warning "$(Get-Date -Format G): Exception: $e.Exception" 
+			}
+		}
 	}
 }
 #endregion
